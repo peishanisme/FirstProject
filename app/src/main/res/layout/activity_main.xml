@@ -28,24 +28,15 @@
             app:menu="@menu/bottom_nav_menu"/>
 
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="410dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/material_dynamic_primary40"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+    android:layout_width="410dp"
+    android:layout_height="70dp"
+    android:layout_marginStart="1dp"
+    android:layout_marginTop="1dp"
+    android:background="@color/material_dynamic_primary40"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" >
 
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/button"
-            android:ems="10"
-            android:hint="Search..."
-            android:inputType="textEmailAddress" />
+
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
