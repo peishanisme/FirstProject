@@ -9,7 +9,7 @@
     android:addStatesFromChildren="false"
     android:scrollbarSize="7dp"
     android:background="@color/white"
-    tools:context=".RegisterActivity">
+    tools:context=".Register_Activity">
 
     <ImageView
         android:id="@+id/imageView"

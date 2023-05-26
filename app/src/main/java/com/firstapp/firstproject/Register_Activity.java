@@ -1,6 +1,7 @@
 package com.firstapp.firstproject;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,17 +12,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.firstapp.firstproject.entity.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class RegisterActivity extends AppCompatActivity {
+public class Register_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-//    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
-private EditText UserName,UserEmail,UserPhoneNumber,UserPassword,UserConfrimPassword;
-private ProgressDialog loadingBar;
-private Button CreateAccountButton;
+    //    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
+    private EditText UserName,UserEmail,UserPhoneNumber,UserPassword,UserConfrimPassword;
+    private ProgressDialog loadingBar;
+    private Button CreateAccountButton;
+    private User user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,26 +59,26 @@ private Button CreateAccountButton;
         String email=UserEmail.getText().toString();
         String phoneNumber=UserPhoneNumber.getText().toString();
         String password=UserPassword.getText().toString();
-        String confirmPassword=UserPassword.getText().toString();
+        String confirmPassword=UserConfrimPassword.getText().toString();
 
         //prompt user to key in the information if the column is still empty
-        if(TextUtils.isEmpty(username)){
-            Toast.makeText(this,"Please insert your username...",Toast.LENGTH_SHORT);
+        if(username.isEmpty()){
+            Toast.makeText(Register_Activity.this,"Please insert your username...",Toast.LENGTH_SHORT).show();
 
         }else if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please insert your email...",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Please insert your email...",Toast.LENGTH_SHORT).show();
 
         }else if(TextUtils.isEmpty(phoneNumber)){
-            Toast.makeText(this,"Please insert your phone number...",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Please insert your phone number...",Toast.LENGTH_SHORT).show();
 
         }else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please insert your password...",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Please insert your password...",Toast.LENGTH_SHORT).show();
 
         }else if(TextUtils.isEmpty(confirmPassword)){
-            Toast.makeText(this,"Please insert your password...",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Please insert your password...",Toast.LENGTH_SHORT).show();
 
         }else if(!(password.equals(confirmPassword))){
-            Toast.makeText(this,"Your password do not match with your confirm password...",Toast.LENGTH_SHORT);
+            Toast.makeText(this,"Your password do not match with your confirm password...",Toast.LENGTH_SHORT).show();
 
         }else{
             //all the columns are filled,start creating new account
@@ -89,12 +94,16 @@ private Button CreateAccountButton;
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     //tell user whether they successful to create account or not
                     if(task.isSuccessful()){
-                        Toast.makeText(RegisterActivity.this,"You are authenticated successfully...",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register_Activity.this,"You are authenticated successfully...",Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
+                        user = new User(FirebaseAuth.getInstance().getUid(),username,email,phoneNumber,"","","","","","","");
+//
+                        FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).setValue(user);
+                        SendUserToSetupActivity();
                     }else {
                         //display the error message to users
                         String message=task.getException().getMessage();
-                        Toast.makeText(RegisterActivity.this,"Error Occured"+message,Toast.LENGTH_SHORT);
+                        Toast.makeText(Register_Activity.this,"Error Occured"+message,Toast.LENGTH_SHORT);
                         loadingBar.dismiss();
                     }
                 }
@@ -102,4 +111,12 @@ private Button CreateAccountButton;
         }
 
     }
-}
+
+    private void SendUserToSetupActivity() {
+            Intent mainIntent = new Intent(Register_Activity.this, Setup_Activity.class);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(mainIntent);
+            finish();
+
+        }
+    }

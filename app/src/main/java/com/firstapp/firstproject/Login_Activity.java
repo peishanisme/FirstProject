@@ -17,7 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginActivity extends AppCompatActivity {
+public class Login_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button LoginButton;
     private EditText UserEmail,UserPhoneNumber,UserPassword;
@@ -61,17 +61,17 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
 
-                        Toast.makeText(LoginActivity.this,"You are logged in successfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login_Activity.this,"You are logged in successfully",Toast.LENGTH_SHORT).show();
 
                         loadingBar.dismiss();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), Main_Activity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     }
                     else {
                         String message =task.getException().getMessage();
-                        Toast.makeText(LoginActivity.this, "Error occured: "+message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Login_Activity.this, "Error occured: "+message, Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
                     }
                     }
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void SendUserToMainActivity() {
-        Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent mainIntent = new Intent(Login_Activity.this, Main_Activity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         finish();
     }

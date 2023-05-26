@@ -1,18 +1,14 @@
 package com.firstapp.firstproject;
 
-import android.content.Intent;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.Menu;
+
 import com.firstapp.firstproject.databinding.ActivityMainBinding;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-
-public class MainActivity extends AppCompatActivity {
+public class Main_Activity extends AppCompatActivity {
     ActivityMainBinding binding;
 
 //    @SuppressLint("NonConstantResourceId")
