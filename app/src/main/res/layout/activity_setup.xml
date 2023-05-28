@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    tools:context=".Setup_Activity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/profile_photo_shape"
+        android:src="@drawable/profile_man_photo_profile"
+        tools:ignore="MissingClass" />
+
+    <EditText
+        android:id="@+id/fullname_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fullname"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="8dp"
+        android:ems="13"
+        android:gravity="start|top"
+        android:hint="Ali bin Ahmad"
+        android:inputType="textMultiLine"
+        android:padding="13dp" />
+
+    <TextView
+        android:id="@+id/fullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile_picture"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:text="Full name:" />
+
+    <TextView
+        android:id="@+id/birthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fullname_input"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Birthday:" />
+
+    <EditText
+        android:id="@+id/birthday_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/birthday"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:ems="13"
+        android:hint="year/month/day"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/birthday_input"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Country:" />
+
+    <EditText
+        android:id="@+id/country_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/country"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:ems="13"
+        android:gravity="start|top"
+        android:hint="Malaysia"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/country_input"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="8dp"
+        android:text="State:" />
+
+    <EditText
+        android:id="@+id/state_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/state"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:ems="13"
+        android:gravity="start|top"
+        android:hint="Selangor"
+        android:inputType="textMultiLine" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/state_input"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Gender:" />
+
+    <RadioGroup
+        android:id="@+id/gender_RG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gender"
+        android:layout_alignStart="@id/gender"
+        android:layout_marginRight="30dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Male"
+            android:textSize="15sp" />
+
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Female"
+            android:textSize="15sp" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/occupation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gender_RG"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Occupation:" />
+
+    <EditText
+        android:id="@+id/occupation_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/occupation"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:ems="13"
+        android:gravity="start|top"
+        android:hint="Student"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/save_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/occupation_input"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Save Information" />
+
+
+</RelativeLayout>

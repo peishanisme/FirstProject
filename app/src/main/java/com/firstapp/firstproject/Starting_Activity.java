@@ -9,9 +9,11 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
-public class StartingActivity extends AppCompatActivity {
+public class Starting_Activity extends AppCompatActivity {
 private FirebaseAuth mAuth;
 private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
     @Override
@@ -26,8 +28,11 @@ private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
         LoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                DatabaseReference transactionReference = FirebaseDatabase.getInstance().getReference();
+//                transactionReference.child("User").setValue("hello");
+
                 view.startAnimation(buttonClick);
-                Intent intent = new Intent(StartingActivity.this, LoginActivity.class);
+                Intent intent = new Intent(Starting_Activity.this, Login_Activity.class);
                 startActivity(intent);
             }
         });
@@ -35,7 +40,7 @@ private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
             @Override
             public void onClick(View view) {
                 view.startAnimation(buttonClick);
-                Intent intent = new Intent(StartingActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(Starting_Activity.this, Register_Activity.class);
                 startActivity(intent);
             }
         });

@@ -5,10 +5,22 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment">
 
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button"
+        android:ems="10"
+        android:hint="Search..."
+        android:inputType="textEmailAddress" />
+
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/app_name" />
+
 
 </FrameLayout>

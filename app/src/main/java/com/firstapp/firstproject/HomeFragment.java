@@ -16,10 +16,9 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        root = inflater.inflate(R.layout.fragment_home, container, false);
-        return root;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        // Set up the views and any other necessary logic for the fragment
+        return view;
     }
 }

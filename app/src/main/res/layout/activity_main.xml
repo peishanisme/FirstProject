@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Main_Activity">
 
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -26,5 +26,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/bottom_nav_menu"/>
+
+    <com.google.android.material.navigation.NavigationView
+    android:layout_width="410dp"
+    android:layout_height="70dp"
+    android:layout_marginStart="1dp"
+    android:layout_marginTop="1dp"
+    android:background="@color/material_dynamic_primary40"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" >
+
+
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
