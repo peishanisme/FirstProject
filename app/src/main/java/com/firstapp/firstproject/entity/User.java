@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 public class User {
 
-    public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender;
+    public int numberOfFriends;
+    public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,hobbies,jobs,relationshipStatus;
 //    public ArrayList<String>hobbies;
     public User(){
 
     }
 
-    public User(String userid,String username, String email, String phone_number,String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender) {
+    public User(String userid,String username, String email, String phone_number,String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,int numberOfFriends,String hobbies,String jobs,String relationshipStatus) {
         this.userid = userid;
         this.username = username;
         this.email = email;
@@ -22,8 +23,11 @@ public class User {
         this.age = age;
         this.occupation = occupation;
         this.gender = gender;
-//        this.hobbies = hobbies;}
-    }
+        this.numberOfFriends=numberOfFriends;
+        this.hobbies = hobbies;
+        this.jobs=jobs;
+        this.relationshipStatus=relationshipStatus;}
+
 
 //    public void setHobbies(String hobbies) {
 //        this.hobbies = hobbies;

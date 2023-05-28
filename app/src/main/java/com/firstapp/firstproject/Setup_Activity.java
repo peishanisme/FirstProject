@@ -111,10 +111,7 @@ public class Setup_Activity extends AppCompatActivity {
                 genderSelection = (RadioButton) findViewById(gender.getCheckedRadioButtonId());
 
                 //calculate age based on birthday
-                LocalDate today = LocalDate.now();
-                LocalDate Birthday = LocalDate.of(Integer.parseInt(birthday.substring(0, 4)), Integer.parseInt(birthday.substring(5, 7)), Integer.parseInt(birthday.substring(8, 10))); //Birth date
-                Period p = Period.between(Birthday, today);
-                String age=String.format("%2d", p.getYears());
+
 
 
                 if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(countryName) || TextUtils.isEmpty(stateName) || TextUtils.isEmpty(birthday) || TextUtils.isEmpty(occupation)) {
@@ -129,7 +126,7 @@ public class Setup_Activity extends AppCompatActivity {
                     user.setCountryName(countryName);
                     user.setStateName(stateName);
                     user.setBirthday(birthday);
-                    user.setAge(age);
+                    user.setAge(ageCalculation(birthday));
                     user.setOccupation(occupation);
                     user.setGender(genderSelection.getText().toString());
 
@@ -159,6 +156,15 @@ public class Setup_Activity extends AppCompatActivity {
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
+    }
+    //method to calculate age
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String ageCalculation(String birthday){
+        LocalDate today = LocalDate.now();
+        LocalDate Birthday = LocalDate.of(Integer.parseInt(birthday.substring(0, 4)), Integer.parseInt(birthday.substring(5, 7)), Integer.parseInt(birthday.substring(8, 10))); //Birth date
+        Period p = Period.between(Birthday, today);
+        String age=String.format("%2d", p.getYears());
+        return age;
     }
 }
 

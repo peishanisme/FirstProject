@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".Edit_Account"
+            android:name=".EditAccount_Activity"
             android:exported="false" />
         <activity
             android:name=".Main_Activity"

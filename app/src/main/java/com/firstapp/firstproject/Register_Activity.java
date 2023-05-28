@@ -96,7 +96,7 @@ public class Register_Activity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(Register_Activity.this,"You are authenticated successfully...",Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
-                        user = new User(FirebaseAuth.getInstance().getUid(),username,email,phoneNumber,"","","","","","","");
+                        user = new User(FirebaseAuth.getInstance().getUid(),username,email,phoneNumber,"","","","","","","",0,"","","");
 //
                         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).setValue(user);
                         SendUserToSetupActivity();
