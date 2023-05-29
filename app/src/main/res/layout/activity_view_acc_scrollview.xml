@@ -242,14 +242,14 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageView7"
                 android:layout_width="69dp"
                 android:layout_height="66dp"
                 android:layout_marginStart="25dp"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageView8"
                 android:layout_width="69dp"
                 android:layout_height="66dp"
                 android:layout_marginStart="25dp"
@@ -257,7 +257,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageView9"
                 android:layout_width="69dp"
                 android:layout_height="66dp"
                 android:layout_marginStart="25dp"

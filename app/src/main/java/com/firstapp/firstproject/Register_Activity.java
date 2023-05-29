@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 public class Register_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     //    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
@@ -96,10 +98,13 @@ public class Register_Activity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(Register_Activity.this,"You are authenticated successfully...",Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
-                        user = new User(FirebaseAuth.getInstance().getUid(),username,email,phoneNumber,"","","","","","","",0,"","","");
+                        user = new User(FirebaseAuth.getInstance().getUid(),username,email,phoneNumber,"","","","","","","",0,new ArrayList<>(),"","");
 //
                         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).setValue(user);
-                        SendUserToSetupActivity();
+                        Intent mainIntent = new Intent(Register_Activity.this, Setup_Activity.class);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(mainIntent);
+                        finish();
                     }else {
                         //display the error message to users
                         String message=task.getException().getMessage();
@@ -112,11 +117,11 @@ public class Register_Activity extends AppCompatActivity {
 
     }
 
-    private void SendUserToSetupActivity() {
-            Intent mainIntent = new Intent(Register_Activity.this, Setup_Activity.class);
-            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(mainIntent);
-            finish();
-
-        }
+//    private void SendUserToSetupActivity() {
+//            Intent mainIntent = new Intent(Register_Activity.this, Setup_Activity.class);
+//            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(mainIntent);
+//            finish();
+//
+//        }
     }

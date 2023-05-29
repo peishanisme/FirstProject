@@ -42,14 +42,14 @@ private DatabaseReference userRef;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    User selectedUser = snapshot.getValue(User.class);
-
-                    // Display the user's profile data in the UI
-                    username.setText(selectedUser.getName());
-                    email.setText(String.valueOf(selectedUser.getAge()));
-                    phone.setText(String.valueOf(selectedUser.getPhone()));
-                    occupation.setText(selectedUser.getOccupation());
-                    gender.setText(selectedUser.getGender());
+//                    User selectedUser = snapshot.getValue(User.class);
+//
+//                    // Display the user's profile data in the UI
+//                    username.setText(selectedUser.getName());
+//                    email.setText(String.valueOf(selectedUser.getAge()));
+//                    phone.setText(String.valueOf(selectedUser.getPhone()));
+//                    occupation.setText(selectedUser.getOccupation());
+//                    gender.setText(selectedUser.getGender());
                 }
             }
 

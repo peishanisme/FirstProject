@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class User {
 
     public int numberOfFriends;
-    public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,hobbies,jobs,relationshipStatus;
-//    public ArrayList<String>hobbies;
+    public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,jobs,relationshipStatus;
+    public ArrayList<String>hobbies;
     public User(){
 
     }
 
-    public User(String userid,String username, String email, String phone_number,String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,int numberOfFriends,String hobbies,String jobs,String relationshipStatus) {
+    public User(String userid,String username, String email, String phone_number,String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,int numberOfFriends,ArrayList<String>hobbies,String jobs,String relationshipStatus) {
         this.userid = userid;
         this.username = username;
         this.email = email;

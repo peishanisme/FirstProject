@@ -25,6 +25,13 @@
             android:name=".Login_Activity"
             android:exported="false" />
         <activity
+            android:name=".Setup_Activity"
+            android:exported="false"/>
+
+        <activity android:name=".ViewAccActivity_Scrollview"
+            android:exported="false"/>
+
+        <activity
             android:name=".Starting_Activity"
             android:exported="true">
             <intent-filter>
