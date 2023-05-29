@@ -1,17 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    tools:context=".Edit_Account">
+    android:orientation="vertical"
+    tools:context=".EditAccount_Activity">
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/_175947601639408993"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-20dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:background="#01639A"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/IV_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="Edit profile"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_picture_IV"
+                android:layout_width="112dp"
+                android:layout_height="112dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/profile_photo_shape"
+                android:src="@drawable/profile_man_photo_profile" />
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_picture_IV"
+                android:layout_alignStart="@+id/change_profile_picture_button"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Username:"
+                android:textColor="#01639A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/name_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:layout_alignStart="@id/username"
+                android:layout_marginRight="30dp"
+                android:hint="alibaba"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_ET"
+                android:layout_alignStart="@+id/change_profile_picture_button"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Age"
+                android:textColor="#01639A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/age_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Age"
+                android:layout_alignStart="@id/Age"
+                android:layout_marginRight="30dp"
+                android:inputType="number"
+                android:hint="20"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/age_ET"
+                android:layout_alignStart="@+id/change_profile_picture_button"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Gender"
+                android:textColor="#01639A"
+                android:textSize="15sp" />
+
+<!--            <Button-->
+<!--                android:id="@+id/change_profile_picture_button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/profile_picture_IV"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:background="@drawable/editprofilepicbutton"-->
+<!--                android:text="Change Profile Picture"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textSize="18sp" />-->
+
+            <RadioGroup
+                android:id="@+id/gender_RG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Gender"
+                android:layout_alignStart="@id/Gender"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Male"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Female"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/Occupation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/gender_RG"
+                android:layout_alignStart="@+id/change_profile_picture_button"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Occupation"
+                android:textColor="#01639A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/occupation_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Occupation"
+                android:layout_alignStart="@id/Occupation"
+                android:layout_marginRight="30dp"
+                android:hint="UMStudent"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/occupation_ET"
+                android:layout_alignStart="@+id/change_profile_picture_button"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Height (cm)"
+                android:textColor="#01639A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/height_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Height"
+                android:layout_alignStart="@id/Height"
+                android:layout_marginRight="30dp"
+                android:inputType="number"
+                android:hint="175"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/height_ET"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Weight (kg)"
+                android:textColor="#01639A"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/weight_ET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Weight"
+                android:layout_alignStart="@id/Weight"
+                android:layout_marginRight="30dp"
+                android:inputType="number"
+                android:hint="65"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+            <RadioGroup
+                android:id="@+id/bloodtype_RG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Blood"
+                android:layout_alignStart="@id/Gender"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"/>
+
+
+            <Button
+                android:id="@+id/button_Save"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bloodtype_RG"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/button"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
