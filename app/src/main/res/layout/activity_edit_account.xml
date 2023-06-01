@@ -125,132 +125,132 @@
 <!--&lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
 <!--&lt;!&ndash;                android:textSize="18sp" />&ndash;&gt;-->
 
-<!--            <RadioGroup-->
-<!--                android:id="@+id/gender_RG"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/Gender"-->
-<!--                android:layout_alignStart="@id/Gender"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:orientation="horizontal">-->
+<!--&lt;!&ndash;            <RadioGroup&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/gender_RG"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@id/Gender"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@id/Gender"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:orientation="horizontal">&ndash;&gt;-->
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/male"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text="Male"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp" />-->
+<!--&lt;!&ndash;                <RadioButton&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/male"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="Male"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="18sp" />&ndash;&gt;-->
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/female"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:text="Female"-->
-<!--                    android:gravity="center"-->
-<!--                    android:textSize="18sp" />-->
+<!--&lt;!&ndash;                <RadioButton&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/female"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:text="Female"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:gravity="center"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:textSize="18sp" />&ndash;&gt;-->
 
-<!--            </RadioGroup>-->
+<!--&lt;!&ndash;            </RadioGroup>&ndash;&gt;-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/Occupation"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/gender_RG"-->
-<!--                android:layout_alignStart="@+id/change_profile_picture_button"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:text="Occupation"-->
-<!--                android:textColor="#01639A"-->
-<!--                android:textSize="15sp" />-->
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/Occupation"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@+id/gender_RG"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@+id/change_profile_picture_button"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginLeft="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="Occupation"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="#01639A"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="15sp" />&ndash;&gt;-->
 
-<!--            <EditText-->
-<!--                android:id="@+id/occupation_ET"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/Occupation"-->
-<!--                android:layout_alignStart="@id/Occupation"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:hint="UMStudent"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="18sp" />-->
+<!--&lt;!&ndash;            <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/occupation_ET"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@id/Occupation"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@id/Occupation"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:hint="UMStudent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="18sp" />&ndash;&gt;-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/Height"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/occupation_ET"-->
-<!--                android:layout_alignStart="@+id/change_profile_picture_button"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:text="Height (cm)"-->
-<!--                android:textColor="#01639A"-->
-<!--                android:textSize="15sp" />-->
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/Height"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@+id/occupation_ET"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@+id/change_profile_picture_button"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginLeft="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="Height (cm)"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="#01639A"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="15sp" />&ndash;&gt;-->
 
-<!--            <EditText-->
-<!--                android:id="@+id/height_ET"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/Height"-->
-<!--                android:layout_alignStart="@id/Height"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:inputType="number"-->
-<!--                android:hint="175"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="18sp" />-->
+<!--&lt;!&ndash;            <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/height_ET"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@id/Height"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@id/Height"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:inputType="number"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:hint="175"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="18sp" />&ndash;&gt;-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/Weight"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/height_ET"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:text="Weight (kg)"-->
-<!--                android:textColor="#01639A"-->
-<!--                android:textSize="15sp" />-->
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/Weight"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@+id/height_ET"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginLeft="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="Weight (kg)"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="#01639A"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="15sp" />&ndash;&gt;-->
 
-<!--            <EditText-->
-<!--                android:id="@+id/weight_ET"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/Weight"-->
-<!--                android:layout_alignStart="@id/Weight"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:inputType="number"-->
-<!--                android:hint="65"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="18sp" />-->
-
-
-<!--            <RadioGroup-->
-<!--                android:id="@+id/bloodtype_RG"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignStart="@id/Gender"-->
-<!--                android:layout_marginTop="5dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:orientation="horizontal"/>-->
+<!--&lt;!&ndash;            <EditText&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/weight_ET"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@id/Weight"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@id/Weight"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:inputType="number"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:hint="65"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@color/black"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="18sp" />&ndash;&gt;-->
 
 
-<!--            <Button-->
-<!--                android:id="@+id/button_Save"-->
-<!--                android:layout_width="100dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/bloodtype_RG"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginBottom="15dp"-->
-<!--                android:background="@drawable/button"-->
-<!--                android:text="Save"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="20sp" />-->
+<!--&lt;!&ndash;            <RadioGroup&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/bloodtype_RG"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_alignStart="@id/Gender"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="5dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginRight="30dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:orientation="horizontal"/>&ndash;&gt;-->
 
 
-<!--        </RelativeLayout>-->
-<!--    </ScrollView>-->
+<!--&lt;!&ndash;            <Button&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/button_Save"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="100dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_below="@id/bloodtype_RG"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_centerHorizontal="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginTop="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_marginBottom="15dp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:background="@drawable/button"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="Save"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textColor="@color/white"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="20sp" />&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;        </RelativeLayout>&ndash;&gt;-->
+<!--&lt;!&ndash;    </ScrollView>&ndash;&gt;-->
 
 </LinearLayout>

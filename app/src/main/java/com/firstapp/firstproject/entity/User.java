@@ -11,7 +11,7 @@ public class User {
 
     }
 
-    public User(String userid,String username, String email, String phone_number,String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,int numberOfFriends,ArrayList<String>hobbies,String jobs,String relationshipStatus) {
+    public User(String userid,String username, String email, String phone_number,String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,int numberOfFriends,String jobs,String relationshipStatus) {
         this.userid = userid;
         this.username = username;
         this.email = email;
@@ -24,7 +24,7 @@ public class User {
         this.occupation = occupation;
         this.gender = gender;
         this.numberOfFriends=numberOfFriends;
-        this.hobbies = hobbies;
+        this.hobbies = new ArrayList<>();
         this.jobs=jobs;
         this.relationshipStatus=relationshipStatus;}
 
@@ -34,9 +34,9 @@ public class User {
 //    }
 
 
-
-
-
+    public ArrayList<String> getHobbies() {
+        return hobbies;
+    }
 
     public String getUsername() {
         return username;
