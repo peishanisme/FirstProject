@@ -43,7 +43,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addFriendBtn"
             android:layout_width="181dp"
             android:layout_height="50dp"
             android:layout_marginStart="115dp"
@@ -51,6 +51,7 @@
             android:layout_marginEnd="115dp"
             android:layout_marginBottom="49dp"
             android:text="Add Friend"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/basicInfo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +68,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/addFriendBtn" />
 
         <LinearLayout
             android:id="@+id/linearLayout4"
