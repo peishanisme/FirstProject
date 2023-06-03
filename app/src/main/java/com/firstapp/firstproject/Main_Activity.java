@@ -1,6 +1,7 @@
 package com.firstapp.firstproject;
 
 import android.os.Bundle;
+import android.view.animation.AlphaAnimation;
 
 import com.firstapp.firstproject.databinding.ActivityMainBinding;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,14 +10,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class Main_Activity extends AppCompatActivity {
+    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
     ActivityMainBinding binding;
 
 //    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_main);
+        binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
 
@@ -26,8 +28,11 @@ public class Main_Activity extends AppCompatActivity {
             if (id==R.id.home) {
                 replaceFragment(new HomeFragment());
 
-            } else if(id==R.id.new_post) {
 
+            } else if(id==R.id.new_post) {
+                replaceFragment(new Post_Fragment());
+            }else if(id==R.id.add_friend){
+                replaceFragment(new AddFriend_Fragment());
             }else if(id==R.id.profile){
                 replaceFragment(new ProfileFragment());
             }
