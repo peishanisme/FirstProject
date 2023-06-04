@@ -14,15 +14,44 @@
         android:layout_height="wrap_content"
         tools:context=".ViewAccActivity_Scrollview">
 
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="410dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/material_dynamic_primary40"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.material.navigation.NavigationView>
+
+        <TextView
+            android:id="@+id/Profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Profile"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"></LinearLayout>
+
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="141dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="64dp"
             android:layout_marginEnd="142dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
@@ -47,28 +76,31 @@
             android:id="@+id/LinearLayoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="90dp"
             android:layout_marginTop="52dp"
+            android:layout_marginEnd="90dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/username"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/username">
 
-            <Button
+            <ImageButton
                 android:id="@+id/setting_button"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginRight="20dp"
                 android:background="@drawable/profile_settings_icon"
-                />
+                android:contentDescription="Settings" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/edit_profile_button"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginRight="20dp"
-                android:background="@drawable/profile_modify_icon" />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="0dp"
+                android:background="@drawable/profile_modify_icon"
+                android:contentDescription="Edit Profile" />
 
         </LinearLayout>
 
@@ -214,8 +246,8 @@
             android:id="@+id/Friends"
             android:layout_width="308dp"
             android:layout_height="23dp"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="15dp"
             android:text="Friends"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -226,7 +258,7 @@
             android:id="@+id/profilepicOfFriends"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/details"
@@ -314,6 +346,7 @@
             android:id="@+id/details"
             android:layout_width="308dp"
             android:layout_height="23dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="45dp"
             android:layout_marginEnd="53dp"
             android:layout_marginBottom="7dp"
@@ -321,10 +354,11 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/Name"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profilepicOfFriends" />
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/hobby_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -337,19 +371,72 @@
             app:layout_constraintTop_toBottomOf="@+id/details">
 
             <TextView
-                android:id="@+id/hobbies"
+                android:id="@+id/hobby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hobbies" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hobbies"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/job_layout"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="93dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hobby_layout">
+
             <TextView
-                android:id="@+id/hobbiesDisplay"
+                android:id="@+id/job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jobs" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/jobs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Relationship_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/job_layout"
+            app:layout_constraintTop_toBottomOf="@id/job_layout">
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Relationship Status:" />
+
+            <TextView
+                android:id="@+id/relationship"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Singing"
-                android:textAlignment="viewEnd" />
-
+                android:text="TextView"
+                android:textAlignment="textEnd" />
         </LinearLayout>
 
 
