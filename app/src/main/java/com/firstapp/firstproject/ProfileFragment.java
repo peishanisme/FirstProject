@@ -1,7 +1,6 @@
 package com.firstapp.firstproject;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,42 +27,16 @@ import org.w3c.dom.Text;
 public class ProfileFragment extends Fragment{
     private View root;
     private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public ProfileFragment() {
         // Required empty public constructor
     }
 
 
-//    public static ProfileFragment newInstance(String param1, String param2) {
-//        ProfileFragment fragment = new ProfileFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile, container, false);
-        Button edit_profile_button=root.findViewById(R.id.edit_profile_button);
-        Button logout_button=root.findViewById(R.id.logout_button);
+        ImageButton edit_profile_button=root.findViewById(R.id.edit_profile_button);
+        ImageButton logout_button=root.findViewById(R.id.logout_button);
         TextView username=root.findViewById(R.id.UsernameDisplay);
         TextView fullname=root.findViewById(R.id.fullnameDisplay);
         TextView email=root.findViewById(R.id.emailDisplay);
@@ -108,51 +82,12 @@ public class ProfileFragment extends Fragment{
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Main_Activity.class);
+                Intent intent = new Intent(getActivity(), Starting_Activity.class);
                 startActivity(intent);
             }
         });
 
-
-//        logout_button.setOnClickListener(this);
-
-
-
-        // Set up the views and any other necessary logic for the fragment
         return root;
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        Intent intent=new Intent;
-//        if(v.getId()==R.id.edit_profile_button){
-//            v.startAnimation(buttonClick);
-//            intent = new Intent(this.getActivity(), EditAccount_Activity.class);
-//            startActivity(intent);
-//
-//        }
-//        else if(v.getId()==R.id.logout_button){
-//            v.startAnimation(buttonClick);
-//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//            builder.setTitle("Log Out");
-//            builder.setMessage("Are you sure to log out");
-//            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//                    mAuth.signOut();
-//                    intent[0] = new Intent(getActivity(), Starting_Activity.class);
-//                    startActivity(intent[0]);
-//                }
-//            });builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//                @Override
-//                public void onClick(DialogInterface dialogInterface, int i) {
-//                    dialogInterface.cancel();
-//                }
-//            });
-//
-//            AlertDialog dialog = builder.create();
-//            dialog.show();
-//        }
-//    }
 }
