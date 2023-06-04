@@ -1,17 +1,19 @@
 package com.firstapp.firstproject.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
     public int numberOfFriends;
     public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,jobs,relationshipStatus;
-    public ArrayList<String>hobbies;
+    public List<String>hobbies = new ArrayList<>();
+    public String hobby;
     public User(){
 
     }
 
-    public User(String userid,String username, String email, String phone_number,String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,int numberOfFriends,String jobs,String relationshipStatus) {
+    public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender, int numberOfFriends, String relationshipStatus) {
         this.userid = userid;
         this.username = username;
         this.email = email;
@@ -24,17 +26,16 @@ public class User {
         this.occupation = occupation;
         this.gender = gender;
         this.numberOfFriends=numberOfFriends;
-        this.hobbies = new ArrayList<>();
-        this.jobs=jobs;
+        this.hobby = hobby;
         this.relationshipStatus=relationshipStatus;}
 
 
-//    public void setHobbies(String hobbies) {
-//        this.hobbies = hobbies;
-//    }
+    public ArrayList<String> getHobbies(ArrayList<String> hobbies) {
+        return hobbies;
+    }
 
 
-    public ArrayList<String> getHobbies() {
+    public List<String> getHobbies() {
         return hobbies;
     }
 
