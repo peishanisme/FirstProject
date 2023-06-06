@@ -19,7 +19,7 @@
         tools:ignore="MissingClass" />
 
     <EditText
-        android:id="@+id/fullname_input"
+        android:id="@+id/editFullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/fullname"
@@ -45,13 +45,13 @@
         android:id="@+id/Age_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/fullname_input"
+        android:layout_below="@id/editFullName"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
         android:text="Birthday:" />
 
     <EditText
-        android:id="@+id/birthday_input"
+        android:id="@+id/editBirthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/Age_layout"
@@ -65,13 +65,13 @@
         android:id="@+id/country"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/birthday_input"
+        android:layout_below="@id/editBirthday"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
         android:text="Country:" />
 
     <EditText
-        android:id="@+id/country_input"
+        android:id="@+id/editCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/country"
@@ -86,13 +86,13 @@
         android:id="@+id/state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/country_input"
+        android:layout_below="@id/editCountry"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
         android:text="State:" />
 
     <EditText
-        android:id="@+id/state_input"
+        android:id="@+id/editState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/state"
@@ -107,13 +107,13 @@
         android:id="@+id/gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/state_input"
+        android:layout_below="@id/editState"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
         android:text="Gender:" />
 
     <RadioGroup
-        android:id="@+id/gender_RG"
+        android:id="@+id/editGender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/gender"
@@ -147,13 +147,13 @@
         android:id="@+id/occupation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/gender_RG"
+        android:layout_below="@id/editGender"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="8dp"
         android:text="Occupation:" />
 
     <EditText
-        android:id="@+id/occupation_input"
+        android:id="@+id/editOccupation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/occupation"
@@ -168,7 +168,7 @@
         android:id="@+id/save_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/occupation_input"
+        android:layout_below="@id/editOccupation"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="Save Information" />

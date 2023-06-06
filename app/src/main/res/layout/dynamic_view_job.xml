@@ -7,20 +7,20 @@
     android:paddingBottom="5dp">
 
     <EditText
-        android:id="@+id/newrow"
-        android:layout_width="match_parent"
+        android:id="@+id/newJob"
+        android:layout_width="400dp"
         android:layout_height="48dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:layout_weight="1"
         android:background="@drawable/round_grey"
-        android:hint="New Hobby"
+        android:hint="New Job"
         android:paddingLeft="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"></EditText>
 
     <ImageButton
-        android:id="@+id/image_remove"
+        android:id="@+id/button_remove"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_gravity="center_vertical"
@@ -29,6 +29,6 @@
         android:src="@drawable/ic_close"
         android:contentDescription="Remove image"
 
-       ></ImageButton>
+        ></ImageButton>
 
 </LinearLayout>

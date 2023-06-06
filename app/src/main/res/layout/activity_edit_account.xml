@@ -16,10 +16,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:id="@+id/top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#01639A"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/IV_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="Edit profile"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_picture"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
+                android:layout_below="@id/top"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
@@ -27,8 +54,31 @@
                 android:src="@drawable/profile_man_photo_profile"
                 tools:ignore="MissingClass" />
 
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_picture"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="30dp"
+                android:text="Username:" />
+
             <EditText
-                android:id="@+id/fullname_input"
+                android:id="@+id/editUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
+                android:layout_marginTop="8dp"
+                android:ems="13"
+                android:gravity="start|top"
+                android:hint="alibaba"
+                android:inputType="textMultiLine"
+                android:padding="13dp" />
+
+            <EditText
+                android:id="@+id/editFullName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fullname"
@@ -45,25 +95,48 @@
                 android:id="@+id/fullname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_picture"
+                android:layout_below="@id/editUsername"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="30dp"
                 android:text="Full name:" />
 
             <TextView
-                android:id="@+id/Age_layout"
+                android:id="@+id/phonen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fullname_input"
+                android:layout_below="@id/editFullName"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="30dp"
+                android:text="Phone Number:" />
+
+            <EditText
+                android:id="@+id/editPhoneN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/phonen"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="false"
                 android:layout_marginTop="8dp"
+                android:ems="13"
+                android:gravity="start|top"
+                android:hint="0124512365"
+                android:inputType="textMultiLine"
+                android:padding="13dp" />
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/editPhoneN"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="30dp"
                 android:text="Birthday:" />
 
             <EditText
-                android:id="@+id/birthday_input"
+                android:id="@+id/editBirthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/Age_layout"
+                android:layout_below="@id/birthday"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:ems="13"
@@ -74,13 +147,13 @@
                 android:id="@+id/country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/birthday_input"
+                android:layout_below="@id/editBirthday"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="8dp"
                 android:text="Country:" />
 
             <EditText
-                android:id="@+id/country_input"
+                android:id="@+id/editCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/country"
@@ -95,13 +168,13 @@
                 android:id="@+id/state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/country_input"
+                android:layout_below="@id/editCountry"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="8dp"
                 android:text="State:" />
 
             <EditText
-                android:id="@+id/state_input"
+                android:id="@+id/editState"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/state"
@@ -116,13 +189,13 @@
                 android:id="@+id/gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/state_input"
+                android:layout_below="@id/editState"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="8dp"
                 android:text="Gender:" />
 
             <RadioGroup
-                android:id="@+id/gender_RG"
+                android:id="@+id/editGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/gender"
@@ -156,13 +229,13 @@
                 android:id="@+id/occupation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/gender_RG"
+                android:layout_below="@id/editGender"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="8dp"
                 android:text="Occupation:" />
 
             <EditText
-                android:id="@+id/occupation_input"
+                android:id="@+id/editOccupation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/occupation"
@@ -177,7 +250,7 @@
                 android:id="@+id/Hobbies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/occupation_input"
+                android:layout_below="@id/editOccupation"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="8dp"
                 android:text="Hobby: " />
@@ -227,11 +300,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/job_layout"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="10dp"
                 android:text="Relationship Status:" />
 
             <EditText
-                android:id="@+id/relationship_input"
+                android:id="@+id/editRelationship"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Relationship"
@@ -245,39 +318,16 @@
                 android:id="@+id/save_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/relationship_input"
+                android:layout_below="@id/editRelationship"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Save Information" />
 
 
         </RelativeLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#01639A"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
 
-        <ImageView
-            android:id="@+id/IV_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_back_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:text="Edit profile"
-            android:textColor="@color/white"
-            android:textSize="20dp" />
-
-    </LinearLayout>
 
 
 </LinearLayout>
