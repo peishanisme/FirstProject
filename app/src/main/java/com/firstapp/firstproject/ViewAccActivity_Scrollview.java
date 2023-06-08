@@ -16,52 +16,80 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-private TextView username, email, phone, occupation, gender, mutualFriends;
+private TextView username, email, phone, occupation, gender, mutualFriends, hobby, degreeConnection;
 private Button addFriendBtn;
-private boolean areFriend;
-private FirebaseDatabase database= FirebaseDatabase.getInstance();
-private FirebaseAuth auth = FirebaseAuth.getInstance();
-private FirebaseUser currentUser = auth.getCurrentUser();
 
-private DatabaseReference otherUserRef;
+
+//private FirebaseAuth auth = FirebaseAuth.getInstance();
+//private FirebaseUser currentUserF = auth.getCurrentUser();
+
+private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
+private DatabaseReference selectedUserRef;
+private DatabaseReference currentUserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_acc_scrollview);
 
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.usernameDisplay);
         email = findViewById(R.id.emailDisplay);
         phone = findViewById(R.id.phDisplay);
         occupation = findViewById(R.id.occpDisplay);
         gender = findViewById(R.id.genderDisplay);
         mutualFriends = findViewById(R.id.mutualFriends);
+        hobby = findViewById(R.id.hobbiesDisplay);
+        degreeConnection = findViewById(R.id.degConnectionDisplay);
         addFriendBtn = findViewById(R.id.addFriendBtn);
+
 
         // Retrieve selected user's ID passed from the previous activity
         String selectedUserId = getIntent().getStringExtra("selectedUserId");
+        String currentUserId = getIntent().getStringExtra("currentUserId");
         // Get reference to the  selected user by ID
-        otherUserRef = database.getReference("Users").child(selectedUserId);
+        selectedUserRef = userRef.child(selectedUserId);
+        currentUserRef = userRef.child(currentUserId);
+
+
 
 
         // Retrieve the user's profile data from the database
-        otherUserRef.addValueEventListener(new ValueEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    User selectedUser = snapshot.getValue(User.class);
-                    displayProfile(currentUser, selectedUser);
 
+                User selectedUser = snapshot.child(selectedUserId).getValue(User.class);
+                User currentUser = snapshot.child(currentUserId).getValue(User.class);
+
+                if(currentUser.getDegreeConnection(selectedUser) == 1){
+                    // First-degree connection, retrieve full profile information
+                    displayFullProfile(selectedUser);
+                    mutualFriends.setText(currentUser.getMutualFriendsNum(selectedUser) + " Mutual Friends");
+                    degreeConnection.setText("1st degree connection");
+                    addFriendBtn.setVisibility(View.GONE);
+
+                }else if(currentUser.getDegreeConnection(selectedUser) == 2){
+                    // other connection, retrieve limited information
+                    displayPartialProfile(selectedUser);
+                    mutualFriends.setText(currentUser.getMutualFriendsNum(selectedUser) + " Mutual Friends");
+                    degreeConnection.setText("2nd degree connection");
+                    addFriendBtn.setVisibility(View.VISIBLE);
+
+                }else if(currentUser.getDegreeConnection(selectedUser) == 3){
+                    // other connection, retrieve limited information
+                    displayPartialProfile(selectedUser);
+                    mutualFriends.setText(currentUser.getMutualFriendsNum(selectedUser) + " Mutual Friends");
+                    degreeConnection.setText("3rd degree connection");
+                    addFriendBtn.setVisibility(View.VISIBLE);
+                }else{
+                    displayPartialProfile(selectedUser);
                 }
-                else{
-                    username.setText("User not found");
-                    email.setText("");
-                    phone.setText("");
-                    occupation.setText("");
-                    gender.setText("");
-                }
+
+                return null;
             }
 
             @Override
@@ -81,37 +109,48 @@ private DatabaseReference otherUserRef;
             }
         });
 
-
         }
 
 
-    public void displayProfile(FirebaseUser currentUser, User otherUser){
-        int degreeConnection = getDegreeOfConnection(currentUser, otherUser);
 
-        if(degreeConnection == 1){
-            // First-degree connection, retrieve full profile information
+    public void displayFullProfile(User selectedUser){
 
-            username.setText(selectedUser.getName());
-            email.setText(String.valueOf(selectedUser.getEmail));
-            phone.setText(String.valueOf(selectedUser.getPhone()));
+            username.setText(selectedUser.getUsername());
+            email.setText(String.valueOf(selectedUser.getEmail()));
+            phone.setText(String.valueOf(selectedUser.getPhone_number());
             occupation.setText(selectedUser.getOccupation());
             gender.setText(selectedUser.getGender());
-            mutualFriends.setText(currentUser.getMutualFriendsNum(otherUser) + " Mutual Friends");
 
-            addFriendBtn.setVisibility(View.GONE); // Hide the button if they are already friends
+            List<String> hobbyList = selectedUser.getHobbies();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hobbyList.size(); i++) {
+                sb.append(hobbyList.get(i));
+                if (i != hobbyList.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+            hobby.setText(sb.toString());
 
-        }else{
-            // other connection, retrieve limited information
-            username.setText(selectedUser.getName());
-            email.setText(String.valueOf(selectedUser.getEmail));
-            occupation.setText("-");
-            gender.setText("-");
-            mutualFriends.setText(currentUser.getMutualFriendsNum(otherUser) + " Mutual Friends");
 
-            addFriendBtn.setVisibility(View.VISIBLE); // Show the button if they are not friends
-        }
     }
 
+    public void displayPartialProfile(User selectedUser){
 
+            username.setText(selectedUser.getUsername());
+            email.setText(String.valueOf(selectedUser.getEmail());
+            phone.setText("-");
+            occupation.setText("-");
+            gender.setText("-");
+            hobby.setText("-");
+
+    }
+
+    public void displayUserNotFound(){
+        username.setText("User not found");
+        email.setText("");
+        phone.setText("");
+        occupation.setText("");
+        gender.setText("");
+    }
 
 }
