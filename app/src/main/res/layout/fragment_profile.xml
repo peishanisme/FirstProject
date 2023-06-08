@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
@@ -38,13 +39,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"></LinearLayout>
-
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/ProfilePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="141dp"
@@ -56,21 +52,40 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="121dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="145dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="145dp"
-            android:text="Username"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20sp"
+
+        <LinearLayout
+            android:id="@+id/Name_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:foregroundGravity="center_horizontal"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+            app:layout_constraintTop_toBottomOf="@id/ProfilePic">
 
+            <TextView
+                android:id="@+id/UsernameDisplay"
+                android:layout_width="121dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="145dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="145dp"
+                android:text="Username"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/fullnameDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="170dp"
+                android:layout_weight="1"
+                android:foregroundGravity="center_horizontal"
+                android:text="(Full Name)" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/LinearLayoutButton"
@@ -78,18 +93,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="90dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="70dp"
             android:layout_marginEnd="90dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/username">
+            app:layout_constraintTop_toTopOf="@id/Name_layout">
 
             <ImageButton
                 android:id="@+id/setting_button"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginRight="20dp"
                 android:background="@drawable/profile_settings_icon"
                 android:contentDescription="Settings" />
 
@@ -101,6 +115,17 @@
                 android:layout_marginRight="0dp"
                 android:background="@drawable/profile_modify_icon"
                 android:contentDescription="Edit Profile" />
+
+            <ImageButton
+                android:id="@+id/logout_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/circlebutton"
+                android:contentDescription="Logout"
+                app:srcCompat="@drawable/baseline_logout_24"
+                app:tint="@color/white" />
 
         </LinearLayout>
 
@@ -118,12 +143,12 @@
             app:layout_constraintTop_toBottomOf="@id/LinearLayoutButton" />
 
         <LinearLayout
-            android:id="@+id/linearLayout4"
+            android:id="@+id/email_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_marginStart="101dp"
-            android:layout_marginTop="54dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="53dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,17 +174,17 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout5"
+            android:id="@+id/PhoneNumber_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginStart="93dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="53dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+            app:layout_constraintTop_toBottomOf="@+id/email_layout">
 
             <TextView
                 android:id="@+id/phoneNum"
@@ -182,17 +207,159 @@
 
 
         <LinearLayout
-            android:id="@+id/linearLayout6"
+            android:id="@+id/Birthday_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="52dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/PhoneNumber_layout">
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Birthday" />
+
+            <TextView
+                android:id="@+id/birthdayDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1998/01/01"
+                android:textAlignment="textEnd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Age_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="53dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Birthday_layout">
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Age" />
+
+            <TextView
+                android:id="@+id/ageDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="25"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Gender_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="58dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="93dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+            app:layout_constraintTop_toBottomOf="@id/Age_layout">
+
+            <TextView
+                android:id="@+id/gender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender" />
+
+            <TextView
+                android:id="@+id/genderDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Prefer not to say"
+                android:textAlignment="viewEnd" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/country_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="53dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Gender_layout">
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Country" />
+
+            <TextView
+                android:id="@+id/countryDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Malaysia"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/state_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="51dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="53dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/country_layout">
+
+            <TextView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="State" />
+
+            <TextView
+                android:id="@+id/stateDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Selangor"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Occupation_Layout"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="93dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/state_layout">
 
             <TextView
                 android:id="@+id/occupation"
@@ -213,35 +380,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="308dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginEnd="93dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
-
-            <TextView
-                android:id="@+id/gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Gender" />
-
-            <TextView
-                android:id="@+id/genderDisplay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Prefer not to say"
-                android:textAlignment="viewEnd" />
-
-        </LinearLayout>
-
         <TextView
             android:id="@+id/Friends"
             android:layout_width="308dp"
@@ -251,20 +389,22 @@
             android:text="Friends"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+            app:layout_constraintTop_toBottomOf="@id/Occupation_Layout" />
 
 
         <LinearLayout
             android:id="@+id/profilepicOfFriends"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Friends"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintVertical_bias="0.0"
+            app:layout_goneMarginLeft="50dp"
+            app:layout_goneMarginRight="50dp">
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -368,7 +508,9 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details">
+            app:layout_constraintTop_toBottomOf="@+id/details"
+            app:layout_goneMarginLeft="50dp"
+            app:layout_goneMarginRight="50dp">
 
             <TextView
                 android:id="@+id/hobby"
@@ -395,7 +537,9 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/hobby_layout">
+            app:layout_constraintTop_toBottomOf="@id/hobby_layout"
+            app:layout_goneMarginLeft="50dp"
+            app:layout_goneMarginRight="50dp">
 
             <TextView
                 android:id="@+id/job"
@@ -415,13 +559,15 @@
             android:id="@+id/Relationship_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="29dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="50dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/job_layout"
-            app:layout_constraintTop_toBottomOf="@id/job_layout">
+            app:layout_constraintTop_toBottomOf="@id/job_layout"
+            app:layout_goneMarginLeft="50dp"
+            app:layout_goneMarginRight="50dp">
 
             <TextView
                 android:id="@+id/textView7"

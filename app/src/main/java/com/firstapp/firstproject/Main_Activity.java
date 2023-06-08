@@ -27,8 +27,6 @@ public class Main_Activity extends AppCompatActivity {
             int id = item.getItemId();
             if (id==R.id.home) {
                 replaceFragment(new HomeFragment());
-
-
             } else if(id==R.id.new_post) {
                 replaceFragment(new Post_Fragment());
             }else if(id==R.id.add_friend){
@@ -46,7 +44,7 @@ public class Main_Activity extends AppCompatActivity {
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(R.id.fragment_container,fragment);
         fragmentTransaction.commit();
 
     }

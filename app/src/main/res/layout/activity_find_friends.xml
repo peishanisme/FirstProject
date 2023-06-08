@@ -4,64 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".FindFriendsActivity">
-
-    <include
-        android:id="@+id/find_friends_appbar_layout"
-        layout="@layout/app_bar_layout">
-
-    </include>
+    android:background="@color/white">
+<!--    tools:context=".FindFriendsActivity"-->
 
 
+<!--    <include-->
+<!--        android:id="@+id/find_friends_appbar_layout"-->
+<!--        layout="@layout/app_bar_layout">-->
 
-    <RelativeLayout
-        android:id="@+id/myLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/find_friends_appbar_layout">
+<!--    </include>-->
 
-        <TextView
-            android:id="@+id/simpleTestID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="20dp"
-            android:text="Search for friends...."
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            />
 
-        <EditText
-            android:id="@+id/search_box_input"
-            android:layout_width="280dp"
-            android:layout_height="70dp"
-            android:layout_below="@+id/simpleTestID"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="21dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/input"
-            android:ems="10"
-            android:hint="search here...."
-            android:inputType="textMultiLine"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/white"
-            />
 
-    </RelativeLayout>
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/myLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_below="@+id/find_friends_appbar_layout">-->
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/search_result_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/myLayout"
-        android:layout_margin="10dp"
-        >
+<!--        <TextView-->
+<!--            android:id="@+id/simpleTestID"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:text="Search for friends...."-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="18sp"-->
+<!--            android:textStyle="bold"-->
+<!--            />-->
 
-    </androidx.recyclerview.widget.RecyclerView>
+<!--        <EditText-->
+<!--            android:id="@+id/search_box_input"-->
+<!--            android:layout_width="280dp"-->
+<!--            android:layout_height="70dp"-->
+<!--            android:layout_below="@+id/simpleTestID"-->
+<!--            android:layout_alignParentStart="true"-->
+<!--            android:layout_marginLeft="21dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:background="@drawable/input"-->
+<!--            android:ems="10"-->
+<!--            android:hint="search here...."-->
+<!--            android:inputType="textMultiLine"-->
+<!--            android:padding="10dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textColorHint="@color/white"-->
+<!--            />-->
+
+<!--    </RelativeLayout>-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/search_result_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_below="@+id/myLayout"-->
+<!--        android:layout_margin="10dp"-->
+<!--        >-->
+
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
 
 </RelativeLayout>

@@ -23,10 +23,7 @@ import java.time.Period;
 
 import com.firstapp.firstproject.entity.User;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,9 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -81,12 +76,12 @@ public class Setup_Activity extends AppCompatActivity {
             }
         });
 
-        FullName = (EditText) findViewById(R.id.fullname_input);
-        CountryName = (EditText) findViewById(R.id.country_input);
-        StateName = (EditText) findViewById(R.id.state_input);
-        Birthday = (EditText) findViewById(R.id.birthday_input);
-        Occupation = (EditText) findViewById(R.id.occupation_input);
-        gender = (RadioGroup) findViewById(R.id.gender_RG);
+        FullName = (EditText) findViewById(R.id.editFullName);
+        CountryName = (EditText) findViewById(R.id.editCountry);
+        StateName = (EditText) findViewById(R.id.editState);
+        Birthday = (EditText) findViewById(R.id.editBirthday);
+        Occupation = (EditText) findViewById(R.id.editOccupation);
+        gender = (RadioGroup) findViewById(R.id.editGender);
         SaveInfoButton = (Button) findViewById(R.id.save_info);
         ProfilePicture = (CircleImageView) findViewById(R.id.profile_picture);
         loadingBar = new ProgressDialog(this);
