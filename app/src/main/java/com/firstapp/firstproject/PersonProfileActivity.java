@@ -297,10 +297,10 @@ public class PersonProfileActivity extends AppCompatActivity {
 
     private void InitializeFields() {
         username = findViewById(R.id.username);
-        email = findViewById(R.id.person_profile_email);
-        phone = findViewById(R.id.person_profile_phoneNum);
-        occupation = findViewById(R.id.person_profile_occupation);
-        gender = findViewById(R.id.person_profile_gender);
+        email = findViewById(R.id.emailDisplay);
+        phone = findViewById(R.id.phDisplay);
+        occupation = findViewById(R.id.occpDisplay);
+        gender = findViewById(R.id.genderDisplay);
         SendFriendReqButton = (Button) findViewById(R.id.send_friend_request);
         DeclineFriendReqButton = (Button) findViewById(R.id.decline_friend_request);
         CURRENT_STATE = "not_friends";
