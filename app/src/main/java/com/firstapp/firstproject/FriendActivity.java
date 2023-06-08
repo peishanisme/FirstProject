@@ -1,8 +1,10 @@
-package com.firstapp.firstproject;
+/**package com.firstapp.firstproject;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,8 +20,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import android.content.Context;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.squareup.picasso.Picasso;
 
 
+
+// display friends list function but not use this dy
 public class FriendActivity extends AppCompatActivity {
 
     private RecyclerView myFriendList;
@@ -49,15 +57,27 @@ public class FriendActivity extends AppCompatActivity {
     }
 
     private void DisplayAllFriends() {
-        FirebaseRecyclerAdapter<Friends, FriendsViewHolder> firebaseRecyclerAdapter
-                =new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(
+        FirebaseRecyclerAdapter<Friends, FriendsViewHolder> firebaseRecyclerAdapter =new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(
                         Friends.class,
                         R.layout.all_users_display_layout,
                         FriendsViewHolder.class,
                         FriendsRef
         ){
+
+            @NonNull
             @Override
-            protected view populateViewHolder(FriendsViewHolder viewHolder, Friends model, int position){
+            public FriendsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                return null;
+
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull FriendsViewHolder holder, int position, @NonNull Friends model) {
+
+            }
+
+            @Override
+            protected void populateViewHolder(FriendsViewHolder viewHolder, Friends model, int position){
                 viewHolder.setDate(model.getDate());
                 final String usersIDs = getRef(position).getKey();
 
@@ -66,10 +86,10 @@ public class FriendActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
                             final String UserName = snapshot.child("UserName").getValue().toString();
-                            final String ProfilePicture = snapshot.child("ProfilePicture").getValue().toString();
+                            //final String ProfilePicture = snapshot.child("ProfilePicture").getValue().toString();
 
                             viewHolder.setFullName(UserName);
-                            viewHolder.setProfilePicture(getApplicationContext(), ProfilePicture);
+                            //viewHolder.setProfilePicture(getApplicationContext(), ProfilePicture);
 
                         }
                     }
@@ -93,11 +113,11 @@ public class FriendActivity extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setProfilePicture(Context ctx, String profilePicture) {
-            CircleImageView myImage = (CircleImageView) mView.findViewById(R.id.all_users_profile_image);
-            Picasso.with(ctx).load(profilePicture).placeholder(R.drawable.profile).into(myImage);
+        //public void setProfilePicture(Context ctx, String profilePicture) {
+          //  CircleImageView myImage = (CircleImageView) mView.findViewById(R.id.all_users_profile_image);
+            //Picasso.with(ctx).load(profilePicture).placeholder(R.drawable.profile).into(myImage);
 
-        }
+        //}
 
         public void setFullName(String fullName) {
             TextView myName = (TextView) mView.findViewById(R.id.all_user_profile_full_name);

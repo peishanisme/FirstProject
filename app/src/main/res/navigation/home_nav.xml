@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/addFriend_Fragment"
-        android:name="com.firstapp.firstproject.AddFriend_Fragment"
+        android:name="com.firstapp.firstproject.Friend_Fragment"
         android:label="fragment_add_friend_"
-        tools:layout="@layout/fragment_add_friend_" />
+        tools:layout="@layout/fragment_friend_" />
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.firstapp.firstproject.HomeFragment"

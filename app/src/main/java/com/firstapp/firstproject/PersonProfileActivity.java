@@ -80,7 +80,7 @@ public class PersonProfileActivity extends AppCompatActivity {
         DeclineFriendReqButton.setVisibility(View.INVISIBLE);
         DeclineFriendReqButton.setEnabled(false);
 
-        if(!senderUserId.equals(receiverUserId){
+        if(!senderUserId.equals(receiverUserId)){
             SendFriendReqButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -99,11 +99,11 @@ public class PersonProfileActivity extends AppCompatActivity {
                     }
                 }
             });
-        }
-        else {
+        }else{
             DeclineFriendReqButton.setVisibility(View.INVISIBLE);
             SendFriendReqButton.setVisibility(View.INVISIBLE);
         }
+
     }
 
     private void UnfriendAnExistingFriend() {

@@ -2,14 +2,14 @@ package com.firstapp.firstproject;
 
 public class FindFriends {
 
-    public String ProfilePicture, FullName, status;
+    public String ProfilePicture, fullName, occupation;
 
     public FindFriends(){}
 
-    public FindFriends(String profilePicture, String fullName, String status) {
+    public FindFriends(String profilePicture, String fullName, String occupation) {
         ProfilePicture = profilePicture;
-        FullName = fullName;
-        this.status = status;
+        this.fullName = fullName;
+        this.occupation = occupation;
     }
 
     public String getProfilePicture() {
@@ -17,11 +17,11 @@ public class FindFriends {
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
-    public String getStatus() {
-        return status;
+    public String getOccupation() {
+        return occupation;
     }
 
     public void setProfilePicture(String profilePicture) {
@@ -29,10 +29,10 @@ public class FindFriends {
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        this.fullName = fullName;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 }

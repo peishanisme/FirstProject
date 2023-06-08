@@ -32,7 +32,7 @@ public class Main_Activity extends AppCompatActivity {
             } else if(id==R.id.new_post) {
                 replaceFragment(new Post_Fragment());
             }else if(id==R.id.add_friend){
-                replaceFragment(new AddFriend_Fragment());
+                replaceFragment(new Friend_Fragment());
             }else if(id==R.id.profile){
                 replaceFragment(new ProfileFragment());
             }

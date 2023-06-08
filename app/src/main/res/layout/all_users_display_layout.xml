@@ -10,7 +10,8 @@
         android:layout_width="85dp"
         android:layout_height="85dp"
         android:layout_marginLeft="10dp"
-        android:src="@drawable/profile"/>
+        android:src="@drawable/profile_man_photo_profile"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,14 +29,39 @@
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/all_user_status"
+            android:id="@+id/all_user_occupation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="status"
+            android:text="occupation"
             android:textAlignment="textStart"
             android:textColor="@color/white"
             android:textSize="16sp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/request_accept_button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Accept"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:visibility="invisible"/>
+
+            <Button
+                android:id="@+id/request_cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:visibility="invisible"/>
+
+
+        </LinearLayout>
 
 </LinearLayout>
