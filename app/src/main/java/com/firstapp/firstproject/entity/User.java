@@ -197,7 +197,6 @@ public class User {
 
         return otherConnections;
     }
-
  */
 
     public List<User> getRecommendedConnections() {
