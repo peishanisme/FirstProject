@@ -32,7 +32,7 @@ public class PersonProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_profile);
+        setContentView(R.layout.activity_view_acc_scrollview);
 
         mAuth = FirebaseAuth.getInstance();
         senderUserId = mAuth.getCurrentUser().getUid();

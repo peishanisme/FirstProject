@@ -43,8 +43,8 @@
             app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
 
         <Button
-            android:id="@+id/addFriendBtn"
-            android:layout_width="181dp"
+            android:id="@+id/send_friend_request"
+            android:layout_width="190dp"
             android:layout_height="50dp"
             android:layout_marginStart="115dp"
             android:layout_marginTop="32dp"
@@ -57,6 +57,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameDisplay" />
 
+        <Button
+            android:id="@+id/decline_friend_request"
+            android:layout_width="190dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="115dp"
+            app:layout_goneMarginTop="32dp"
+            android:layout_marginEnd="115dp"
+            android:layout_marginBottom="49dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/send_friend_request"
+            android:text="Decline friend request" />
+
         <TextView
             android:id="@+id/basicInfo"
             android:layout_width="308dp"
@@ -68,7 +82,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addFriendBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/send_friend_request" />
 
         <LinearLayout
             android:id="@+id/email_layout"
