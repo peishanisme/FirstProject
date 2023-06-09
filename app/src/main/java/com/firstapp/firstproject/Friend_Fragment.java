@@ -74,6 +74,7 @@ public class Friend_Fragment extends Fragment {
         bottomNavigationView = view.findViewById(R.id.bottomNavView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             // Handle the item selection
+            if
             switch (item.getItemId()) {
                 case R.id.SearchForFriends:
                     navController.navigate(R.id.SearchForFriends);
