@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-private TextView username, email, phone, occupation, gender, mutualFriends, hobby, degreeConnection;
+    private TextView username, email, phone, occupation, gender, mutualFriends, hobby, degreeConnection;
 //private Button addFriendBtn;
 
     private Button SendFriendReqButton, DeclineFriendReqButton;
@@ -34,11 +34,11 @@ private TextView username, email, phone, occupation, gender, mutualFriends, hobb
 //private FirebaseAuth auth = FirebaseAuth.getInstance();
 //private FirebaseUser currentUserF = auth.getCurrentUser();
 
-private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
-private DatabaseReference selectedUserRef;
-private DatabaseReference currentUserRef;
+    private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
+    private DatabaseReference selectedUserRef;
+    private DatabaseReference currentUserRef;
 
-private String selectedUserId, currentUserId, CURRENT_STATE, saveCurrentDate;
+    private String selectedUserId, currentUserId, CURRENT_STATE, saveCurrentDate;
     private DatabaseReference FriendRequestRef, FriendsRef;
     private FirebaseAuth mAuth;
 
@@ -378,48 +378,48 @@ private String selectedUserId, currentUserId, CURRENT_STATE, saveCurrentDate;
 
 
     //button function to send friend request
-        //SendFriendReqButton.setOnClickListener(new View.OnClickListener() {
-            //@Override
-            //public void onClick(View v) {
-             //   addFriendRequest(User otherUser);
-             //   SendFriendReqButton.setText("Request Sent");
-               // SendFriendReqButton.setEnabled(false);
-            //}
-       // });
+    //SendFriendReqButton.setOnClickListener(new View.OnClickListener() {
+    //@Override
+    //public void onClick(View v) {
+    //   addFriendRequest(User otherUser);
+    //   SendFriendReqButton.setText("Request Sent");
+    // SendFriendReqButton.setEnabled(false);
+    //}
+    // });
 
-      //  }
+    //  }
 
 
 
     public void displayFullProfile(User selectedUser){
 
-            username.setText(selectedUser.getUsername());
-            email.setText(String.valueOf(selectedUser.getEmail()));
-            phone.setText(String.valueOf(selectedUser.getPhone_number()));
-            occupation.setText(selectedUser.getOccupation());
-            gender.setText(selectedUser.getGender());
+        username.setText(selectedUser.getUsername());
+        email.setText(String.valueOf(selectedUser.getEmail()));
+        phone.setText(String.valueOf(selectedUser.getPhone_number()));
+        occupation.setText(selectedUser.getOccupation());
+        gender.setText(selectedUser.getGender());
 
-            List<String> hobbyList = selectedUser.getHobbies();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hobbyList.size(); i++) {
-                sb.append(hobbyList.get(i));
-                if (i != hobbyList.size() - 1) {
-                    sb.append(", ");
-                }
+        List<String> hobbyList = selectedUser.getHobbies();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < hobbyList.size(); i++) {
+            sb.append(hobbyList.get(i));
+            if (i != hobbyList.size() - 1) {
+                sb.append(", ");
             }
-            hobby.setText(sb.toString());
+        }
+        hobby.setText(sb.toString());
 
 
     }
 
     public void displayPartialProfile(User selectedUser){
 
-            username.setText(selectedUser.getUsername());
-            email.setText(String.valueOf(selectedUser.getEmail()));
-            phone.setText("-");
-            occupation.setText("-");
-            gender.setText("-");
-            hobby.setText("-");
+        username.setText(selectedUser.getUsername());
+        email.setText(String.valueOf(selectedUser.getEmail()));
+        phone.setText("-");
+        occupation.setText("-");
+        gender.setText("-");
+        hobby.setText("-");
 
     }
 
