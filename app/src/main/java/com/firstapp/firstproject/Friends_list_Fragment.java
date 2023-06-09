@@ -97,9 +97,8 @@ public class Friends_list_Fragment extends Fragment {
         super.onStart();
 
         FirebaseRecyclerOptions options =
-                new FirebaseRecyclerOptions.Builder<User>()
-                        .setQuery(ContactRef, User.class)
-                        .build();
+                new FirebaseRecyclerOptions.Builder<Friends>()
+                        .setQuery(ContactRef, Friends.class).build();
 
         final FirebaseRecyclerAdapter<Friends, ContactsViewHolder> adapter
                 = new FirebaseRecyclerAdapter<Friends, ContactsViewHolder>(options) {

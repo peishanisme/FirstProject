@@ -1,4 +1,4 @@
-package com.firstapp.firstproject;
+/**package com.firstapp.firstproject;
 
 import android.os.Bundle;
 import android.view.View;

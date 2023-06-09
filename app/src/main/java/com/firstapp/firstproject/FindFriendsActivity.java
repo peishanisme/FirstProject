@@ -1,6 +1,6 @@
 package com.firstapp.firstproject;
 
-import android.content.Intent;
+/**import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -124,7 +124,7 @@ public class FindFriendsActivity extends AppCompatActivity {
             });
         }**/
 
-        FirebaseRecyclerOptions<FindFriends> options =
+        /**FirebaseRecyclerOptions<FindFriends> options =
                 new FirebaseRecyclerOptions.Builder<FindFriends>()
                         .setQuery((Query) queries, FindFriends.class)
                         .build();
@@ -206,7 +206,7 @@ public class FindFriendsActivity extends AppCompatActivity {
         SearchResultList.setAdapter(firebaseRecyclerAdapter);**/
     }
 
-     class FindFriendsViewHolder extends RecyclerView.ViewHolder{
+     /**class FindFriendsViewHolder extends RecyclerView.ViewHolder{
         View mView;
         TextView myName;
         TextView myOccupation;
