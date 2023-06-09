@@ -4,7 +4,7 @@
     <item
         android:id="@+id/search_tab"
         android:title="Search for Friends"
-        android:icon="@drawable/SearchFriends_img"/>
+        android:icon="@drawable/searchfriends_img"/>
 
     <item
         android:id="@+id/request_tab"
