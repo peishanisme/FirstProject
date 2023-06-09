@@ -26,14 +26,17 @@ public class Main_Activity extends AppCompatActivity {
 
             int id = item.getItemId();
             if (id==R.id.home) {
-                replaceFragment(new HomeFragment());
-            } else if(id==R.id.new_post) {
-                replaceFragment(new HomeFragment());
-            }else if(id==R.id.add_friend){
-                replaceFragment(new Friend_Fragment());
+                replaceFragment(new HomeFragment());}
+            else if (id == R.id.search_tab) {
+                replaceFragment(new SearchForFriends_Fragment());
+            }else if (id == R.id.request_tab) {
+                replaceFragment(new Request_tab_Fragment());
+            }else if (id == R.id.friends_tab) {
+                replaceFragment(new Friends_list_Fragment());
             }else if(id==R.id.profile){
                 replaceFragment(new ProfileFragment());
             }
+
 
             return true;
         });

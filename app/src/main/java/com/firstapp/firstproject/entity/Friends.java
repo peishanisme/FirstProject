@@ -1,4 +1,4 @@
-package com.firstapp.firstproject;
+package com.firstapp.firstproject.entity;
 
 public class Friends {
     public String date;

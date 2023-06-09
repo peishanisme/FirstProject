@@ -9,10 +9,10 @@
 
 
 
-    <include
-        android:id="@+id/update_post_page_toolbar"
-        layout="@layout/app_bar_layout"
-        android:visibility="invisible" />
+<!--    <include-->
+<!--        android:id="@+id/update_post_page_toolbar"-->
+<!--        layout="@layout/app_bar_layout"-->
+<!--        android:visibility="invisible" />-->
 
     <ImageButton
         android:id="@+id/select_post_image"

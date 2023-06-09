@@ -1,5 +1,7 @@
 package com.firstapp.firstproject;
 
+import com.firstapp.firstproject.entity.User;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -100,20 +102,20 @@ public class SocialNetwork {
             return 0; // Same user, degree of connection is 0
         }
 
-        List<User> firstDegreeConnections = getFirstDegreeConnections(user1);
-        if (firstDegreeConnections.contains(user2)) {
-            return 1;
-        }
-
-        List<User> secondDegreeConnections = getSecondDegreeConnections(user1);
-        if (secondDegreeConnections.contains(user2)) {
-            return 2;
-        }
-
-        List<User> thirdDegreeConnections = getThirdDegreeConnections(user1);
-        if (thirdDegreeConnections.contains(user2)) {
-            return 3;
-        }
+//        List<User> firstDegreeConnections = getFirstDegreeConnections(user1);
+//        if (firstDegreeConnections.contains(user2)) {
+//            return 1;
+//        }
+//
+//        List<User> secondDegreeConnections = getSecondDegreeConnections(user1);
+//        if (secondDegreeConnections.contains(user2)) {
+//            return 2;
+//        }
+//
+//        List<User> thirdDegreeConnections = getThirdDegreeConnections(user1);
+//        if (thirdDegreeConnections.contains(user2)) {
+//            return 3;
+//        }
 
         return -1; // No connection found
     }

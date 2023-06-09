@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.firstapp.firstproject.entity.User;
+import com.firstapp.firstproject.entity.Friends;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,17 +79,17 @@ public class Friends_list_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-         ContactView = inflater.inflate(R.layout.fragment_friend_list_, container, false);
-         myContactList = (RecyclerView) ContactView.findViewById(R.id.contacts_list);
-         myContactList.setLayoutManager(new LinearLayoutManager(getContext()));
+        ContactView = inflater.inflate(R.layout.fragment_friend_list_, container, false);
+        myContactList = (RecyclerView) ContactView.findViewById(R.id.contacts_list);
+        myContactList.setLayoutManager(new LinearLayoutManager(getContext()));
 
-         mAuth = FirebaseAuth.getInstance();
-         currentUserID = mAuth.getCurrentUser().getUid();
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
 
-         ContactRef = FirebaseDatabase.getInstance().getReference().child("Friends").child(currentUserID);
-         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        ContactRef = FirebaseDatabase.getInstance().getReference().child("Friends").child(currentUserID);
+        UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-         return ContactView;
+        return ContactView;
     }
 
     @Override

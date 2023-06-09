@@ -3,25 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_nav"
-    app:startDestination="@id/addFriend_Fragment">
+    app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/addFriend_Fragment"
-        android:name="com.firstapp.firstproject.Friend_Fragment"
-        android:label="fragment_add_friend_"
-        tools:layout="@layout/fragment_friend_" />
+<!--    <fragment-->
+<!--        android:id="@+id/addFriend_Fragment"-->
+<!--        android:name="com.firstapp.firstproject.Friend_Fragment"-->
+<!--        android:label="fragment_add_friend_"-->
+<!--        tools:layout="@layout/fragment_friend_" />-->
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.firstapp.firstproject.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/post_Fragment"
-        android:name="com.firstapp.firstproject.Post_Fragment"
-        android:label="fragment_post_"
-        tools:layout="@layout/fragment_post_" />
+<!--    <fragment-->
+<!--        android:id="@+id/post_Fragment"-->
+<!--        android:name="com.firstapp.firstproject.Post_Fragment"-->
+<!--        android:label="fragment_post_"-->
+<!--        tools:layout="@layout/fragment_post_" />-->
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.firstapp.firstproject.ProfileFragment"
         android:label="ProfileFragment" />
+
+    <fragment
+        android:id="@+id/SearchForFriends"
+        android:name="com.firstapp.firstproject.SeacrhForFriends_Fragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_seacrh_for_friends_"/>
+
+    <fragment
+        android:id="@+id/RequestTab"
+        android:name="com.firstapp.firstproject.Request_tab_Fragment"
+        android:label="Request"
+        tools:layout="@layout/fragment_request_tab_"/>
+
+    <fragment
+        android:id="@+id/FriendsList"
+        android:name="com.firstapp.firstproject.Friends_list_Fragment"
+        android:label="FriendsList"
+        tools:layout="@layout/fragment_friend_list_"/>
+
 </navigation>

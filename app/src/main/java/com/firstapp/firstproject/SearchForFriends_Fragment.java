@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,12 +25,7 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SeacrhForFriends_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SeacrhForFriends_Fragment extends Fragment {
+public class SearchForFriends_Fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,21 +43,13 @@ public class SeacrhForFriends_Fragment extends Fragment {
     private View SeacrhView;
 
     private DatabaseReference UsersRef;
-    public SeacrhForFriends_Fragment() {
+    public SearchForFriends_Fragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SeacrhForFriends_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SeacrhForFriends_Fragment newInstance(String param1, String param2) {
-        SeacrhForFriends_Fragment fragment = new SeacrhForFriends_Fragment();
+
+    public static SearchForFriends_Fragment newInstance(String param1, String param2) {
+        SearchForFriends_Fragment fragment = new SearchForFriends_Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -94,20 +79,20 @@ public class SeacrhForFriends_Fragment extends Fragment {
         SearchButton = (ImageButton) SeacrhView.findViewById(R.id.search_people_friends_button);
         SearchInputText = (EditText) SeacrhView.findViewById(R.id.search_box_input);
 
-        mToolbar = SeacrhView.findViewById(R.id.find_friends_appbar_layout);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        activity.setSupportActionBar(mToolbar);
-        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
-        activity.getSupportActionBar().setTitle("Find Friends");
+//        /**mToolbar = SeacrhView.findViewById(R.id.find_friends_appbar_layout);
+//        AppCompatActivity activity = (AppCompatActivity) getActivity();
+//        activity.setSupportActionBar(mToolbar);
+//        activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        activity.getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        activity.getSupportActionBar().setTitle("Find Friends");**/
 
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         SearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchBoxInput = SearchInputText.getText().toString();
-                SearchPeopleAndFriends(searchBoxInput);
+//                String searchBoxInput = SearchInputText.getText().toString();
+//                SearchPeopleAndFriends(searchBoxInput);
             }
 
         });
@@ -115,28 +100,29 @@ public class SeacrhForFriends_Fragment extends Fragment {
         return SeacrhView;
 
     }
-    List<Query> queries = new ArrayList<>();
+    //List<Query> queries = new ArrayList<>();
+    Query query;
     private void SearchPeopleAndFriends(String searchBoxInput) {
         //Toast.makeText(this, "Searching", Toast.LENGTH_LONG).show();
 
-        //Query searchPeopleandFriendsQuery = allUsersDatabaseRef.orderByChild("fullName")
-        //      .startAt(searchBoxInput).endAt(searchBoxInput + "\uf8ff");
+        query = UsersRef.orderByChild("fullName")
+              .startAt(searchBoxInput).endAt(searchBoxInput + "\uf8ff");
 
         //List<Query> queries = new ArrayList<>();
 
         // Create a query for each child property you want to search
-        Query fullNameQuery = UsersRef.orderByChild("fullName").equalTo(searchBoxInput);
-        Query usernameQuery = UsersRef.orderByChild("username").equalTo(searchBoxInput);
-        Query useridQuery = UsersRef.orderByChild("userid").equalTo(searchBoxInput);
-        Query emailQuery = UsersRef.orderByChild("email").equalTo(searchBoxInput);
-        Query phoneNumberQuery = UsersRef.orderByChild("phone_number").equalTo(searchBoxInput);
+//        Query fullNameQuery = UsersRef.orderByChild("fullName").equalTo(searchBoxInput);
+//        Query usernameQuery = UsersRef.orderByChild("username").equalTo(searchBoxInput);
+//        Query useridQuery = UsersRef.orderByChild("userid").equalTo(searchBoxInput);
+//        Query emailQuery = UsersRef.orderByChild("email").equalTo(searchBoxInput);
+//        Query phoneNumberQuery = UsersRef.orderByChild("phone_number").equalTo(searchBoxInput);
 
         // Add the queries to the list
-        queries.add(fullNameQuery);
-        queries.add(usernameQuery);
-        queries.add(useridQuery);
-        queries.add(emailQuery);
-        queries.add(phoneNumberQuery);
+//        queries.add(fullNameQuery);
+//        queries.add(usernameQuery);
+//        queries.add(useridQuery);
+//        queries.add(emailQuery);
+//        queries.add(phoneNumberQuery);
 
     }
 
@@ -144,8 +130,12 @@ public class SeacrhForFriends_Fragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        String searchBoxInput = SearchInputText.getText().toString();
+        SearchPeopleAndFriends(searchBoxInput);
+
+
         FirebaseRecyclerOptions<User> options = new FirebaseRecyclerOptions.Builder<User>()
-                .setQuery((Query) queries, User.class).build();
+                .setQuery(query, User.class).build();
 
         FirebaseRecyclerAdapter<User, FindFriendViewHolder> adapter =
                 new FirebaseRecyclerAdapter<User, FindFriendViewHolder>(options) {
@@ -153,11 +143,12 @@ public class SeacrhForFriends_Fragment extends Fragment {
                     protected void onBindViewHolder(@NonNull FindFriendViewHolder holder, int position, @NonNull User model) {
                         holder.userName.setText(model.getFullName());
                         holder.userOccupation.setText(model.getOccupation());
+                        final int itemPosition = position;
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String visit_user_id = getRef(position).getKey();
+                                String visit_user_id = getRef(itemPosition).getKey();
                                 Intent profileIntent = new Intent(getActivity(), ViewAccActivity_Scrollview.class);
                                 //Intent profileIntent = new Intent(SeacrhForFriends_Fragment.this, ViewAccActivity_Scrollview.class);
                                 profileIntent.putExtra("visit_user_id", visit_user_id);
@@ -188,15 +179,15 @@ public class SeacrhForFriends_Fragment extends Fragment {
             mView = itemView;
 
             //public void setFullName(String fullName) {
-               // userName = (TextView) mView.findViewById(R.id.all_user_profile_full_name);
-                //userName.setText(fullName);
+            // userName = (TextView) mView.findViewById(R.id.all_user_profile_full_name);
+            //userName.setText(fullName);
 
             //}
 
             //public void setOccupation(String occupation) {
             //    userOccupation = (TextView) mView.findViewById(R.id.all_user_occupation);
             //    userOccupation.setText(occupation);
-           // }
+            // }
 
             userName = itemView.findViewById(R.id.all_user_profile_full_name);
             userOccupation = itemView.findViewById(R.id.all_user_occupation);

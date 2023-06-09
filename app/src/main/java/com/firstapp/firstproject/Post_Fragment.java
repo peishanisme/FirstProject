@@ -76,7 +76,7 @@ public class Post_Fragment extends AppCompatActivity
         loadingBar = new ProgressDialog(this);
 
 
-        mToolbar = findViewById(R.id.update_post_page_toolbar);
+//        mToolbar = findViewById(R.id.update_post_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
