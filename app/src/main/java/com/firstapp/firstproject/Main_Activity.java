@@ -28,7 +28,7 @@ public class Main_Activity extends AppCompatActivity {
             if (id==R.id.home) {
                 replaceFragment(new HomeFragment());
             } else if(id==R.id.new_post) {
-                replaceFragment(new Post_Fragment());
+                replaceFragment(new HomeFragment());
             }else if(id==R.id.add_friend){
                 replaceFragment(new Friend_Fragment());
             }else if(id==R.id.profile){
