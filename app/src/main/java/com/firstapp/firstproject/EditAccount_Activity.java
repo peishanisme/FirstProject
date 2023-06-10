@@ -87,13 +87,26 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
                         reference.child(uid).child("relationship").setValue(EditRelationship.getText().toString());
                         String EditAge = Setup_Activity.ageCalculation(EditBirthday.getText().toString());
                         reference.child(uid).child("age").setValue(EditAge);
-
+                        hobbyList.clear();
+                        for (int i =1;i<layoutList1.getChildCount();i++){
+                            EditText ETHobby = (EditText) layoutList1.getChildAt(i).findViewById(R.id.newHobby);
+                            if(ETHobby.getText().toString()!=null){
+                                hobbyList.add(ETHobby.getText().toString());
+                            }
+                        }
                         DatabaseReference hobbyReference = FirebaseDatabase.getInstance().getReference("Hobbies");
                         hobbyReference.child(uid).setValue(hobbyList);
 
                         // Save jobStack data to Firebase
+                        jobStack.clear();
                         DatabaseReference jobReference = FirebaseDatabase.getInstance().getReference("Jobs");
                         jobReference.child(uid).setValue(jobStack);
+                        for (int i =1;i<layoutList2.getChildCount();i++){
+                            EditText ETJob = (EditText) layoutList2.getChildAt(i).findViewById(R.id.newJob);
+                            if(ETJob.getText().toString()!=null){
+                                jobStack.push(ETJob.getText().toString());
+                            }
+                        }
 
                         Toast.makeText(EditAccount_Activity.this, "Saved", Toast.LENGTH_SHORT).show();
                     } else {
