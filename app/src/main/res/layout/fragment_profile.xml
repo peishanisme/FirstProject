@@ -414,6 +414,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:text="Hobbies" />
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hobbies"
                 android:layout_width="match_parent"

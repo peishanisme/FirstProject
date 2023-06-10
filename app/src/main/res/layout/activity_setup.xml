@@ -165,7 +165,7 @@
         android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/save_info"
+        android:id="@+id/save_job"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/editOccupation"

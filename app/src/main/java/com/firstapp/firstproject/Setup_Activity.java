@@ -82,7 +82,7 @@ public class Setup_Activity extends AppCompatActivity {
         Birthday = (EditText) findViewById(R.id.editBirthday);
         Occupation = (EditText) findViewById(R.id.editOccupation);
         gender = (RadioGroup) findViewById(R.id.editGender);
-        SaveInfoButton = (Button) findViewById(R.id.save_info);
+        SaveInfoButton = (Button) findViewById(R.id.save_job);
         ProfilePicture = (CircleImageView) findViewById(R.id.profile_picture);
         loadingBar = new ProgressDialog(this);
 

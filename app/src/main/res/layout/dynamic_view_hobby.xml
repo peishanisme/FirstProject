@@ -15,6 +15,7 @@
         android:layout_weight="1"
         android:background="@drawable/round_grey"
         android:hint="New Hobby"
+        android:text="testing"
         android:paddingLeft="10dp"
         android:textColor="@color/black"
         android:textSize="14sp"></EditText>
