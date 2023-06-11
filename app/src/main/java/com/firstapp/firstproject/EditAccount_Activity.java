@@ -32,6 +32,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     LinearLayout layoutList1;
     LinearLayout layoutList2;
+    ImageView back_button;
     Button addJob;
     Button addHobby;
     String Username, fullname, phoneNumber, birthday, age, country, state, occupation, Gender, relationship;
@@ -50,6 +51,14 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
+        back_button=findViewById(R.id.backbutton);
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         String uid = mAuth.getCurrentUser().getUid();

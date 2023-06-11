@@ -1,6 +1,5 @@
 package com.firstapp.firstproject;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.firstapp.firstproject.EditAccount_Activity;
+import com.firstapp.firstproject.R;
+import com.firstapp.firstproject.Starting_Activity;
 import com.firstapp.firstproject.adapter.addhobbyAdapter;
 import com.firstapp.firstproject.adapter.addjobAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,59 +29,53 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class ProfileFragment extends Fragment{
+public class ProfileFragment extends Fragment {
     private View root;
     RecyclerView recyclerViewHobby;
-    ArrayList<String>hobbies;
+    ArrayList<String> hobbies;
     addhobbyAdapter addhobbyAdapter;
     RecyclerView recyclerViewJob;
     Stack<String> jobStack;
     addjobAdapter addjobAdapter;
 
-
-
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile, container, false);
-        ImageButton edit_profile_button=root.findViewById(R.id.edit_profile_button);
-        ImageButton logout_button=root.findViewById(R.id.logout_button);
-        TextView username=root.findViewById(R.id.UsernameDisplay);
-        TextView fullname=root.findViewById(R.id.fullnameDisplay);
-        TextView email=root.findViewById(R.id.emailDisplay);
-        TextView phoneNumber=root.findViewById(R.id.phDisplay);
-        TextView birthday=root.findViewById(R.id.birthdayDisplay);
-        TextView age=root.findViewById(R.id.ageDisplay);
-        TextView country=root.findViewById(R.id.countryDisplay);
-        TextView state=root.findViewById(R.id.stateDisplay);
-        TextView occupation=root.findViewById(R.id.occpDisplay);
-        TextView gender=root.findViewById(R.id.genderDisplay);
-        TextView relationship=root.findViewById(R.id.relationshipDisplay);
+        ImageButton edit_profile_button = root.findViewById(R.id.edit_profile_button);
+        ImageButton logout_button = root.findViewById(R.id.logout_button);
+        TextView username = root.findViewById(R.id.UsernameDisplay);
+        TextView fullname = root.findViewById(R.id.fullnameDisplay);
+        TextView email = root.findViewById(R.id.emailDisplay);
+        TextView phoneNumber = root.findViewById(R.id.phDisplay);
+        TextView birthday = root.findViewById(R.id.birthdayDisplay);
+        TextView age = root.findViewById(R.id.ageDisplay);
+        TextView country = root.findViewById(R.id.countryDisplay);
+        TextView state = root.findViewById(R.id.stateDisplay);
+        TextView occupation = root.findViewById(R.id.occpDisplay);
+        TextView gender = root.findViewById(R.id.genderDisplay);
+        TextView relationship = root.findViewById(R.id.relationshipDisplay);
 
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Users");
-        DatabaseReference hobbyReference=FirebaseDatabase.getInstance().getReference("Hobbies");
-        String uid=auth.getCurrentUser().getUid();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference hobbyReference = FirebaseDatabase.getInstance().getReference("Hobbies");
+        String uid = auth.getCurrentUser().getUid();
 
-        hobbies=new ArrayList<>();
+        hobbies = new ArrayList<>();
 
         recyclerViewHobby = root.findViewById(R.id.hobbies_recyclerview);
         addhobbyAdapter = new addhobbyAdapter(hobbies);
         recyclerViewHobby.setAdapter(addhobbyAdapter);
         recyclerViewHobby.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        jobStack=new Stack<>();
+        jobStack = new Stack<>();
         recyclerViewJob = root.findViewById(R.id.jobs_recyclerview);
-        addjobAdapter=new addjobAdapter(jobStack);
+        addjobAdapter = new addjobAdapter(jobStack);
         recyclerViewJob.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewJob.setAdapter(addjobAdapter);
-
-
-
 
         databaseReference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,25 +91,26 @@ public class ProfileFragment extends Fragment{
                 occupation.setText(snapshot.child("occupation").getValue(String.class));
                 gender.setText(snapshot.child("gender").getValue(String.class));
                 relationship.setText(snapshot.child("relationship").getValue(String.class));
-
-
-
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
         hobbyReference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 hobbies.clear();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String hobby = dataSnapshot.getValue(String.class);
-                    hobbies.add(hobby);
+
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String hobby = dataSnapshot.getValue(String.class);
+                        hobbies.add(hobby);
+                    }
                 }
+
                 addhobbyAdapter.notifyDataSetChanged();
             }
 
@@ -123,22 +119,23 @@ public class ProfileFragment extends Fragment{
                 // Handle error
             }
         });
+
         DatabaseReference jobReference = FirebaseDatabase.getInstance().getReference("Jobs");
         jobReference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 jobStack.clear();
+
                 Stack<String> jobList=new Stack<>();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String job = dataSnapshot.getValue(String.class);
                     jobList.push(job);
-//                    jobStack.push(job);
-
                 }
                 for(int i=0;i<=jobList.size();i++){
                     jobStack.push(jobList.pop());
 
                 }
+
                 addjobAdapter.notifyDataSetChanged();
             }
 
@@ -155,6 +152,7 @@ public class ProfileFragment extends Fragment{
                 startActivity(intent);
             }
         });
+
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,10 +161,6 @@ public class ProfileFragment extends Fragment{
             }
         });
 
-
-
-
         return root;
     }
-
 }

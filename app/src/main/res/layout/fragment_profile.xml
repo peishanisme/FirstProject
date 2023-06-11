@@ -13,6 +13,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/material_dynamic_primary40"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="User Profile"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -435,8 +454,8 @@
                 android:id="@+id/jobs_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="2dp"
                 android:textAlignment="textEnd" />
 
         </LinearLayout>

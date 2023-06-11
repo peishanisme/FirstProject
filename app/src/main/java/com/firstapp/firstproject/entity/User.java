@@ -33,6 +33,14 @@ public class User {
         this.hobby = hobby;
         this.relationshipStatus=relationshipStatus;}
 
+    public User(String uid, String username, String fullName, String email, String phone_number) {
+        this.userid=uid;
+        this.username=username;
+        this.fullName=fullName;
+        this.email=email;
+        this.phone_number=phone_number;
+    }
+
 
     public ArrayList<String> getHobbies(ArrayList<String> hobbies) {
         return hobbies;
@@ -45,6 +53,9 @@ public class User {
 
     public List<User> getFriends() {
         return friends;
+    }
+    public String getUid() {
+        return userid;
     }
 
     public String getUsername() {
@@ -70,6 +81,7 @@ public class User {
     public String getBirthday() {
         return birthday;
     }
+
 
     public String getFullName() {
         return fullName;
@@ -233,4 +245,6 @@ public class User {
 
         return -1; // No connection found
     }
+
+
 }

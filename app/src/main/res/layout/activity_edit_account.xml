@@ -20,7 +20,7 @@
                 android:id="@+id/top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#01639A"
+                android:background="@color/material_dynamic_primary40"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp">
 
