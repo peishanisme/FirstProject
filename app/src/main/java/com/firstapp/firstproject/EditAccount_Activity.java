@@ -1,5 +1,6 @@
 package com.firstapp.firstproject;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +38,9 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
     EditText EditUsername, EditFullName, EditPhoneN, EditBirthday, EditCountry, EditState, EditOccupation, EditRelationship;
     RadioGroup gender;
     RadioButton genderSelection;
+    //Use Array List to store hobbies
     ArrayList<String> hobbyList = new ArrayList<>();
+    //Use stack to store jobs
     Stack<String> jobStack = new Stack<>();
     Button save;
     Button addJobButton;
@@ -87,6 +90,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
                         reference.child(uid).child("relationship").setValue(EditRelationship.getText().toString());
                         String EditAge = Setup_Activity.ageCalculation(EditBirthday.getText().toString());
                         reference.child(uid).child("age").setValue(EditAge);
+
                         hobbyList.clear();
                         for (int i =1;i<layoutList1.getChildCount();i++){
                             EditText ETHobby = (EditText) layoutList1.getChildAt(i).findViewById(R.id.newHobby);
@@ -107,8 +111,11 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
                                 jobStack.push(ETJob.getText().toString());
                             }
                         }
+                        DatabaseReference job_Reference = FirebaseDatabase.getInstance().getReference("Jobs");
+                        job_Reference.child(uid).setValue(jobStack);
 
                         Toast.makeText(EditAccount_Activity.this, "Saved", Toast.LENGTH_SHORT).show();
+                        SendUserToProfileFragment();
                     } else {
                         Toast.makeText(EditAccount_Activity.this, "Please do not leave empty space", Toast.LENGTH_SHORT).show();
                     }
@@ -129,7 +136,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
                 occupation = snapshot.child("occupation").getValue(String.class);
                 Gender = snapshot.child("gender").getValue(String.class);
                 relationship = snapshot.child("relationship").getValue(String.class);
-                //hobby & job
+
             }
 
             @Override
@@ -139,6 +146,8 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
         });
     }
 
+
+
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.AddJob) {
@@ -146,6 +155,38 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
         } else if (v.getId() == R.id.AddHobby) {
             addHobbyView();
         }
+    }
+
+    private void addJobView() {
+        final View jobView = getLayoutInflater().inflate(R.layout.dynamic_view_job, null, false);
+        final EditText jobEdit = (EditText) jobView.findViewById(R.id.newJob);
+        ImageView removeJob = (ImageView) jobView.findViewById(R.id.button_remove);
+
+        removeJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeJobView(jobView);
+            }
+        });
+
+        layoutList2.addView(jobView);
+        jobStack.push(jobEdit.getText().toString());
+    }
+
+    private void addHobbyView() {
+        final View hobbyView = getLayoutInflater().inflate(R.layout.dynamic_view_hobby, null, false);
+        final EditText hobbyEdit = (EditText) hobbyView.findViewById(R.id.newHobby);
+        ImageView removeHobby = (ImageView) hobbyView.findViewById(R.id.image_remove);
+
+        removeHobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeHobbyView(hobbyView);
+            }
+        });
+
+        layoutList1.addView(hobbyView);
+        hobbyList.add(hobbyEdit.getText().toString());
     }
 
     public void removeJobView(View v) {
@@ -252,35 +293,10 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void addJobView() {
-        final View jobView = getLayoutInflater().inflate(R.layout.dynamic_view_job, null, false);
-        final EditText jobEdit = (EditText) jobView.findViewById(R.id.newJob);
-        ImageView removeJob = (ImageView) jobView.findViewById(R.id.button_remove);
 
-        removeJob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeJobView(jobView);
-            }
-        });
+    private void SendUserToProfileFragment() {
+        Intent intent = new Intent(EditAccount_Activity.this, ProfileFragment.class);
+        startActivity(intent);
 
-        layoutList2.addView(jobView);
-        jobStack.push(jobEdit.getText().toString());
-    }
-
-    private void addHobbyView() {
-        final View hobbyView = getLayoutInflater().inflate(R.layout.dynamic_view_hobby, null, false);
-        final EditText hobbyEdit = (EditText) hobbyView.findViewById(R.id.newHobby);
-        ImageView removeHobby = (ImageView) hobbyView.findViewById(R.id.image_remove);
-
-        removeHobby.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeHobbyView(hobbyView);
-            }
-        });
-
-        layoutList1.addView(hobbyView);
-        hobbyList.add(hobbyEdit.getText().toString());
     }
 }

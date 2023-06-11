@@ -297,7 +297,7 @@
                     android:text="Relationship Status:" />
 
                 <TextView
-                    android:id="@+id/relationship"
+                    android:id="@+id/relationshipDisplay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -416,7 +416,7 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/hobbies"
+                android:id="@+id/hobbies_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
@@ -432,7 +432,7 @@
                 android:text="Jobs" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/jobs"
+                android:id="@+id/jobs_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
