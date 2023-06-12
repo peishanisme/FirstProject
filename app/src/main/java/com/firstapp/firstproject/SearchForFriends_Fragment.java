@@ -22,6 +22,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class SearchForFriends_Fragment extends Fragment {
@@ -69,7 +71,7 @@ public class SearchForFriends_Fragment extends Fragment {
                 userList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    if (user != null) {
+                    if (user != null&&!(userList.contains(user))) {
                         userList.add(user);
                     }
                 }
@@ -88,7 +90,7 @@ public class SearchForFriends_Fragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    if (user != null) {
+                    if (user != null&&!(userList.contains(user))) {
                         if (!userList.contains(user)) {
                             userList.add(user);
                         }
@@ -109,7 +111,7 @@ public class SearchForFriends_Fragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    if (user != null) {
+                    if (user != null&&!(userList.contains(user))) {
                         if (!userList.contains(user)) {
                             userList.add(user);
                         }
@@ -130,7 +132,7 @@ public class SearchForFriends_Fragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    if (user != null) {
+                    if (user != null&&!(userList.contains(user))) {
                         if (!userList.contains(user)) {
                             userList.add(user);
                         }
@@ -151,14 +153,17 @@ public class SearchForFriends_Fragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
-                    if (user != null) {
+                    if (user != null&&!(userList.contains(user))) {
                         if (!userList.contains(user)) {
                             userList.add(user);
                         }
                     }
                 }
                 searchFriendAdapter.notifyDataSetChanged();
+
+
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

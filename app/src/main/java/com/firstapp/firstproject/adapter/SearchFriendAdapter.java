@@ -1,5 +1,6 @@
 package com.firstapp.firstproject.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapter.UserViewHolder> {
     private static List<User> userList;
+    private Context context;
 
     public SearchFriendAdapter(List<User> userList) {
         this.userList = userList;
@@ -38,6 +40,15 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
         holder.fullnameTextView.setText(user.getFullName());
         holder.emailTextView.setText(user.getEmail());
         holder.phonenumberTextView.setText(user.getPhone_number());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewAccActivity_Scrollview.class);
+                intent.putExtra("uid", user.getUid()); // Pass the user object
+                context.startActivity(intent);
+            }
+        });
 
     }
 
