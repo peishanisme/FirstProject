@@ -34,6 +34,10 @@
             android:name=".ViewAccActivity_Scrollview"
             android:exported="false" />
         <activity
+            android:name=".FindFriendsActivity"
+            android:parentActivityName=".Main_Activity"
+             />
+        <activity
             android:name=".Starting_Activity"
             android:exported="true">
             <intent-filter>

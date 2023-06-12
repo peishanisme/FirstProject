@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SearchForFriends_Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <Toolbar
         android:id="@+id/find_friends_appbar_layout"
         android:layout_width="match_parent"
