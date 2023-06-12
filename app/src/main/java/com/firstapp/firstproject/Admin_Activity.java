@@ -105,10 +105,11 @@ public class Admin_Activity extends AppCompatActivity implements UserAdapter.OnD
         usersRef.child(uid).removeValue();
 
         // Delete account from Authentication
-//        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-//        if (firebaseUser != null) {
-//            firebaseUser.delete();
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser != null) {
+            firebaseUser.delete();
 
+        }
         }
     
     }

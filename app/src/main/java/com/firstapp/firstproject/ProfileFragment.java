@@ -125,15 +125,16 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 jobStack.clear();
+                if(snapshot.exists()) {
+                    Stack<String> jobList = new Stack<>();
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String job = dataSnapshot.getValue(String.class);
+                        jobList.push(job);
+                    }
+                    for (int i = 0; i <= jobList.size(); i++) {
+                        jobStack.push(jobList.pop());
 
-                Stack<String> jobList=new Stack<>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String job = dataSnapshot.getValue(String.class);
-                    jobList.push(job);
-                }
-                for(int i=0;i<=jobList.size();i++){
-                    jobStack.push(jobList.pop());
-
+                    }
                 }
 
                 addjobAdapter.notifyDataSetChanged();

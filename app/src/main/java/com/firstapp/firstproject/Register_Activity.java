@@ -100,13 +100,11 @@ public class Register_Activity extends AppCompatActivity {
                     if(task.isSuccessful()){
                         Toast.makeText(Register_Activity.this,"You are authenticated successfully...",Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
-//                        ArrayList<String>hobbies = new ArrayList<>();
-//                        hobbies.add("");
-
-                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","" ,0 , "");
 
 
-//                        FirebaseDatabase.getInstance().getReference().child("Hobbies").child(FirebaseAuth.getInstance().getUid()).setValue(hobbies);
+                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","" ,0 );
+
+
                         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).setValue(user);
                         Intent mainIntent = new Intent(Register_Activity.this, Setup_Activity.class);
                         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -124,11 +122,5 @@ public class Register_Activity extends AppCompatActivity {
 
     }
 
-//    private void SendUserToSetupActivity() {
-//            Intent mainIntent = new Intent(Register_Activity.this, Setup_Activity.class);
-//            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//            startActivity(mainIntent);
-//            finish();
-//
-//        }
+
     }

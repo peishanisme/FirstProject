@@ -6,12 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".SearchForFriends_Fragment">
 
-
-    <Toolbar
-        android:id="@+id/find_friends_appbar_layout"
+    <LinearLayout
+        android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"></Toolbar>
+        android:background="@color/material_dynamic_primary40"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:text="Search Friend"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+    </LinearLayout>
+
+
 
 
     <RelativeLayout
@@ -28,35 +43,44 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="20dp"
             android:text="Search For People and Friends"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/search_box_input"
-            android:layout_width="280dp"
-            android:layout_height="70dp"
-            android:layout_below="@+id/simpleTextID"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="21dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/purple"
-            android:ems="10"
-            android:hint="Search here...."
-            android:inputType="textMultiLine"
-            android:padding="10dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/white" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/simpleTextID"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/search_people_friends_button"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_below="@+id/simpleTextID"
-            android:layout_marginTop="10dp"
-            android:layout_toEndOf="@+id/search_box_input"
-            android:background="@color/white"
-            android:src="@drawable/search" />
+            <EditText
+                android:id="@+id/search_box_input"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button"
+                android:backgroundTint="#7771CC"
+                android:ems="10"
+                android:hint="Search here...."
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white" />
+
+            <ImageButton
+                android:id="@+id/search_people_friends_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/circlebutton"
+                android:src="@drawable/baseline_search_24"
+                />
+
+        </LinearLayout>
 
 
     </RelativeLayout>
