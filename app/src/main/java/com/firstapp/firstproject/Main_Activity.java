@@ -30,6 +30,29 @@ public class Main_Activity extends AppCompatActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
+        
+        // Automatic replace fragment to the respective fragment
+        // based on the targetFragment when it redirect from the traceback function
+        String targetFragment = getIntent().getStringExtra("targetFragment");
+
+        if (targetFragment != null) {
+            if (targetFragment.equals("Add Friends")) {
+                targetFragment = null;
+                replaceFragment(new AddFriend_Fragment());
+            } else if (targetFragment.equals("Home")) {
+                targetFragment = null;
+                replaceFragment(new HomeFragment());
+            } else if (targetFragment.equals("Profile")) {
+                targetFragment = null;
+                replaceFragment(new ProfileFragment());
+            } else {
+                targetFragment = null;
+                replaceFragment(new HomeFragment());
+            }
+        } else {
+            targetFragment = null;
+            replaceFragment(new HomeFragment());
+        }
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 

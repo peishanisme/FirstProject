@@ -33,7 +33,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class Post_Fragment extends AppCompatActivity
 {
@@ -76,11 +76,6 @@ public class Post_Fragment extends AppCompatActivity
         loadingBar = new ProgressDialog(this);
 
 
-//        mToolbar = findViewById(R.id.update_post_page_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Update Post");
 
 
 
@@ -128,10 +123,9 @@ public class Post_Fragment extends AppCompatActivity
     private void StoringImageToFirebaseStorage()
     {
         Calendar calFordDate = Calendar.getInstance();
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
+        SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
         saveCurrentDate = currentDate.format(calFordDate.getTime());
-
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
+       SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss");
         saveCurrentTime = currentTime.format(calFordDate.getTime());
 
         postRandomName = saveCurrentDate + saveCurrentTime;
@@ -143,18 +137,24 @@ public class Post_Fragment extends AppCompatActivity
             @Override
             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task)
             {
-                if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult().getUploadSessionUri();
-                    if (downloadUri != null) {
-                        downloadUrl = downloadUri.toString();
-                        Toast.makeText(Post_Fragment.this, "Image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
-                        SavingPostInformationToDatabase();
-                    } else {
-                        Toast.makeText(Post_Fragment.this, "Failed to retrieve download URL.", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
+                if(task.isSuccessful())
+                {
+                    PostsImagesRefrence.child("Post Images").getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            //getdownloadUrl
+                            downloadUrl = task.getResult().toString();
+                            PostsRef.push().child("imageurl").setValue(downloadUrl);
+                        }
+                    });
+                    Toast.makeText(Post_Fragment.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
+
+                    SavingPostInformationToDatabase();
+
+                }
+                else
+                {
                     String message = task.getException().getMessage();
-                    Toast.makeText(Post_Fragment.this, "Error occurred: " + message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Post_Fragment.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -174,16 +174,16 @@ public class Post_Fragment extends AppCompatActivity
                     String userFullName = dataSnapshot.child("fullname").getValue().toString();
                     String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
 
-                    TreeMap<String, Object> postData = new TreeMap<>();
-                    postData.put("uid", current_user_id);
-                    postData.put("date", saveCurrentDate);
-                    postData.put("time", saveCurrentTime);
-                    postData.put("description", Description);
-                    postData.put("postimage", downloadUrl);
-                    postData.put("profileimage", userProfileImage);
-                    postData.put("fullname", userFullName);
-                    PostsRef.child(current_user_id + postRandomName).updateChildren(postData)
-                            .addOnCompleteListener(new OnCompleteListener() {
+                    Post postData = new Post();
+                    postData.setUid(current_user_id);
+                    postData.setDate(saveCurrentDate);
+                    postData.setTime(saveCurrentTime);
+                    postData.setDescription(Description);
+                    postData.setPostImage(downloadUrl);
+                    postData.setProfileImage(userProfileImage);
+                    postData.setFullName(userFullName);
+
+                    PostsRef.child(current_user_id + postRandomName).setValue(postData).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task task)
                                 {
