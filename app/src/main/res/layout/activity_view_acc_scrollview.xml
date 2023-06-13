@@ -47,7 +47,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:text="@string/add_friend" />
+            android:text="add_friend" />
 
         <Button
             android:id="@+id/decline_friend_request"
@@ -64,7 +64,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/basic_info"
+            android:text="basic_info"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -78,7 +78,7 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/email" />
+                android:text="email" />
 
             <TextView
                 android:id="@+id/emailDisplay"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
-                android:text="@string/abc_gmail_com"
+                android:text="abc_gmail_com"
                 android:textAlignment="viewEnd" />
 
 

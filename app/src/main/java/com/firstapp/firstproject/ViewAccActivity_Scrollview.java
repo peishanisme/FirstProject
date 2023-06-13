@@ -1,18 +1,20 @@
 package com.firstapp.firstproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.firstapp.firstproject.entity.User;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.firstapp.firstproject.adapter.addhobbyAdapter;
+import com.firstapp.firstproject.adapter.addjobAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,29 +22,34 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Stack;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-    String received_id;
-
-    private TextView username, email, phone, occupation, gender, mutualFriends, hobby, degreeConnection;
-//private Button addFriendBtn;
+    private TextView username, email, phone, occupation, gender, country, birthday, relationship, mutualFriends, degreeConnection;
+    private View root;
+    RecyclerView recyclerViewHobby;
+    ArrayList<String> hobbies;
+    addhobbyAdapter addhobbyAdapter;
+    RecyclerView recyclerViewJob;
+    Stack<String> jobStack;
+    addjobAdapter addjobAdapter;
+    private String selectedUserId, currentUserId, CURRENT_STATE, saveCurrentDate;
 
     private Button SendFriendReqButton, DeclineFriendReqButton;
-
-
-//private FirebaseAuth auth = FirebaseAuth.getInstance();
-//private FirebaseUser currentUserF = auth.getCurrentUser();
-
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
+    private DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("Friends");
     private DatabaseReference selectedUserRef;
     private DatabaseReference currentUserRef;
+    private DatabaseReference FriendRequestRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests");
+    private DatabaseReference FriendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");;
+    private DatabaseReference hobbyReference = FirebaseDatabase.getInstance().getReference("Hobbies");
+    private DatabaseReference jobReference = FirebaseDatabase.getInstance().getReference("Jobs");
 
-    private String selectedUserId, currentUserId, CURRENT_STATE, saveCurrentDate;
-    private DatabaseReference FriendRequestRef, FriendsRef;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +57,13 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         setContentView(R.layout.activity_view_acc_scrollview);
 
 
-        mAuth = FirebaseAuth.getInstance();
+        // Retrieve selected user's ID passed from the previous activity
         currentUserId = mAuth.getCurrentUser().getUid();
-        received_id = getIntent().getStringExtra("uid");
-//        selectedUserId = getIntent().getExtras().get("visit_user_id").toString();
-        userRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        FriendRequestRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests");
-        FriendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
+        selectedUserId = getIntent().getStringExtra("uid");
+
+        // Get reference to the  selected user by ID
+        selectedUserRef = userRef.child(selectedUserId);
+        currentUserRef = userRef.child(currentUserId);
 
 
         username = findViewById(R.id.usernameDisplay);
@@ -64,31 +71,198 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         phone = findViewById(R.id.phDisplay);
         occupation = findViewById(R.id.occpDisplay);
         gender = findViewById(R.id.genderDisplay);
+        country = findViewById(R.id.countryDisplay);
+        birthday = findViewById(R.id.birthdayDisplay);
+        relationship = findViewById(R.id.relationshipDisplay);
         mutualFriends = findViewById(R.id.mutualFriends);
-        hobby = findViewById(R.id.hobbiesDisplay);
         degreeConnection = findViewById(R.id.degConnectionDisplay);
         SendFriendReqButton = findViewById(R.id.send_friend_request);
         DeclineFriendReqButton = findViewById(R.id.decline_friend_request);
         CURRENT_STATE = "not_friends";
 
 
+        hobbies = new ArrayList<>();
+        recyclerViewHobby = findViewById(R.id.hobbies_recyclerview);
+        addhobbyAdapter = new addhobbyAdapter(hobbies);
+        recyclerViewHobby.setAdapter(addhobbyAdapter);
+        recyclerViewHobby.setLayoutManager(new LinearLayoutManager(this));
+
+        jobStack = new Stack<>();
+        recyclerViewJob = findViewById(R.id.jobs_recyclerview);
+        addjobAdapter = new addjobAdapter(jobStack);
+        recyclerViewJob.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewJob.setAdapter(addjobAdapter);
+
+        //     List<String> currentUserFriendList = new ArrayList<>();
+        //   List<String> selectedUserFriendList = new ArrayList<>();
+
+        //     Toast.makeText(this, "User ID: "+ selectedUserId, Toast.LENGTH_SHORT).show();
+
+/*
+        friendRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                // get current user friend list
+                for (DataSnapshot userSnapshot : dataSnapshot.child(currentUserId).getChildren()) {
+                    String currentUserFriendId = userSnapshot.getValue().toString();
+
+                    if (currentUserFriendId != null) {
+                        currentUserFriendList.add(currentUserFriendId); // Add the user id to the list
+                    }
+                }
+
+                // get selected user friend list
+                for (DataSnapshot userSnapshot : dataSnapshot.child(selectedUserId).getChildren()) {
+                    String selectedUserFriendId = userSnapshot.getValue().toString();
+
+                    if (selectedUserFriendId != null) {
+                        selectedUserFriendList.add(selectedUserFriendId);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+*/
+        // get mutual friend between two user
+        //  List<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
+
+        selectedUserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+
+                    String selectedUsername = snapshot.child("username").getValue().toString();
+                    String selectedUserEmail = snapshot.child("email").getValue().toString();
+                    String selectedUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
+                    String selectedOccupation = snapshot.child("occupation").getValue().toString();
+                    String selectedGender = snapshot.child("gender").getValue().toString();
+                    String selectedCountry = snapshot.child("countryName").getValue().toString();
+                    String selectedBirthday = snapshot.child("birthday").getValue().toString();
+                    String selectedRelationship = snapshot.child("relationship").getValue().toString();
 
 
-        // Retrieve selected user's ID passed from the previous activity
-        selectedUserId = getIntent().getStringExtra("uid");
-//        currentUserId = getIntent().getStringExtra("currentUserId");
-        // Get reference to the  selected user by ID
-        selectedUserRef = userRef.child(selectedUserId);
-        currentUserRef = userRef.child(currentUserId);
+
+                    // Display the user's profile data in the UI
+                    username.setText(selectedUsername);
+                    email.setText(selectedUserEmail);
+                    //   mutualFriends.setText(mutualFriendList.size() + " Mutual Friends");
+
+                    // if (currentUserFriendList.contains(selectedUserId)) {
+                    phone.setText(selectedUserPhoneNumber);
+                    occupation.setText(selectedOccupation);
+                    gender.setText(selectedGender);
+                    country.setText(selectedCountry);
+                    birthday.setText(selectedBirthday);
+                    relationship.setText(selectedRelationship);
+
+                    hobbyReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            hobbies.clear();
+
+                            if (snapshot.exists()) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    String hobby = dataSnapshot.getValue(String.class);
+                                    hobbies.add(hobby);
+                                }
+                            }
+
+                            addhobbyAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Handle error
+                        }
+                    });
 
 
-        Toast.makeText(this, "User ID: "+ selectedUserId, Toast.LENGTH_SHORT).show();
+                    jobReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            jobStack.clear();
+
+                            Stack<String> jobList=new Stack<>();
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                String job = dataSnapshot.getValue(String.class);
+                                jobList.push(job);
+                            }
+                            for(int i=0;i<=jobList.size();i++){
+                                jobStack.push(jobList.pop());
+
+                            }
+
+                            addjobAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Handle error
+                        }
+                    });
+
+                    //    } else {
+                    //        phone.setText("-");
+                    //       occupation.setText("-");
+                    //       gender.setText("-");
+                    //       country.setText("-");
+                    //       birthday.setText("-");
+                    //       relationship.setText("-");
+                    //   }
+
+                    MaintananceofButtion();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error
+            }
+        });
+
+
 
 
         // Retrieve the user's profile data from the database
+        /*
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 if (snapshot.exists()) {
+
+
+                    String myUsername = snapshot.child("username").getValue().toString();
+                    String myUserEmail = snapshot.child("email").getValue().toString();
+                    String myUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
+                    String myOccupation = snapshot.child("occupation").getValue().toString();
+                    String myGender = snapshot.child("gender").getValue().toString();
+
+
+
+                    // Display the user's profile data in the UI
+                    if()
+                    username.setText("@"+myUserName);
+                    email.setText(myUserEmail);
+                    phone.setText(myUserPhoneNumber);
+                    occupation.setText(myOccupation);
+                    gender.setText(myGender);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error
+            }
+        });
 
                 User selectedUser = snapshot.child(selectedUserId).getValue(User.class);
                 User currentUser = snapshot.child(currentUserId).getValue(User.class);
@@ -131,11 +305,11 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
 
-//                    String myProfileImage = snapshot.child("ProfilePicture").getValue().toString();
-                    String myUserName = snapshot.child("username").getValue().toString();
-                    String myUserEmail = snapshot.child("email").getValue().toString();
-                    String myUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
-                    String myOccupation = snapshot.child("occupation").getValue().toString();
+                    String myProfileImage = snapshot.child("ProfilePicture").getValue().toString();
+                    String myUserName = snapshot.child("UserName").getValue().toString();
+                    String myUserEmail = snapshot.child("UserEmail").getValue().toString();
+                    String myUserPhoneNumber = snapshot.child("UserPhoneNumber").getValue().toString();
+                    String myOccupation = snapshot.child("Occupation").getValue().toString();
                     String myGender = snapshot.child("gender").getValue().toString();
 
                     // Picasso.with(ctx).load(profilePicture).placeholder(R.drawable.);
@@ -158,7 +332,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                 // Handle the error
             }
         });
-
+*/
         DeclineFriendReqButton.setVisibility(View.INVISIBLE);
         DeclineFriendReqButton.setEnabled(false);
 
@@ -393,37 +567,47 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
     //  }
 
-
-
-    public void displayFullProfile(User selectedUser){
-
-        username.setText(selectedUser.getUsername());
-        email.setText(String.valueOf(selectedUser.getEmail()));
-        phone.setText(String.valueOf(selectedUser.getPhone_number()));
-        occupation.setText(selectedUser.getOccupation());
-        gender.setText(selectedUser.getGender());
-
-        List<String> hobbyList = selectedUser.getHobbies();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < hobbyList.size(); i++) {
-            sb.append(hobbyList.get(i));
-            if (i != hobbyList.size() - 1) {
-                sb.append(", ");
+    public List<String> getMutualFriendID(List<String> currentUserFriend, List<String> selectedUserFriend){
+        List<String> mutualFriends = new ArrayList<>();
+        for (String friendID : currentUserFriend) {
+            if (selectedUserFriend.contains(friendID)) {
+                mutualFriends.add(friendID);
             }
         }
-        hobby.setText(sb.toString());
+        return mutualFriends;
+    }
+
+
+/* display profile method (old)
+    public void displayFullProfile(User selectedUser){
+
+            username.setText(selectedUser.getUsername());
+            email.setText(String.valueOf(selectedUser.getEmail()));
+            phone.setText(String.valueOf(selectedUser.getPhone_number()));
+            occupation.setText(selectedUser.getOccupation());
+            gender.setText(selectedUser.getGender());
+
+            List<String> hobbyList = selectedUser.getHobbies();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hobbyList.size(); i++) {
+                sb.append(hobbyList.get(i));
+                if (i != hobbyList.size() - 1) {
+                    sb.append(", ");
+                }
+            }
+            hobby.setText(sb.toString());
 
 
     }
 
     public void displayPartialProfile(User selectedUser){
 
-        username.setText(selectedUser.getUsername());
-        email.setText(String.valueOf(selectedUser.getEmail()));
-        phone.setText("-");
-        occupation.setText("-");
-        gender.setText("-");
-        hobby.setText("-");
+            username.setText(selectedUser.getUsername());
+            email.setText(String.valueOf(selectedUser.getEmail()));
+            phone.setText("-");
+            occupation.setText("-");
+            gender.setText("-");
+            hobby.setText("-");
 
     }
 
@@ -434,5 +618,5 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         occupation.setText("");
         gender.setText("");
     }
-
+*/
 }
