@@ -8,108 +8,85 @@
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="1dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ViewAccActivity_Scrollview">
+        android:orientation="vertical">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ProfilePic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="141dp"
-            android:layout_marginTop="44dp"
-            android:layout_marginEnd="142dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/profile_photo_shape"
+            android:src="@drawable/profile_man_photo_profile"
+            tools:ignore="MissingClass" />
 
         <TextView
             android:id="@+id/usernameDisplay"
-            android:layout_width="121dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="145dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="145dp"
-            android:text="Username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="username"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ProfilePic" />
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/degConnectionDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Degree of Connection"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/send_friend_request"
             android:layout_width="190dp"
             android:layout_height="50dp"
-            android:layout_marginStart="115dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="115dp"
-            android:layout_marginBottom="49dp"
-            android:text="Add Friend"
-            app:layout_constraintBottom_toTopOf="@+id/basicInfo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameDisplay" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:text="@string/add_friend" />
 
         <Button
             android:id="@+id/decline_friend_request"
             android:layout_width="190dp"
             android:layout_height="50dp"
-            android:layout_marginStart="115dp"
-            app:layout_goneMarginTop="32dp"
-            android:layout_marginEnd="115dp"
-            android:layout_marginBottom="49dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/send_friend_request"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
             android:text="Decline friend request" />
 
         <TextView
             android:id="@+id/basicInfo"
             android:layout_width="308dp"
             android:layout_height="23dp"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="49dp"
-            android:layout_marginEnd="52dp"
-            android:text="Basic Info"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/send_friend_request" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/basic_info"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/email_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_marginStart="101dp"
-            android:layout_marginTop="54dp"
-            android:layout_marginEnd="53dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/basicInfo">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email" />
+                android:text="@string/email" />
 
             <TextView
                 android:id="@+id/emailDisplay"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
-                android:text="abc@gmail.com"
+                android:text="@string/abc_gmail_com"
                 android:textAlignment="viewEnd" />
 
 
@@ -119,14 +96,8 @@
             android:id="@+id/PhoneNumber_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginStart="93dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="53dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email_layout">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/phoneNum"
@@ -152,14 +123,8 @@
             android:id="@+id/Occupation_Layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="58dp"
-            android:layout_marginEnd="93dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/PhoneNumber_layout">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/occupation"
@@ -184,14 +149,8 @@
             android:id="@+id/Gender_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="55dp"
-            android:layout_marginEnd="93dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Occupation_Layout">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/gender"
@@ -209,93 +168,164 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/Country_layout"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Country"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Gender_Layout" />
+
+            <TextView
+                android:id="@+id/countryDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Malaysia"
+                android:textAlignment="viewEnd"
+                tools:layout_editor_absoluteX="308dp"
+                tools:layout_editor_absoluteY="515dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Birthday_layout"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthday"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="446dp" />
+
+            <TextView
+                android:id="@+id/birthdayDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1/1/2023"
+                android:textAlignment="viewEnd" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Relationship_layout"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/relationship"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Relationship Status"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="500dp" />
+
+            <TextView
+                android:id="@+id/relationshipDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Single"
+                android:textAlignment="viewEnd" />
+
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/Friends"
             android:layout_width="308dp"
             android:layout_height="23dp"
-            android:layout_marginStart="51dp"
-            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
             android:text="Friends"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Gender_layout" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/mutualFriends"
             android:layout_width="308dp"
             android:layout_height="23dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="7dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
             android:text="Mutual friends"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Friends" />
+            android:textSize="16sp" />
 
 
         <LinearLayout
             android:id="@+id/profilepicOfFriends"
-            android:layout_width="match_parent"
+            android:layout_width="310dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/details"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toEndOf="@id/mutualFriends"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mutualFriends"
-            app:layout_constraintVertical_bias="0.0">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="7dp"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="69dp"
-                android:layout_height="66dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginBottom="8dp"
-                tools:srcCompat="@tools:sample/avatars" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/friend_picture1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/profile_photo_shape"
+                android:src="@drawable/profile_man_photo_profile"
+                tools:ignore="MissingClass" />
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="69dp"
-                android:layout_height="66dp"
-                android:layout_marginStart="25dp"
-                tools:srcCompat="@tools:sample/avatars" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/friend_picture2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/profile_photo_shape"
+                android:src="@drawable/profile_man_photo_profile"
+                tools:ignore="MissingClass" />
 
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="69dp"
-                android:layout_height="66dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginBottom="8dp"
-                tools:srcCompat="@tools:sample/avatars" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/friend_picture3"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="22dp"
+                android:background="@drawable/profile_photo_shape"
+                android:src="@drawable/profile_man_photo_profile"
+                tools:ignore="MissingClass" />
 
-            <ImageView
-                android:id="@+id/imageView9"
-                android:layout_width="69dp"
-                android:layout_height="66dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginBottom="8dp"
-                tools:srcCompat="@tools:sample/avatars" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/friend_picture4"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/profile_photo_shape"
+                android:src="@drawable/profile_man_photo_profile"
+                tools:ignore="MissingClass" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/Name"
-            android:layout_width="match_parent"
+            android:layout_width="310dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profilepicOfFriends">
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginEnd="22dp"
                 android:layout_weight="1"
                 android:text="TextView" />
 
@@ -303,7 +333,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginEnd="22dp"
                 android:layout_weight="1"
                 android:text="TextView" />
 
@@ -311,7 +341,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_marginEnd="22dp"
                 android:layout_weight="1"
                 android:text="TextView" />
 
@@ -319,70 +349,65 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+
                 android:layout_weight="1"
                 android:text="TextView" />
         </LinearLayout>
 
         <TextView
             android:id="@+id/details"
-            android:layout_width="308dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="53dp"
-            android:layout_marginBottom="7dp"
-            android:text="Details"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/Name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profilepicOfFriends" />
-
-        <LinearLayout
-            android:id="@+id/hobby_layout"
-            android:layout_width="308dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:layout_marginStart="50dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginEnd="93dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/details">
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:text="Details"
+            android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/hobbies"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hobbies" />
-
-            <TextView
-                android:id="@+id/hobbiesDisplay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Singing"
-                android:textAlignment="viewEnd" />
-
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/degConnectionDisplay"
-            android:layout_width="180dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="116dp"
-            android:layout_marginEnd="115dp"
-            android:layout_marginBottom="12dp"
-            android:text="Degree of Connection"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/send_friend_request"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/usernameDisplay"
-            app:layout_constraintVertical_bias="0.0" />
+            android:id="@+id/hobby"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginBottom="5dp"
+            android:text="Hobbies"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/hobbies_recyclerview"
+            android:layout_width="308dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="53dp"
+            android:layout_marginBottom="18dp"
+            android:textAlignment="textEnd" />
+
+        <TextView
+            android:id="@+id/job"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="55dp"
+            android:text="Jobs"
+            android:textSize="16sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/jobs_recyclerview"
+            android:layout_width="308dp"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginBottom="20dp"
+            android:textAlignment="textEnd" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </ScrollView>
