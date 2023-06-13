@@ -34,6 +34,12 @@
             android:name=".ViewAccActivity_Scrollview"
             android:exported="false" />
         <activity
+            android:name=".Post_Fragment"
+            android:exported="false"/>
+        <activity
+            android:name=".Interaction"
+            android:exported="false"/>
+        <activity
             android:name=".FindFriendsActivity"
             android:parentActivityName=".Main_Activity"
              />
