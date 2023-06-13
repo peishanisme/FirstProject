@@ -25,6 +25,8 @@ import java.util.List;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
+    String received_id;
+
     private TextView username, email, phone, occupation, gender, mutualFriends, hobby, degreeConnection;
 //private Button addFriendBtn;
 
@@ -47,9 +49,11 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_acc_scrollview);
 
+
         mAuth = FirebaseAuth.getInstance();
         currentUserId = mAuth.getCurrentUser().getUid();
-        selectedUserId = getIntent().getExtras().get("visit_user_id").toString();
+        received_id = getIntent().getStringExtra("uid");
+//        selectedUserId = getIntent().getExtras().get("visit_user_id").toString();
         userRef = FirebaseDatabase.getInstance().getReference().child("Users");
         FriendRequestRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests");
         FriendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
@@ -71,8 +75,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
 
         // Retrieve selected user's ID passed from the previous activity
-        selectedUserId = getIntent().getStringExtra("selectedUserId");
-        currentUserId = getIntent().getStringExtra("currentUserId");
+        selectedUserId = getIntent().getStringExtra("uid");
+//        currentUserId = getIntent().getStringExtra("currentUserId");
         // Get reference to the  selected user by ID
         selectedUserRef = userRef.child(selectedUserId);
         currentUserRef = userRef.child(currentUserId);
@@ -127,11 +131,11 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
 
-                    String myProfileImage = snapshot.child("ProfilePicture").getValue().toString();
-                    String myUserName = snapshot.child("UserName").getValue().toString();
-                    String myUserEmail = snapshot.child("UserEmail").getValue().toString();
-                    String myUserPhoneNumber = snapshot.child("UserPhoneNumber").getValue().toString();
-                    String myOccupation = snapshot.child("Occupation").getValue().toString();
+//                    String myProfileImage = snapshot.child("ProfilePicture").getValue().toString();
+                    String myUserName = snapshot.child("username").getValue().toString();
+                    String myUserEmail = snapshot.child("email").getValue().toString();
+                    String myUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
+                    String myOccupation = snapshot.child("occupation").getValue().toString();
                     String myGender = snapshot.child("gender").getValue().toString();
 
                     // Picasso.with(ctx).load(profilePicture).placeholder(R.drawable.);

@@ -29,6 +29,7 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_users_display_layout, parent, false);
+        context= parent.getContext();
         return new UserViewHolder(view);
     }
 
