@@ -39,9 +39,9 @@ public class Main_Activity extends AppCompatActivity {
             else if (id == R.id.search_tab) {
                 replaceFragment(new SearchForFriends_Fragment());
             }else if (id == R.id.request_tab) {
-                replaceFragment(new HomeFragment());
+                replaceFragment(new RequestFragment());
             }else if (id == R.id.friends_tab) {
-                replaceFragment(new HomeFragment());
+                replaceFragment(new Friends_list_Fragment());
             }else if(id==R.id.profile){
                 replaceFragment(new ProfileFragment());
             }

@@ -68,7 +68,7 @@
             android:textSize="20sp" />
 
         <LinearLayout
-            android:id="@+id/email_layout"
+            android:id="@+id/mutualfriend_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

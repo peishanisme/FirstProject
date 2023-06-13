@@ -100,13 +100,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:text="Basic Info"
                 android:textAlignment="center"
                 android:textSize="16sp" />
 
             <LinearLayout
-                android:id="@+id/email_layout"
+                android:id="@+id/mutualfriend_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
@@ -326,102 +326,11 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/Friends"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="15dp"
-                android:text="Friends"
-                android:textSize="16sp" />
-
-            <LinearLayout
-                android:id="@+id/profilepicOfFriends"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="69dp"
-                    android:layout_height="66dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="8dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="69dp"
-                    android:layout_height="66dp"
-                    android:layout_marginStart="25dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="69dp"
-                    android:layout_height="66dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="8dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
-                    android:id="@+id/imageView9"
-                    android:layout_width="69dp"
-                    android:layout_height="66dp"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginBottom="8dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/Name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_weight="1"
-                    android:text="TextView" />
-            </LinearLayout>
-
-            <TextView
                 android:id="@+id/details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:text="Details"
                 android:textSize="16sp" />
 

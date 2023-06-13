@@ -26,29 +26,5 @@
 
     </LinearLayout>
 
-<!--    <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/navigationView"-->
-<!--        android:layout_width="410dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginStart="1dp"-->
-<!--        android:layout_marginTop="1dp"-->
-<!--        android:background="@color/material_dynamic_primary40"-->
-<!--        -->
-
-<!--    </com.google.android.material.navigation.NavigationView>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/search"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:background="@drawable/button"-->
-<!--            android:ems="10"-->
-<!--            android:hint="Search..."-->
-<!--            android:inputType="textEmailAddress" />-->
-<!--    -->
-
-    <!-- TODO: Update blank fragment layout -->
 
 </ScrollView>

@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firstapp.firstproject.R;
-import com.firstapp.firstproject.SearchForFriends_Fragment;
 import com.firstapp.firstproject.ViewAccActivity_Scrollview;
 import com.firstapp.firstproject.entity.User;
 
@@ -28,7 +27,7 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.all_users_display_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_display, parent, false);
         context= parent.getContext();
         return new UserViewHolder(view);
     }

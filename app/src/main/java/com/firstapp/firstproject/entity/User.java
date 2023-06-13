@@ -9,7 +9,7 @@ import java.util.Queue;
 public class User {
 
     public int numberOfFriends;
-    public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender;
+    public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,relationship;
     public List<String>hobbies = new ArrayList<>();
     public List<User>friends = new ArrayList<>();
     public String hobby;
@@ -17,7 +17,7 @@ public class User {
 
     }
 
-    public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender, int numberOfFriends) {
+    public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender, int numberOfFriends,String relationship) {
         this.userid = userid;
         this.username = username;
         this.email = email;
@@ -30,6 +30,7 @@ public class User {
         this.occupation = occupation;
         this.gender = gender;
         this.numberOfFriends=numberOfFriends;
+        this.relationship=relationship;
         }
 
     public User(String uid, String username, String fullName, String email, String phone_number) {

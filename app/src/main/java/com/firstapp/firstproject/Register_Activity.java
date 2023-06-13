@@ -102,7 +102,7 @@ public class Register_Activity extends AppCompatActivity {
                         loadingBar.dismiss();
 
 
-                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","" ,0 );
+                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","" ,0 ,"");
 
 
                         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).setValue(user);
