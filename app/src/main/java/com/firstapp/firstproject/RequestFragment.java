@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.firstapp.firstproject.R;
 import com.firstapp.firstproject.adapter.RequestAdapter;
 import com.firstapp.firstproject.entity.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +24,7 @@ public class RequestFragment extends Fragment {
     private RequestAdapter requestAdapter;
     private DatabaseReference friendRequestsRef;
     private DatabaseReference friendsRef;
+    private DatabaseReference usersRef;
     private String currentUserId;
 
     public RequestFragment() {
@@ -44,6 +46,7 @@ public class RequestFragment extends Fragment {
         // Get the Firebase references
         friendRequestsRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests");
         friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
+        usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         // Query the friend requests for the current user
         Query query = friendRequestsRef.child(currentUserId);
@@ -52,21 +55,11 @@ public class RequestFragment extends Fragment {
                 .build();
 
         // Initialize and set the adapter
-        requestAdapter = new RequestAdapter(options.getSnapshots(), friendRequestsRef, friendsRef, currentUserId);
+        requestAdapter = new RequestAdapter(options.getSnapshots(), friendRequestsRef, friendsRef, usersRef, currentUserId);
         requestRecyclerView.setAdapter(requestAdapter);
 
         return view;
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        requestAdapter.startListening();
-//    }
-//
-//    @Override
-//    public void onStop() {
-//        super.onStop();
-//        requestAdapter.stopListening();
-//    }
+
 }

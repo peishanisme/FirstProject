@@ -42,6 +42,7 @@ public class User {
     }
 
 
+
     public ArrayList<String> getHobbies(ArrayList<String> hobbies) {
         return hobbies;
     }
@@ -103,8 +104,20 @@ public class User {
         return stateName;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 
     public void setCountryName(String countryName) {

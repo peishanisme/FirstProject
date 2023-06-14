@@ -1,15 +1,11 @@
 package com.firstapp.firstproject;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.animation.AlphaAnimation;
 
 import com.firstapp.firstproject.databinding.ActivityMainBinding;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -30,7 +26,7 @@ public class Main_Activity extends AppCompatActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new HomeFragment());
-        
+
         // Automatic replace fragment to the respective fragment
         // based on the targetFragment when it redirect from the traceback function
         String targetFragment = getIntent().getStringExtra("targetFragment");
@@ -64,7 +60,7 @@ public class Main_Activity extends AppCompatActivity {
             }else if (id == R.id.request_tab) {
                 replaceFragment(new RequestFragment());
             }else if (id == R.id.friends_tab) {
-                replaceFragment(new Friends_list_Fragment());
+                replaceFragment(new FriendList_Fragment());
             }else if(id==R.id.profile){
                 replaceFragment(new ProfileFragment());
             }

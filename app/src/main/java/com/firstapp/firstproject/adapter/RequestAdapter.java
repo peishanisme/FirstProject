@@ -1,7 +1,5 @@
 package com.firstapp.firstproject.adapter;
 
-import static com.google.firebase.database.ktx.DatabaseKt.getSnapshots;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firstapp.firstproject.R;
 import com.firstapp.firstproject.entity.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -22,12 +23,14 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRe
     private List<User> friendRequests;
     private DatabaseReference friendRequestsRef;
     private DatabaseReference friendsRef;
+    private DatabaseReference usersRef;
     private String currentUserId;
 
-    public RequestAdapter(List<User> friendRequests, DatabaseReference friendRequestsRef, DatabaseReference friendsRef, String currentUserId) {
+    public RequestAdapter(List<User> friendRequests, DatabaseReference friendRequestsRef, DatabaseReference friendsRef, DatabaseReference usersRef, String currentUserId) {
         this.friendRequests = friendRequests;
         this.friendRequestsRef = friendRequestsRef;
         this.friendsRef = friendsRef;
+        this.usersRef = usersRef;
         this.currentUserId = currentUserId;
     }
 
@@ -49,82 +52,89 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRe
         return friendRequests.size();
     }
 
-//    public void stopListening() {
-//        if (getSnapshots() != null) {
-//            getSnapshots().clear();
-//            notifyDataSetChanged();
-//    }
-//
-//    public void startListening() {
-//            notifyDataSetChanged();
-//
-//        }
-//    }
-
     public class FriendRequestViewHolder extends RecyclerView.ViewHolder {
 
         private TextView usernameText;
         private TextView fullnameText;
-        private TextView mutualFriendsText;
         private Button acceptButton;
-        private Button deleteButton;
+        private Button rejectButton;
 
         public FriendRequestViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameText = itemView.findViewById(R.id.friend_username);
             fullnameText = itemView.findViewById(R.id.friend_fullname_display);
-//            mutualFriendsText = itemView.findViewById(R.id.friend_emailDisplay);
             acceptButton = itemView.findViewById(R.id.accapt_button);
-            deleteButton = itemView.findViewById(R.id.delete_button);
+            rejectButton = itemView.findViewById(R.id.delete_button);
         }
 
         public void bind(User friendRequest) {
             usernameText.setText(friendRequest.getUsername());
             fullnameText.setText(friendRequest.getFullName());
-//            mutualFriendsText.setText(String.valueOf(friendRequest.getMutualFriendsCount()));
 
-            acceptButton.setOnClickListener(v -> {
-                String receiverUserId = friendRequest.getUid();
-                friendsRef.child(currentUserId).child(receiverUserId).setValue(true)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                friendsRef.child(receiverUserId).child(currentUserId).setValue(true)
-                                        .addOnCompleteListener(task1 -> {
-                                            if (task1.isSuccessful()) {
-                                                friendRequestsRef.child(currentUserId).child(receiverUserId).removeValue()
-                                                        .addOnCompleteListener(task2 -> {
-                                                            if (task2.isSuccessful()) {
-                                                                friendRequestsRef.child(receiverUserId).child(currentUserId).removeValue()
-                                                                        .addOnCompleteListener(task3 -> {
-                                                                            if (task3.isSuccessful()) {
-                                                                                // Request completed successfully
-                                                                            }
-                                                                        });
-                                                            }
-                                                        });
-                                            }
-                                        });
-                            }
-                        });
+            // Retrieve username and fullname from Users node based on UID
+            usersRef.child(friendRequest.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        User user = snapshot.getValue(User.class);
+                        if (user != null) {
+                            usernameText.setText(user.getUsername());
+                            fullnameText.setText(user.getFullName());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle error
+                }
             });
 
-            deleteButton.setOnClickListener(v -> {
-                String receiverUserId = friendRequest.getUid();
-                friendRequestsRef.child(currentUserId).child(receiverUserId).removeValue()
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                friendRequestsRef.child(receiverUserId).child(currentUserId).removeValue()
-                                        .addOnCompleteListener(task1 -> {
-                                            if (task1.isSuccessful()) {
-                                                // Request deleted successfully
-                                            }
-                                        });
-                            }
-                        });
-            });
+            // Rest of the code...
         }
     }
 }
+
+//            acceptButton.setOnClickListener(v -> {
+//                String receiverUserId = friendRequest.getUid();
+//                friendsRef.child(currentUserId).child(receiverUserId).setValue(true)
+//                        .addOnCompleteListener(task -> {
+//                            if (task.isSuccessful()) {
+//                                friendsRef.child(receiverUserId).child(currentUserId).setValue(true)
+//                                        .addOnCompleteListener(task1 -> {
+//                                            if (task1.isSuccessful()) {
+//                                                friendRequestsRef.child(currentUserId).child(receiverUserId).removeValue()
+//                                                        .addOnCompleteListener(task2 -> {
+//                                                            if (task2.isSuccessful()) {
+//                                                                friendRequestsRef.child(receiverUserId).child(currentUserId).removeValue()
+//                                                                        .addOnCompleteListener(task3 -> {
+//                                                                            if (task3.isSuccessful()) {
+//                                                                                // Request completed successfully
+//                                                                            }
+//                                                                        });
+//                                                            }
+//                                                        });
+//                                            }
+//                                        });
+//                            }
+//                        });
+//            });
+//
+//            deleteButton.setOnClickListener(v -> {
+//                String receiverUserId = friendRequest.getUid();
+//                friendRequestsRef.child(currentUserId).child(receiverUserId).removeValue()
+//                        .addOnCompleteListener(task -> {
+//                            if (task.isSuccessful()) {
+//                                friendRequestsRef.child(receiverUserId).child(currentUserId).removeValue()
+//                                        .addOnCompleteListener(task1 -> {
+//                                            if (task1.isSuccessful()) {
+//                                                // Request deleted successfully
+//                                            }
+//                                        });
+//                            }
+//                        });
+//            });
+//        }
 
 
 //package com.firstapp.firstproject.adapter;

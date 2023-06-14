@@ -81,6 +81,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         CURRENT_STATE = "not_friends";
 
 
+
+
         hobbies = new ArrayList<>();
         recyclerViewHobby = findViewById(R.id.hobbies_recyclerview);
         addhobbyAdapter = new addhobbyAdapter(hobbies);
@@ -93,45 +95,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         recyclerViewJob.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewJob.setAdapter(addjobAdapter);
 
-        //     List<String> currentUserFriendList = new ArrayList<>();
-        //   List<String> selectedUserFriendList = new ArrayList<>();
 
-        //     Toast.makeText(this, "User ID: "+ selectedUserId, Toast.LENGTH_SHORT).show();
-
-/*
-        friendRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                // get current user friend list
-                for (DataSnapshot userSnapshot : dataSnapshot.child(currentUserId).getChildren()) {
-                    String currentUserFriendId = userSnapshot.getValue().toString();
-
-                    if (currentUserFriendId != null) {
-                        currentUserFriendList.add(currentUserFriendId); // Add the user id to the list
-                    }
-                }
-
-                // get selected user friend list
-                for (DataSnapshot userSnapshot : dataSnapshot.child(selectedUserId).getChildren()) {
-                    String selectedUserFriendId = userSnapshot.getValue().toString();
-
-                    if (selectedUserFriendId != null) {
-                        selectedUserFriendList.add(selectedUserFriendId);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-*/
-        // get mutual friend between two user
-        //  List<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
 
         selectedUserRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -209,14 +173,6 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                         }
                     });
 
-                    //    } else {
-                    //        phone.setText("-");
-                    //       occupation.setText("-");
-                    //       gender.setText("-");
-                    //       country.setText("-");
-                    //       birthday.setText("-");
-                    //       relationship.setText("-");
-                    //   }
 
                     MaintananceofButtion();
                 }
@@ -228,116 +184,51 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
             }
         });
 
-
-
-
-        // Retrieve the user's profile data from the database
-        /*
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                 if (snapshot.exists()) {
-
-
-                    String myUsername = snapshot.child("username").getValue().toString();
-                    String myUserEmail = snapshot.child("email").getValue().toString();
-                    String myUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
-                    String myOccupation = snapshot.child("occupation").getValue().toString();
-                    String myGender = snapshot.child("gender").getValue().toString();
-
-
-
-                    // Display the user's profile data in the UI
-                    if()
-                    username.setText("@"+myUserName);
-                    email.setText(myUserEmail);
-                    phone.setText(myUserPhoneNumber);
-                    occupation.setText(myOccupation);
-                    gender.setText(myGender);
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error
-            }
-        });
-
-                User selectedUser = snapshot.child(selectedUserId).getValue(User.class);
-                User currentUser = snapshot.child(currentUserId).getValue(User.class);
-
-                if(currentUser.getDegreeConnection(selectedUser) == 1){
-                    // First-degree connection, retrieve full profile information
-                    displayFullProfile(selectedUser);
-                    mutualFriends.setText(currentUser.getMutualFriendsNum(selectedUser) + " Mutual Friends");
-                    degreeConnection.setText("1st degree connection");
-                    SendFriendReqButton.setVisibility(View.GONE);
-
-                }else if(currentUser.getDegreeConnection(selectedUser) == 2){
-                    // other connection, retrieve limited information
-                    displayPartialProfile(selectedUser);
-                    mutualFriends.setText(currentUser.getMutualFriendsNum(selectedUser) + " Mutual Friends");
-                    degreeConnection.setText("2nd degree connection");
-                    SendFriendReqButton.setVisibility(View.VISIBLE);
-
-                }else if(currentUser.getDegreeConnection(selectedUser) == 3){
-                    // other connection, retrieve limited information
-                    displayPartialProfile(selectedUser);
-                    mutualFriends.setText(currentUser.getMutualFriendsNum(selectedUser) + " Mutual Friends");
-                    degreeConnection.setText("3rd degree connection");
-                    SendFriendReqButton.setVisibility(View.VISIBLE);
-                }else{
-                    displayPartialProfile(selectedUser);
-                }
-
-                //return null;
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error
-            }
-        });
-
-        userRef.child(selectedUserId).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-
-                    String myProfileImage = snapshot.child("ProfilePicture").getValue().toString();
-                    String myUserName = snapshot.child("UserName").getValue().toString();
-                    String myUserEmail = snapshot.child("UserEmail").getValue().toString();
-                    String myUserPhoneNumber = snapshot.child("UserPhoneNumber").getValue().toString();
-                    String myOccupation = snapshot.child("Occupation").getValue().toString();
-                    String myGender = snapshot.child("gender").getValue().toString();
-
-                    // Picasso.with(ctx).load(profilePicture).placeholder(R.drawable.);
-
-//
-//                    // Display the user's profile data in the UI
-                    username.setText("@"+myUserName);
-                    email.setText(myUserEmail);
-                    phone.setText(myUserPhoneNumber);
-                    occupation.setText(myOccupation);
-                    gender.setText(myGender);
-
-                    MaintananceofButtion();
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error
-            }
-        });
-*/
         DeclineFriendReqButton.setVisibility(View.INVISIBLE);
         DeclineFriendReqButton.setEnabled(false);
 
         if(!currentUserId.equals(selectedUserId)){
+            FriendRequestRef.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    if (snapshot.hasChild(selectedUserId)) {
+                        if (snapshot.child(selectedUserId).child("request_type").getValue().equals("sent")) {
+                            CURRENT_STATE = "request_sent";
+                            SendFriendReqButton.setText("Cancel Friend Request");
+                            DeclineFriendReqButton.setVisibility(View.INVISIBLE);
+                            DeclineFriendReqButton.setEnabled(false);
+                        } else if (snapshot.child(selectedUserId).child("request_type").getValue().equals("received")) {
+                            CURRENT_STATE = "request_received";
+                            SendFriendReqButton.setText("Accept Friend Request");
+
+                        }
+                    }
+                    else {
+                        FriendsRef.child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.hasChild(selectedUserId)) {
+                                    CURRENT_STATE = "friend";
+                                    SendFriendReqButton.setText("Unfriend this Person");
+                                    DeclineFriendReqButton.setVisibility(View.INVISIBLE);
+                                    DeclineFriendReqButton.setEnabled(false);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                // Handle error
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle error
+                }
+            });
             SendFriendReqButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -556,68 +447,6 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
 
 
-    //button function to send friend request
-    //SendFriendReqButton.setOnClickListener(new View.OnClickListener() {
-    //@Override
-    //public void onClick(View v) {
-    //   addFriendRequest(User otherUser);
-    //   SendFriendReqButton.setText("Request Sent");
-    // SendFriendReqButton.setEnabled(false);
-    //}
-    // });
-
-    //  }
-
-    public List<String> getMutualFriendID(List<String> currentUserFriend, List<String> selectedUserFriend){
-        List<String> mutualFriends = new ArrayList<>();
-        for (String friendID : currentUserFriend) {
-            if (selectedUserFriend.contains(friendID)) {
-                mutualFriends.add(friendID);
-            }
-        }
-        return mutualFriends;
-    }
 
 
-/* display profile method (old)
-    public void displayFullProfile(User selectedUser){
-
-            username.setText(selectedUser.getUsername());
-            email.setText(String.valueOf(selectedUser.getEmail()));
-            phone.setText(String.valueOf(selectedUser.getPhone_number()));
-            occupation.setText(selectedUser.getOccupation());
-            gender.setText(selectedUser.getGender());
-
-            List<String> hobbyList = selectedUser.getHobbies();
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hobbyList.size(); i++) {
-                sb.append(hobbyList.get(i));
-                if (i != hobbyList.size() - 1) {
-                    sb.append(", ");
-                }
-            }
-            hobby.setText(sb.toString());
-
-
-    }
-
-    public void displayPartialProfile(User selectedUser){
-
-            username.setText(selectedUser.getUsername());
-            email.setText(String.valueOf(selectedUser.getEmail()));
-            phone.setText("-");
-            occupation.setText("-");
-            gender.setText("-");
-            hobby.setText("-");
-
-    }
-
-    public void displayUserNotFound(){
-        username.setText("User not found");
-        email.setText("");
-        phone.setText("");
-        occupation.setText("");
-        gender.setText("");
-    }
-*/
 }
