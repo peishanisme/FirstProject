@@ -41,6 +41,7 @@ import java.util.List;
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
+            InteractionTracker.add("Friend list");
 
             friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
             recyclerView = view.findViewById(R.id.my_freind_list);

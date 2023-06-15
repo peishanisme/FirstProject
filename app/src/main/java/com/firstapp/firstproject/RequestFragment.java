@@ -42,6 +42,7 @@ public class RequestFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_tab_, container, false);
+        InteractionTracker.add("Request");
 
         // Initialize RecyclerView
         requestRecyclerView = view.findViewById(R.id.rv_request_list);

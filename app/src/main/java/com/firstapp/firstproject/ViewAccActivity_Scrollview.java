@@ -63,6 +63,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         // Retrieve selected user's ID passed from the previous activity
         currentUserId = mAuth.getCurrentUser().getUid();
         selectedUserId = getIntent().getStringExtra("uid");
+        InteractionTracker.add("View Account",selectedUserId);
 
         // Get reference to the  selected user by ID
         selectedUserRef = userRef.child(selectedUserId);

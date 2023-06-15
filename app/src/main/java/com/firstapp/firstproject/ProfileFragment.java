@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         DatabaseReference hobbyReference = FirebaseDatabase.getInstance().getReference("Hobbies");
         String uid = auth.getCurrentUser().getUid();
+        InteractionTracker.add("Profile");
 
         hobbies = new ArrayList<>();
 

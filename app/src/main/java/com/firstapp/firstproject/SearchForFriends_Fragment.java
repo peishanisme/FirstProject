@@ -38,6 +38,7 @@ public class SearchForFriends_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_seacrh_for_friends_, container, false);
+        InteractionTracker.add("Search Friends");
 
         // Initialize UI components
         searchBoxInput = view.findViewById(R.id.search_box_input);
