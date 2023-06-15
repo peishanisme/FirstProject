@@ -60,6 +60,7 @@ public class Post_Fragment extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_post_);
+        InteractionTracker.add("Post");
 
 
         mAuth = FirebaseAuth.getInstance();

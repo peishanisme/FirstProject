@@ -2,20 +2,15 @@ package com.firstapp.firstproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
-
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import java.util.LinkedList;
 
 public class Interaction extends AppCompatActivity {
@@ -64,8 +59,7 @@ public class Interaction extends AppCompatActivity {
             holder.interactionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String interactionContent = data1;
-                    handleButtonClick(interactionContent, data2);
+                    handleButtonClick(data1, data2);
                 }
             });
         }
@@ -105,7 +99,6 @@ public class Interaction extends AppCompatActivity {
 
     private void handleButtonClick(String interactionContent, String id) {
         // Handle the button click based on the interaction content
-        // ...
         if(interactionContent.equals( "Post")){
             // Start the Post_Fragment activity
             Intent postFragmentIntent = new Intent(Interaction.this, Post_Fragment.class);
@@ -148,11 +141,7 @@ public class Interaction extends AppCompatActivity {
             ViewAccountIntent.putExtra("uid", id);
             startActivity(ViewAccountIntent);
         }
-        else
-        {
-            Intent post = new Intent(Interaction.this,Post_Fragment.class);
-            startActivity(post);
-        }
+        else ;
     }
 }
 
