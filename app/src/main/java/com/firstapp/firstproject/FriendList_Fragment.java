@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -29,16 +30,19 @@ import java.util.List;
         private RecyclerView recyclerView;
         private FriendsAdapter adapter;
         private List<User> friendList;
-
         private DatabaseReference usersRef;
+        DatabaseReference friendsRef;
         private FirebaseAuth mAuth;
         String currentUser;
+        TextView numberOfFriends;
+        int friendCount;
 
         @Nullable
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
 
+            friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
             recyclerView = view.findViewById(R.id.my_freind_list);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -50,17 +54,34 @@ import java.util.List;
             usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
             currentUser = mAuth.getCurrentUser().getUid();
 
+            numberOfFriends=view.findViewById(R.id.numberOfFriends);
+
             // Retrieve the friend list of the current user from the database
             retrieveFriendList();
+
+            friendsRef.child(currentUser).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        friendCount=(int)snapshot.getChildrenCount();
+                        numberOfFriends.setText("("+Integer.toString(friendCount)+")");
+
+                    }else
+                        numberOfFriends.setText("0");
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
             return view;
         }
 
         private void retrieveFriendList() {
-            DatabaseReference friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends")
-                    .child(currentUser);
 
-            friendsRef.addValueEventListener(new ValueEventListener() {
+            friendsRef.child(currentUser).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     friendList.clear();
@@ -72,21 +93,6 @@ import java.util.List;
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 User friend = dataSnapshot.getValue(User.class);
-
-                                // Retrieve the user information from the friend DataSnapshot
-                                String username = friendSnapshot.child("username").getValue(String.class);
-                                String fullName = friendSnapshot.child("fullName").getValue(String.class);
-                                String email = friendSnapshot.child("email").getValue(String.class);
-                                String phone_number = friendSnapshot.child("phone_number").getValue(String.class);
-                                // Add more fields as needed
-
-                                // Set the retrieved information to the User object
-                                friend.setUsername(username);
-                                friend.setFullName(fullName);
-                                friend.setEmail(email);
-                                friend.setPhone_number(phone_number);
-                                // Set more fields as needed
-
                                 friendList.add(friend);
                                 adapter.notifyDataSetChanged();
                             }

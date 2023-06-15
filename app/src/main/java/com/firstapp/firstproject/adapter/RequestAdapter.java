@@ -1,96 +1,98 @@
 package com.firstapp.firstproject.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
+import com.firstapp.firstproject.ViewAccActivity_Scrollview;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firstapp.firstproject.R;
 import com.firstapp.firstproject.entity.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRequestViewHolder> {
 
-    private List<User> friendRequests;
-    private DatabaseReference friendRequestsRef;
-    private DatabaseReference friendsRef;
-    private DatabaseReference usersRef;
-    private String currentUserId;
+    private List<User> requestList;
+    private Context context;
+    private ViewAccActivity_Scrollview view = new ViewAccActivity_Scrollview();
 
-    public RequestAdapter(List<User> friendRequests, DatabaseReference friendRequestsRef, DatabaseReference friendsRef, DatabaseReference usersRef, String currentUserId) {
-        this.friendRequests = friendRequests;
-        this.friendRequestsRef = friendRequestsRef;
-        this.friendsRef = friendsRef;
-        this.usersRef = usersRef;
-        this.currentUserId = currentUserId;
+    public RequestAdapter(List<User> requestList, Context context) {
+        this.requestList=requestList;
+        this.context = context;
     }
 
     @NonNull
     @Override
-    public FriendRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.request_display, parent, false);
-        return new FriendRequestViewHolder(view);
+    public RequestAdapter.FriendRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.request_display, parent, false);
+        return new RequestAdapter.FriendRequestViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FriendRequestViewHolder holder, int position) {
-        User friendRequest = friendRequests.get(position);
-        holder.bind(friendRequest);
+        User request = requestList.get(position);
+        holder.username.setText(request.getUsername());
+        holder.fullname.setText(request.getFullName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ViewAccActivity_Scrollview.class);
+                intent.putExtra("uid", request.getUid()); // Pass the user object
+                context.startActivity(intent);
+            }
+        });
+        holder.accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference("Friends").child(FirebaseAuth.getInstance().getUid()).child(request.userid);
+                FirebaseDatabase.getInstance().getReference("Friends").child(request.userid).child(FirebaseAuth.getInstance().getUid());
+                FirebaseDatabase.getInstance().getReference("FriendRequests").child(FirebaseAuth.getInstance().getUid()).child(request.getUid()).removeValue();
+                FirebaseDatabase.getInstance().getReference("FriendRequests").child(request.getUid()).child(FirebaseAuth.getInstance().getUid()).removeValue();
+            }
+        });
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase.getInstance().getReference("FriendRequests").child(FirebaseAuth.getInstance().getUid()).child(request.getUid()).removeValue();
+                FirebaseDatabase.getInstance().getReference("FriendRequests").child(request.getUid()).child(FirebaseAuth.getInstance().getUid()).removeValue();
+            }
+        });
+
+
+
     }
 
     @Override
     public int getItemCount() {
-        return friendRequests.size();
+        return requestList.size();
     }
 
     public class FriendRequestViewHolder extends RecyclerView.ViewHolder {
+        private TextView username;
+        private TextView fullname;
 
-        private TextView usernameText;
-        private TextView fullnameText;
-        private Button acceptButton;
-        private Button rejectButton;
+        private Button accept;
+        private Button delete;
 
         public FriendRequestViewHolder(@NonNull View itemView) {
             super(itemView);
-            usernameText = itemView.findViewById(R.id.friend_username);
-            fullnameText = itemView.findViewById(R.id.friend_fullname_display);
-            acceptButton = itemView.findViewById(R.id.accapt_button);
-            rejectButton = itemView.findViewById(R.id.delete_button);
-        }
-
-        public void bind(User friendRequest) {
-            usernameText.setText(friendRequest.getUsername());
-            fullnameText.setText(friendRequest.getFullName());
-
-            // Retrieve username and fullname from Users node based on UID
-            usersRef.child(friendRequest.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        User user = snapshot.getValue(User.class);
-                        if (user != null) {
-                            usernameText.setText(user.getUsername());
-                            fullnameText.setText(user.getFullName());
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    // Handle error
-                }
-            });
-
-            // Rest of the code...
+            username = itemView.findViewById(R.id.friend_username);
+            fullname=itemView.findViewById(R.id.friend_fullname_display);
+            accept = itemView.findViewById(R.id.accapt_button);
+            delete = itemView.findViewById(R.id.delete_button);
         }
     }
 }

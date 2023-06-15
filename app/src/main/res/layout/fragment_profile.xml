@@ -103,7 +103,8 @@
                 android:layout_marginTop="25dp"
                 android:text="Basic Info"
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/mutualfriend_layout"
@@ -313,7 +314,7 @@
                     android:id="@+id/textView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Relationship Status:" />
+                    android:text="Relationship Status" />
 
                 <TextView
                     android:id="@+id/relationshipDisplay"
@@ -332,7 +333,9 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="20dp"
                 android:text="Details"
-                android:textSize="16sp" />
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/hobby"
@@ -364,7 +367,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="10dp"
                 android:textAlignment="textEnd" />
 
         </LinearLayout>

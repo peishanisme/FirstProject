@@ -1,9 +1,11 @@
 package com.firstapp.firstproject;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,8 +31,7 @@ import java.util.Stack;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-    private TextView username, email, phone, occupation, gender, country, birthday, relationship, mutualFriends, degreeConnection;
-    private View root;
+    private TextView username, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection;
     RecyclerView recyclerViewHobby;
     ArrayList<String> hobbies;
     addhobbyAdapter addhobbyAdapter;
@@ -42,7 +43,6 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
     private Button SendFriendReqButton, DeclineFriendReqButton;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
-    private DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("Friends");
     private DatabaseReference selectedUserRef;
     private DatabaseReference currentUserRef;
     private DatabaseReference FriendRequestRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests");
@@ -74,13 +74,15 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         country = findViewById(R.id.countryDisplay);
         birthday = findViewById(R.id.birthdayDisplay);
         relationship = findViewById(R.id.relationshipDisplay);
+        friends = findViewById(R.id.Friends);
+        mutual1 = findViewById(R.id.textView);
+        mutual2 = findViewById(R.id.textView3);
+        mutual3 = findViewById(R.id.textView2);
         mutualFriends = findViewById(R.id.mutualFriends);
         degreeConnection = findViewById(R.id.degConnectionDisplay);
         SendFriendReqButton = findViewById(R.id.send_friend_request);
         DeclineFriendReqButton = findViewById(R.id.decline_friend_request);
         CURRENT_STATE = "not_friends";
-
-
 
 
         hobbies = new ArrayList<>();
@@ -96,93 +98,194 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         recyclerViewJob.setAdapter(addjobAdapter);
 
 
+        // create list to store user's friend list
+        List<String> currentUserFriendList = new ArrayList<>();
+        List<String> selectedUserFriendList = new ArrayList<>();
+        Toast.makeText(this, "User ID: "+ selectedUserId, Toast.LENGTH_SHORT).show();
 
-        selectedUserRef.addValueEventListener(new ValueEventListener() {
+        // retrieve friend list of users
+        FriendsRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-
-                    String selectedUsername = snapshot.child("username").getValue().toString();
-                    String selectedUserEmail = snapshot.child("email").getValue().toString();
-                    String selectedUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
-                    String selectedOccupation = snapshot.child("occupation").getValue().toString();
-                    String selectedGender = snapshot.child("gender").getValue().toString();
-                    String selectedCountry = snapshot.child("countryName").getValue().toString();
-                    String selectedBirthday = snapshot.child("birthday").getValue().toString();
-                    String selectedRelationship = snapshot.child("relationship").getValue().toString();
-
-
-
-                    // Display the user's profile data in the UI
-                    username.setText(selectedUsername);
-                    email.setText(selectedUserEmail);
-                    //   mutualFriends.setText(mutualFriendList.size() + " Mutual Friends");
-
-                    // if (currentUserFriendList.contains(selectedUserId)) {
-                    phone.setText(selectedUserPhoneNumber);
-                    occupation.setText(selectedOccupation);
-                    gender.setText(selectedGender);
-                    country.setText(selectedCountry);
-                    birthday.setText(selectedBirthday);
-                    relationship.setText(selectedRelationship);
-
-                    hobbyReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            hobbies.clear();
-
-                            if (snapshot.exists()) {
-                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                    String hobby = dataSnapshot.getValue(String.class);
-                                    hobbies.add(hobby);
-                                }
-                            }
-
-                            addhobbyAdapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            // Handle error
-                        }
-                    });
-
-
-                    jobReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            jobStack.clear();
-
-                            if(snapshot.exists()) {
-                                Stack<String> jobList = new Stack<>();
-                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                    String job = dataSnapshot.getValue(String.class);
-                                    jobList.push(job);
-                                }
-                                for (int i = 0; i <= jobList.size(); i++) {
-                                    jobStack.push(jobList.pop());
-
-                                }
-                            }
-                            addjobAdapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            // Handle error
-                        }
-                    });
-
-
-                    MaintananceofButtion();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Get current user friend list
+                DataSnapshot currentUserSnapshot = dataSnapshot.child(currentUserId);
+                if (currentUserSnapshot.exists()) {
+                    for (DataSnapshot userSnapshot : currentUserSnapshot.getChildren()) {
+                        String currentUserFriendId = userSnapshot.getKey();
+                        currentUserFriendList.add(currentUserFriendId);
+                    }
                 }
+
+                // Get selected user friend list
+                DataSnapshot selectedUserSnapshot = dataSnapshot.child(selectedUserId);
+                if (selectedUserSnapshot.exists()) {
+                    for (DataSnapshot userSnapshot : selectedUserSnapshot.getChildren()) {
+                        String selectedUserFriendId = userSnapshot.getKey();
+                        selectedUserFriendList.add(selectedUserFriendId);
+                    }
+                }
+
+                Log.d("FriendList", "Current User Friend List: " + currentUserFriendList);
+                Log.d("FriendList", "Selected User Friend List: " + selectedUserFriendList);
+
+
+                // get mutual friend between two user
+                List<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
+                Log.d("FriendList", "MutualFriend List: " + mutualFriendList);
+
+                // set textview for
+                TextView[] mutualName = {mutual1, mutual2, mutual3};
+                if(mutualFriendList.isEmpty()){
+                    for(TextView tv : mutualName){
+                        tv.setVisibility(View.GONE);
+                    }
+                }else{
+                    userRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            int mutualFriendCount = Math.min(mutualFriendList.size(), 3);
+                            for(int i = 0; i < mutualFriendCount; i++){
+                                String mutualFriendID = mutualFriendList.get(i);
+                                if(mutualFriendID != null){
+                                    DataSnapshot mutualFriendSnapshot = dataSnapshot.child(mutualFriendID);
+                                    if(dataSnapshot.exists()){
+                                        String mutualFriendUsername = mutualFriendSnapshot.child("username").getValue().toString();
+                                        mutualName[i].setText(mutualFriendUsername);
+                                        mutualName[i].setVisibility(View.VISIBLE);
+
+                                    }
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Handle the error if necessary
+                        }
+                    });
+
+
+                }
+
+
+                selectedUserRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+
+                            String selectedUsername = snapshot.child("username").getValue().toString();
+                            String selectedUserEmail = snapshot.child("email").getValue().toString();
+                            String selectedUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
+                            String selectedOccupation = snapshot.child("occupation").getValue().toString();
+                            String selectedGender = snapshot.child("gender").getValue().toString();
+                            String selectedCountry = snapshot.child("countryName").getValue().toString();
+                            String selectedBirthday = snapshot.child("birthday").getValue().toString();
+                            String selectedRelationship = snapshot.child("relationship").getValue().toString();
+
+
+
+                            // Display the user's profile data in the UI
+                            username.setText(selectedUsername);
+                            email.setText(selectedUserEmail);
+                            friends.setText("Friends (" + selectedUserFriendList.size() + ")");
+
+                            if(!mutualFriendList.isEmpty()){
+                                mutualFriends.setText(String.format("%d Mutual Friends", mutualFriendList.size()));
+                            }else{
+                                mutualFriends.setText("No mutual friends");
+                            }
+
+                            if(currentUserFriendList.contains(selectedUserId)){
+
+                                phone.setText(selectedUserPhoneNumber);
+                                occupation.setText(selectedOccupation);
+                                gender.setText(selectedGender);
+                                country.setText(selectedCountry);
+                                birthday.setText(selectedBirthday);
+                                relationship.setText(selectedRelationship);
+
+                                hobbyReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        hobbies.clear();
+
+                                        if (snapshot.exists()) {
+                                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                String hobby = dataSnapshot.getValue(String.class);
+                                                hobbies.add(hobby);
+                                            }
+                                        }
+
+                                        addhobbyAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        // Handle error
+                                    }
+                                });
+
+
+                                jobReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        jobStack.clear();
+
+                                        if(snapshot.exists()) {
+                                            Stack<String> jobList = new Stack<>();
+                                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                                String job = dataSnapshot.getValue(String.class);
+                                                jobList.push(job);
+                                            }
+                                            for (int i = 0; i <= jobList.size(); i++) {
+                                                jobStack.push(jobList.pop());
+
+                                            }
+                                        }
+                                        addjobAdapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        // Handle error
+                                    }
+                                });
+
+                            }else{
+                                phone.setText("-");
+                                occupation.setText("-");
+                                gender.setText("-");
+                                country.setText("-");
+                                birthday.setText("-");
+                                relationship.setText("-");
+                            }
+
+
+                            MaintananceofButtion();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle the error
+                    }
+                });
+
+
+
+
             }
 
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // Handle the error
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseData", "Failed to read friendlist: " + error.getMessage());
             }
         });
+
+
 
         DeclineFriendReqButton.setVisibility(View.INVISIBLE);
         DeclineFriendReqButton.setEnabled(false);
@@ -253,6 +356,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         }
 
     }
+
+
 
     private void UnfriendAnExistingFriend() {
         FriendsRef.child(currentUserId).child(selectedUserId)
@@ -443,7 +548,15 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                 });
     }
 
-
+    public List<String> getMutualFriendID(List<String> currentUserFriend, List<String> selectedUserFriend){
+        List<String> mutualFriends = new ArrayList<>();
+        for (String friendID : selectedUserFriend) {
+            if (currentUserFriend.contains(friendID)) {
+                mutualFriends.add(friendID);
+            }
+        }
+        return mutualFriends;
+    }
 
 
 

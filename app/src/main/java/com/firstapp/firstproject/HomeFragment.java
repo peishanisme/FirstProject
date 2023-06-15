@@ -26,13 +26,13 @@ public class HomeFragment extends Fragment {
         HistoryButton = view.findViewById(R.id.historyButton) ;
         InteractionTracker.add("Home","null"); // if the user enter this fragment, it will record the title as Home and no interaction link inside it.
         
-        HistoryButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Interaction.class);
-                startActivity(intent);
-            }
-        });
+//        HistoryButton.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), Interaction.class);
+//                startActivity(intent);
+//            }
+//        });
 
         AddNewPostButton.setOnClickListener(new View.OnClickListener(){
 

@@ -1,21 +1,17 @@
 package com.firstapp.firstproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.firstapp.firstproject.R;
+import com.firstapp.firstproject.ViewAccActivity_Scrollview;
 import com.firstapp.firstproject.entity.User;
-
 import java.util.List;
-
-
-
     public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendViewHolder> {
         private List<User> friendList;
         private Context context;
@@ -35,11 +31,19 @@ import java.util.List;
         @Override
         public void onBindViewHolder(@NonNull FriendViewHolder holder, int position) {
             User friend = friendList.get(position);
-
             holder.username.setText(friend.getUsername());
             holder.fullname.setText(friend.getFullName());
             holder.email.setText(friend.getEmail());
             holder.phonenumber.setText(friend.getPhone_number());
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ViewAccActivity_Scrollview.class);
+                    intent.putExtra("uid", friend.getUid()); // Pass the user object
+                    context.startActivity(intent);
+                }
+            });
         }
 
         @Override
@@ -53,8 +57,6 @@ import java.util.List;
             private TextView email;
             private TextView phonenumber;
 
-
-
             public FriendViewHolder(@NonNull View itemView) {
                 super(itemView);
                 username = itemView.findViewById(R.id.friend_username);
@@ -62,9 +64,5 @@ import java.util.List;
                 email=itemView.findViewById(R.id.friend_emailDisplay);
                 phonenumber=itemView.findViewById(R.id.friend_phDisplay);
             }
-
-
         }
-
 }
-
