@@ -52,6 +52,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
         back_button=findViewById(R.id.backbutton);
+        InteractionTracker.add("Edit Account");
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
