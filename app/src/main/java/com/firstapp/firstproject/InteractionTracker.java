@@ -2,16 +2,9 @@ package com.firstapp.firstproject;
 import android.os.Build;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.*;
+import java.util.LinkedList;
 
-public class InteractionTracker<E> {
-    private E interaction;
-    private E interactionLink;
-    private LocalDateTime timestamp;
-
-
-
+public class InteractionTracker {
 
     public InteractionTracker() {
     }
@@ -26,15 +19,13 @@ public class InteractionTracker<E> {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             interactionTimeList.add(LocalDateTime.now().toString());
         }
+
     }
 
-
-    public static void  remove(String interaction){
-        int i = interactionList.indexOf(interaction);
-        interactionList.remove(interaction);
-        interactionLinkList.remove(i);
-        interactionTimeList.remove(i);
+    public static void add(String interaction){
+        add(interaction,null);
     }
+
 
     public static void clear(){
         interactionList.clear();

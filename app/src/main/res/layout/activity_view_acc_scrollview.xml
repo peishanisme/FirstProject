@@ -13,13 +13,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/material_dynamic_primary40"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <ImageView
+                android:id="@+id/backbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/userprofile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="User Profile"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+        </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ProfilePic"
             android:layout_width="112dp"
             android:layout_height="112dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/profile_photo_shape"
             android:src="@drawable/profile_man_photo_profile"
             tools:ignore="MissingClass" />
@@ -62,23 +89,24 @@
             android:layout_width="308dp"
             android:layout_height="23dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="basic_info"
+            android:text="Basic Info"
             android:textSize="20sp" />
 
         <LinearLayout
-            android:id="@+id/email_layout"
+            android:id="@+id/mutualfriend_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="email" />
+                android:text="Email" />
 
             <TextView
                 android:id="@+id/emailDisplay"
@@ -97,6 +125,7 @@
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -124,6 +153,7 @@
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -150,6 +180,7 @@
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -174,6 +205,7 @@
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -202,6 +234,7 @@
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -228,6 +261,7 @@
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -264,6 +298,7 @@
             android:layout_width="308dp"
             android:layout_height="23dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:text="Mutual friends"
             android:textSize="16sp" />
@@ -276,15 +311,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="7dp"
             android:orientation="horizontal">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/friend_picture1"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginEnd="22dp"
-                android:background="@drawable/profile_photo_shape"
-                android:src="@drawable/profile_man_photo_profile"
-                tools:ignore="MissingClass" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/friend_picture2"
@@ -322,15 +348,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="22dp"
-                android:layout_weight="1"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="22dp"
@@ -346,19 +364,20 @@
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginEnd="22dp"
                 android:layout_weight="1"
                 android:text="TextView" />
+
         </LinearLayout>
 
         <TextView
             android:id="@+id/details"
-            android:layout_width="wrap_content"
+            android:layout_width="308dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
             android:layout_marginBottom="10dp"
             android:text="Details"
@@ -369,8 +388,9 @@
             android:id="@+id/hobby"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:text="Hobbies"
             android:textSize="16sp" />
@@ -379,9 +399,9 @@
             android:id="@+id/hobbies_recyclerview"
             android:layout_width="308dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="53dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="18dp"
             android:textAlignment="textEnd" />
 
@@ -389,10 +409,9 @@
             android:id="@+id/job"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginStart="48dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="55dp"
             android:text="Jobs"
             android:textSize="16sp" />
 
@@ -400,9 +419,10 @@
             android:id="@+id/jobs_recyclerview"
             android:layout_width="308dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
             android:layout_marginHorizontal="30dp"
             android:layout_marginStart="48dp"
-            android:layout_marginEnd="55dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
             android:textAlignment="textEnd" />
 

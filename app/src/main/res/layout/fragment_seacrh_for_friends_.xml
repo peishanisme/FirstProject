@@ -27,14 +27,12 @@
     </LinearLayout>
 
 
-
-
     <RelativeLayout
         android:id="@+id/myLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/find_friends_appbar_layout"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="45dp">
 
         <TextView
             android:id="@+id/simpleTextID"
@@ -42,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="20dp"
+            android:paddingTop="10dp"
             android:text="Search For People and Friends"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -77,8 +76,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/circlebutton"
-                android:src="@drawable/baseline_search_24"
-                />
+                android:src="@drawable/baseline_search_24" />
 
         </LinearLayout>
 

@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Login_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button LoginButton;
-    private EditText UserEmail, UserPhoneNumber, UserPassword;
+    private EditText UserEmail, UserPassword;
     private ProgressDialog loadingBar;
     private DatabaseReference adminRef;
 
@@ -40,7 +41,18 @@ public class Login_Activity extends AppCompatActivity {
         UserEmail = (EditText) findViewById(R.id.input_email);
         UserPassword = (EditText) findViewById(R.id.input_password);
         LoginButton = (Button) findViewById(R.id.login_button);
+        TextView forgotPassword = findViewById(R.id.TV_ForgotPassword);
         loadingBar = new ProgressDialog(this);
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Login_Activity.this, "You can reset your password now!.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), ForgotPassword_Activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,40 +131,3 @@ public class Login_Activity extends AppCompatActivity {
 }
 
 
-//    private void Login(){
-//        String email=UserEmail.getText().toString();
-//        String password=UserPassword.getText().toString();
-//
-//        if(TextUtils.isEmpty(email)){
-//            Toast.makeText(this, "Please write your email...", Toast.LENGTH_SHORT).show();
-//
-//        }else if(TextUtils.isEmpty(password)){
-//            Toast.makeText(this, "Please write your password...",Toast.LENGTH_SHORT).show();
-//        }else{
-//            //loading bar message
-//            loadingBar.setTitle("Logging in...");
-//            loadingBar.setMessage("Please wait, we are logging your account...");
-//            loadingBar.show();
-//            loadingBar.setCanceledOnTouchOutside(true);
-//            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//                @Override
-//                public void onComplete(@NonNull Task<AuthResult> task) {
-//                    if(task.isSuccessful()){
-//
-//                        Toast.makeText(Login_Activity.this,"You are logged in successfully",Toast.LENGTH_SHORT).show();
-//
-//                        loadingBar.dismiss();
-//                        Intent intent = new Intent(getApplicationContext(), Main_Activity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-//                    else {
-//                        String message =task.getException().getMessage();
-//                        Toast.makeText(Login_Activity.this, "Error occured: "+message, Toast.LENGTH_SHORT).show();
-//                        loadingBar.dismiss();
-//                    }
-//                    }
-//            });
-//        }
-//

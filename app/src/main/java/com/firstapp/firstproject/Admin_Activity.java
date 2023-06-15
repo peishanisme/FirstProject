@@ -67,7 +67,6 @@ public class Admin_Activity extends AppCompatActivity implements UserAdapter.OnD
                     String fullName = userSnapshot.child("fullName").getValue(String.class);
                     String email = userSnapshot.child("email").getValue(String.class);
                     String phone_number = userSnapshot.child("phone_number").getValue(String.class);
-                    // Add more fields as needed
 
                     // Create a User object with the retrieved information
                     User user = new User(uid, username, fullName, email, phone_number);

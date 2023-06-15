@@ -9,7 +9,7 @@
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#01639A"
+        android:background="@color/material_dynamic_primary40"
         android:paddingTop="5dp"
         >
 
@@ -23,84 +23,38 @@
             android:text="Home"
             android:layout_centerVertical="true"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="25sp" />
 
         <ImageButton
             android:id="@+id/addpostButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
 
-            android:background="#01639A"
+            android:background="@drawable/circlebutton"
             android:baselineAlignBottom="false"
-            android:padding="10dp"
+            android:padding="5dp"
             android:scaleType="centerCrop"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/add_post_high" />
+            android:src="@drawable/baseline_add_to_photos_24"
+            />
 
 
         <ImageButton
             android:id="@+id/historyButton"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="96dp"
-            android:background="#01639A "
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="75dp"
+            android:background="@drawable/circlebutton"
             android:baselineAlignBottom="false"
-            android:padding="10dp"
+            android:padding="5dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/history"
+            android:src="@drawable/baseline_history_24"
             android:layout_alignParentEnd="true"
             android:focusableInTouchMode="false"
             />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="History"
-            android:textSize="15sp"
-            android:textColor="@color/white"
-            android:layout_marginEnd="103dp"
-            android:layout_marginTop="50dp"
-            android:baselineAlignBottom="false"
-            android:scaleType="centerCrop"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Post"
-            android:textSize="15sp"
-            android:textColor="@color/white"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="10dp"
-            android:baselineAlignBottom="false"
-            android:scaleType="centerCrop"
-            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
-<!--    <com.google.android.material.navigation.NavigationView-->
-<!--        android:id="@+id/navigationView"-->
-<!--        android:layout_width="410dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginStart="1dp"-->
-<!--        android:layout_marginTop="1dp"-->
-<!--        android:background="@color/material_dynamic_primary40"-->
-<!--        -->
-
-<!--    </com.google.android.material.navigation.NavigationView>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/search"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="30dp"-->
-<!--            android:background="@drawable/button"-->
-<!--            android:ems="10"-->
-<!--            android:hint="Search..."-->
-<!--            android:inputType="textEmailAddress" />-->
-<!--    -->
-
-    <!-- TODO: Update blank fragment layout -->
 
 </ScrollView>

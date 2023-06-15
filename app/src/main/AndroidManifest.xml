@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FirstProject"
         tools:targetApi="31">
         <activity
+            android:name=".ForgotPassword_Activity"
+            android:exported="false" />
+        <activity
             android:name=".Admin_Activity"
             android:exported="false" />
         <activity
@@ -35,14 +38,13 @@
             android:exported="false" />
         <activity
             android:name=".Post_Fragment"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".Interaction"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".FindFriendsActivity"
-            android:parentActivityName=".Main_Activity"
-             />
+            android:parentActivityName=".Main_Activity" />
         <activity
             android:name=".Starting_Activity"
             android:exported="true">
