@@ -166,7 +166,6 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                         mutualName[i].setText(mutualFriendUsername);
                                         mutualName[i].setVisibility(View.VISIBLE);
                                         friendPics[i].setVisibility(View.VISIBLE);
-
                                     }
                                 }
                             }
