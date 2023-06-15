@@ -36,7 +36,7 @@
             android:padding="5dp"
             android:scaleType="centerCrop"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/baseline_add_to_photos_24"
+            android:src="@drawable/add_post_high"
             />
 
 
