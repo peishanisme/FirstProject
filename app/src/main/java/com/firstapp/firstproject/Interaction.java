@@ -124,10 +124,10 @@ public class Interaction extends AppCompatActivity {
             MainIntent.putExtra("targetFragment", "Profile");
             startActivity(MainIntent);
         }
-        else if(interactionContent.equals( "Friends")) {
-            //Intent FriendsActivityIntent = new Intent(Interaction.this, Friends.class);
-            //startActivity(FriendsActivityIntent);
-            //break;
+        else if(interactionContent.equals( "Friend list")) {
+            Intent FriendsActivityIntent = new Intent(Interaction.this, Main_Activity.class);
+            FriendsActivityIntent.putExtra("targetFragment", "Friend list");
+            startActivity(FriendsActivityIntent);
         }
         else if(interactionContent.equals( "Search Friends")) {
             Intent MainIntent = new Intent(Interaction.this, Main_Activity.class);
@@ -142,10 +142,6 @@ public class Interaction extends AppCompatActivity {
             Intent MainIntent = new Intent(Interaction.this, Main_Activity.class);
             MainIntent.putExtra("targetFragment", "Request");
             startActivity(MainIntent);
-        }
-        else if(interactionContent.equals( "Admin")) {
-            Intent AdminIntent = new Intent(Interaction.this, Admin_Activity.class);
-            startActivity(AdminIntent);
         }
         else if(interactionContent.equals( "View Account")) {
             Intent ViewAccountIntent = new Intent(Interaction.this, ViewAccActivity_Scrollview.class);
