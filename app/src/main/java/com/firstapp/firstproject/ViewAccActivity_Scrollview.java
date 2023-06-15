@@ -29,9 +29,12 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Stack;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
     private TextView username, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection;
+    CircleImageView friendPic1, friendPic2, friendPic3;
     RecyclerView recyclerViewHobby;
     ArrayList<String> hobbies;
     addhobbyAdapter addhobbyAdapter;
@@ -78,6 +81,9 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         mutual1 = findViewById(R.id.textView);
         mutual2 = findViewById(R.id.textView3);
         mutual3 = findViewById(R.id.textView2);
+        friendPic1 = findViewById(R.id.friend_picture);
+        friendPic2 = findViewById(R.id.friend_picture2);
+        friendPic3 = findViewById(R.id.friend_picture3);
         mutualFriends = findViewById(R.id.mutualFriends);
         degreeConnection = findViewById(R.id.degConnectionDisplay);
         SendFriendReqButton = findViewById(R.id.send_friend_request);
@@ -133,12 +139,19 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                 List<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
                 Log.d("FriendList", "MutualFriend List: " + mutualFriendList);
 
-                // set textview for
+                // set textview and imageview for mutual friends
                 TextView[] mutualName = {mutual1, mutual2, mutual3};
+                CircleImageView[] friendPics = {friendPic1, friendPic2, friendPic3};
+
                 if(mutualFriendList.isEmpty()){
                     for(TextView tv : mutualName){
                         tv.setVisibility(View.GONE);
                     }
+
+                    for(CircleImageView iv : friendPics){
+                        iv.setVisibility(View.GONE);
+                    }
+
                 }else{
                     userRef.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -152,6 +165,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                         String mutualFriendUsername = mutualFriendSnapshot.child("username").getValue().toString();
                                         mutualName[i].setText(mutualFriendUsername);
                                         mutualName[i].setVisibility(View.VISIBLE);
+                                        friendPics[i].setVisibility(View.VISIBLE);
 
                                     }
                                 }
