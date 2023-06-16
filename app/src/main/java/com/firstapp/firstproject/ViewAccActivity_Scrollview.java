@@ -1,5 +1,6 @@
 package com.firstapp.firstproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firstapp.firstproject.adapter.addhobbyAdapter;
 import com.firstapp.firstproject.adapter.addjobAdapter;
+import com.firstapp.firstproject.MutualFriendListActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -149,8 +151,17 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
 
                 // get mutual friend between two user
-                List<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
+                ArrayList<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
                 Log.d("FriendList", "MutualFriend List: " + mutualFriendList);
+
+                mutualFriends.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ViewAccActivity_Scrollview.this, MutualFriendListActivity.class);
+                        intent.putStringArrayListExtra("mutualFriendList", mutualFriendList);
+                        startActivity(intent);
+                    }
+                });
 
                 // set textview and imageview for mutual friends
                 TextView[] mutualName = {mutual1, mutual2, mutual3};
@@ -575,8 +586,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                 });
     }
 
-    public List<String> getMutualFriendID(List<String> currentUserFriend, List<String> selectedUserFriend){
-        List<String> mutualFriends = new ArrayList<>();
+    public ArrayList<String> getMutualFriendID(List<String> currentUserFriend, List<String> selectedUserFriend){
+        ArrayList<String> mutualFriends = new ArrayList<>();
         for (String friendID : selectedUserFriend) {
             if (currentUserFriend.contains(friendID)) {
                 mutualFriends.add(friendID);
