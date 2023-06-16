@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,7 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-    private TextView username, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection;
+    private TextView username, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection,topUsername;
     CircleImageView friendPic1, friendPic2, friendPic3;
     RecyclerView recyclerViewHobby;
     ArrayList<String> hobbies;
@@ -44,6 +45,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
     private String selectedUserId, currentUserId, CURRENT_STATE, saveCurrentDate;
 
     private Button SendFriendReqButton, DeclineFriendReqButton;
+    private ImageView back_button;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
     private DatabaseReference selectedUserRef;
@@ -59,6 +61,16 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_acc_scrollview);
 
+        back_button=findViewById(R.id.backbutton);
+        InteractionTracker.add("Edit Account");
+
+        back_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
         // Retrieve selected user's ID passed from the previous activity
         currentUserId = mAuth.getCurrentUser().getUid();
@@ -69,7 +81,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         selectedUserRef = userRef.child(selectedUserId);
         currentUserRef = userRef.child(currentUserId);
 
-
+        topUsername=findViewById(R.id.topUsername);
         username = findViewById(R.id.usernameDisplay);
         email = findViewById(R.id.emailDisplay);
         phone = findViewById(R.id.phDisplay);
@@ -200,6 +212,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
 
                             // Display the user's profile data in the UI
+                            topUsername.setText("@"+selectedUsername);
                             username.setText(selectedUsername);
                             email.setText(selectedUserEmail);
                             friends.setText("Friends (" + selectedUserFriendList.size() + ")");

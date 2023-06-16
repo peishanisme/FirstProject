@@ -61,7 +61,7 @@ import java.util.List;
                 super(itemView);
                 username = itemView.findViewById(R.id.friend_username);
                 fullname=itemView.findViewById(R.id.friend_fullname_display);
-                email=itemView.findViewById(R.id.friend_emailDisplay);
+                email=itemView.findViewById(R.id.friend_mutualFriendDisplay);
                 phonenumber=itemView.findViewById(R.id.friend_phDisplay);
             }
         }

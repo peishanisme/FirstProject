@@ -30,7 +30,7 @@
                 app:tint="@color/white" />
 
             <TextView
-                android:id="@+id/userprofile"
+                android:id="@+id/topUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -121,7 +121,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/PhoneNumber_layout"
+            android:id="@+id/Button_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
