@@ -141,7 +141,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:ems="13"
-                android:hint="year/month/day"
+                android:hint="1998/01/01"
                 android:inputType="date" />
 
             <TextView
