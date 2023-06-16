@@ -64,7 +64,6 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         setContentView(R.layout.activity_view_acc_scrollview);
 
         back_button=findViewById(R.id.backbutton);
-        InteractionTracker.add("Edit Account");
 
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
