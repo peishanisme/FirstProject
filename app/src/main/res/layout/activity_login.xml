@@ -93,14 +93,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="200dp"
         android:text="Forgot Password?"
+        android:textColor="@color/black"
         android:textSize="13sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/input_password"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/input_password"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824"
-        android:textColor="@color/black"/>
+        app:layout_constraintVertical_bias="0.824" />
 
     <Button
         android:id="@+id/login_button"
