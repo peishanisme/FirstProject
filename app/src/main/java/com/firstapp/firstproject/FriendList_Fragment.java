@@ -68,7 +68,7 @@ import java.util.List;
                         numberOfFriends.setText("("+Integer.toString(friendCount)+")");
 
                     }else
-                        numberOfFriends.setText("0");
+                        numberOfFriends.setText("(0)");
                 }
 
                 @Override
