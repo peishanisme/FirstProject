@@ -63,8 +63,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_acc_scrollview);
 
+        // set back button
         back_button=findViewById(R.id.backbutton);
-
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,15 +73,19 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         });
 
 
-        // Retrieve selected user's ID passed from the previous activity
+        // Retrieve current user's ID using method in Firebase library
         currentUserId = mAuth.getCurrentUser().getUid();
+
+        // Retrieve selected user's ID passed from the previous activity
         selectedUserId = getIntent().getStringExtra("uid");
+
         InteractionTracker.add("View Account",selectedUserId);
 
         // Get reference to the  selected user by ID
         selectedUserRef = userRef.child(selectedUserId);
         currentUserRef = userRef.child(currentUserId);
 
+        // Initialization of TextView object
         topUsername=findViewById(R.id.topUsername);
         username = findViewById(R.id.usernameDisplay);
         email = findViewById(R.id.emailDisplay);
@@ -145,14 +149,12 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                     }
                 }
 
-                Log.d("FriendList", "Current User Friend List: " + currentUserFriendList);
-                Log.d("FriendList", "Selected User Friend List: " + selectedUserFriendList);
 
 
                 // get mutual friend between two user
                 ArrayList<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
-                Log.d("FriendList", "MutualFriend List: " + mutualFriendList);
 
+                // set "Mutual Friend" textview into button ( to display all mutual friend's profile)
                 mutualFriends.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -204,7 +206,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
                 }
 
-
+                // retrieve the selected user's profile data from database
                 selectedUserRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -233,6 +235,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                 mutualFriends.setText("No mutual friends");
                             }
 
+                            // set the profile data that can only be seen if both user are friends
                             if(currentUserFriendList.contains(selectedUserId)){
 
                                 phone.setText(selectedUserPhoneNumber);
@@ -242,6 +245,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                 birthday.setText(selectedBirthday);
                                 relationship.setText(selectedRelationship);
 
+                                // retrieve hobbies list from database
                                 hobbyReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -264,6 +268,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                 });
 
 
+                                // retrieve job stack from database
                                 jobReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -290,6 +295,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                 });
 
                             }else{
+
+                                // profile data will set as "-" if both user are not friend
                                 phone.setText("-");
                                 occupation.setText("-");
                                 gender.setText("-");
@@ -318,10 +325,9 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseData", "Failed to read friendlist: " + error.getMessage());
+
             }
         });
-
 
 
         DeclineFriendReqButton.setVisibility(View.INVISIBLE);
