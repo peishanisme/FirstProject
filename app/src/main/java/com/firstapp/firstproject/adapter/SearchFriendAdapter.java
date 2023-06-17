@@ -14,6 +14,7 @@ import com.firstapp.firstproject.R;
 import com.firstapp.firstproject.ViewAccActivity_Scrollview;
 import com.firstapp.firstproject.entity.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapter.UserViewHolder> {

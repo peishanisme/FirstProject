@@ -25,7 +25,6 @@ import java.util.List;
 
 public class Register_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    //    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
     private EditText UserName,UserEmail,UserPhoneNumber,UserPassword,UserConfrimPassword;
     private ProgressDialog loadingBar;
     private Button CreateAccountButton;
@@ -102,7 +101,7 @@ public class Register_Activity extends AppCompatActivity {
                         loadingBar.dismiss();
 
 
-                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","" ,0 ,"");
+                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","","");
 
 
                         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).setValue(user);

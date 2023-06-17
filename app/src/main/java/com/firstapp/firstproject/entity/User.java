@@ -8,16 +8,14 @@ import java.util.Queue;
 
 public class User {
 
-    public int numberOfFriends;
     public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,relationship;
     public List<String>hobbies = new ArrayList<>();
     public List<User>friends = new ArrayList<>();
-    public String hobby;
     public User(){
 
     }
 
-    public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender, int numberOfFriends,String relationship) {
+    public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,String relationship) {
         this.userid = userid;
         this.username = username;
         this.email = email;
@@ -29,7 +27,6 @@ public class User {
         this.age = age;
         this.occupation = occupation;
         this.gender = gender;
-        this.numberOfFriends=numberOfFriends;
         this.relationship=relationship;
         }
 
@@ -39,17 +36,6 @@ public class User {
         this.fullName=fullName;
         this.email=email;
         this.phone_number=phone_number;
-    }
-
-
-
-    public ArrayList<String> getHobbies(ArrayList<String> hobbies) {
-        return hobbies;
-    }
-
-
-    public List<String> getHobbies() {
-        return hobbies;
     }
 
     public List<User> getFriends() {
@@ -69,10 +55,6 @@ public class User {
 
     public String getPhone_number() {
         return phone_number;
-    }
-
-    public String getUserid() {
-        return userid;
     }
 
     public String getCountryName() {
