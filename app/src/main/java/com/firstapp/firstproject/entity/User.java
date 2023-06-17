@@ -37,7 +37,7 @@ public class User {
         this.email=email;
         this.phone_number=phone_number;
     }
-    
+
     public String getUid() {
         return userid;
     }
