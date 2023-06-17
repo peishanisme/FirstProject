@@ -25,7 +25,6 @@ public class Interaction extends AppCompatActivity {
         interactList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setReverseLayout(true);
-        linearLayoutManager.setStackFromEnd(true);
         interactList.setLayoutManager(linearLayoutManager);
         MyAdapter adapter = new MyAdapter(InteractionTracker.interactionList, InteractionTracker.interactionLinkList, InteractionTracker.interactionTimeList);
         interactList.setAdapter(adapter);
