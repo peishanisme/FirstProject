@@ -29,6 +29,7 @@ public class Login_Activity extends AppCompatActivity {
     private EditText UserEmail, UserPassword;
     private ProgressDialog loadingBar;
     private DatabaseReference adminRef;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class Login_Activity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         adminRef = FirebaseDatabase.getInstance().getReference().child("Admin");
+        userRef=FirebaseDatabase.getInstance().getReference().child("Users");
 
         UserEmail = (EditText) findViewById(R.id.input_email);
         UserPassword = (EditText) findViewById(R.id.input_password);
@@ -76,12 +78,34 @@ public class Login_Activity extends AppCompatActivity {
             loadingBar.setMessage("Please wait, we are logging your account...");
             loadingBar.show();
             loadingBar.setCanceledOnTouchOutside(true);
+
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         String userId = mAuth.getCurrentUser().getUid();
-                        checkAdminStatus(userId);
+
+                        // Check if user exists in "Users" node
+                        userRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    // User exists in the "Users" node
+                                    checkAdminStatus(userId);
+                                } else {
+                                    // User does not exist in the "Users" node
+                                    Toast.makeText(Login_Activity.this, "User not found. Login failed.", Toast.LENGTH_SHORT).show();
+                                    loadingBar.dismiss();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                // Handle error
+                                loadingBar.dismiss();
+                            }
+                        });
+
                     } else {
                         String message = task.getException().getMessage();
                         Toast.makeText(Login_Activity.this, "Error occurred: " + message, Toast.LENGTH_SHORT).show();
@@ -91,6 +115,7 @@ public class Login_Activity extends AppCompatActivity {
             });
         }
     }
+
 
     private void checkAdminStatus(String userId) {
         adminRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -102,8 +127,6 @@ public class Login_Activity extends AppCompatActivity {
                     // User is an admin
                     Toast.makeText(Login_Activity.this, "You are logged in as admin", Toast.LENGTH_SHORT).show();
 
-                    // Perform admin-related actions or navigate to the admin interface
-                    // For example, you can start a new activity for the admin dashboard
                     Intent intent = new Intent(Login_Activity.this, Admin_Activity.class);
                     startActivity(intent);
                     finish();
@@ -111,8 +134,6 @@ public class Login_Activity extends AppCompatActivity {
                     // User is not an admin
                     Toast.makeText(Login_Activity.this, "You are logged in successfully", Toast.LENGTH_SHORT).show();
 
-                    // Perform regular user actions or navigate to the user interface
-                    // For example, you can start a new activity for the user dashboard
                     Intent intent = new Intent(Login_Activity.this, Main_Activity.class);
                     startActivity(intent);
                     finish();

@@ -105,8 +105,11 @@ public class Setup_Activity extends AppCompatActivity {
                 String occupation = Occupation.getText().toString();
                 genderSelection = (RadioButton) findViewById(gender.getCheckedRadioButtonId());
 
-                //calculate age based on birthday
-
+                // Validate the birthday format
+                if (!isValidBirthdayFormat(birthday)) {
+                    Toast.makeText(Setup_Activity.this, "Invalid birthday format. Please use yyyy/MM/dd.", Toast.LENGTH_SHORT).show();
+                    return; // Exit the method if the format is invalid
+                }
 
 
                 if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(countryName) || TextUtils.isEmpty(stateName) || TextUtils.isEmpty(birthday) || TextUtils.isEmpty(occupation)) {
@@ -125,7 +128,6 @@ public class Setup_Activity extends AppCompatActivity {
                     user.setOccupation(occupation);
                     user.setGender(genderSelection.getText().toString());
 
-//                    uploadPicture();
                     reference.setValue(user)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -152,6 +154,13 @@ public class Setup_Activity extends AppCompatActivity {
         startActivity(mainIntent);
         finish();
     }
+
+    // Validate the birthday format (yyyy/MM/dd)
+    private boolean isValidBirthdayFormat(String birthday) {
+        String regex = "\\d{4}/\\d{2}/\\d{2}";
+        return birthday.matches(regex);
+    }
+
     //method to calculate age
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String ageCalculation(String birthday){
