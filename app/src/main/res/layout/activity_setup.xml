@@ -29,7 +29,7 @@
         android:ems="13"
         android:gravity="start|top"
         android:hint="Ali bin Ahmad"
-        android:inputType="textMultiLine"
+        android:inputType="textEmailAddress"
         android:padding="13dp" />
 
     <TextView
@@ -58,7 +58,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:ems="13"
-        android:hint="year/month/day"
+        android:hint="1998/01/01"
         android:inputType="date" />
 
     <TextView
@@ -80,7 +80,7 @@
         android:ems="13"
         android:gravity="start|top"
         android:hint="Malaysia"
-        android:inputType="textMultiLine" />
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/state"
@@ -101,7 +101,7 @@
         android:ems="13"
         android:gravity="start|top"
         android:hint="Selangor"
-        android:inputType="textMultiLine" />
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:id="@+id/gender"
@@ -162,7 +162,7 @@
         android:ems="13"
         android:gravity="start|top"
         android:hint="Student"
-        android:inputType="textMultiLine" />
+        android:inputType="textEmailAddress" />
 
     <Button
         android:id="@+id/save_job"

@@ -10,14 +10,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/HistoryDisplay"
         >
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="History"
-            android:textSize="26dp"
             android:padding="5dp"
-            android:textColor="#DD58D6"
-            />
+            android:text="History"
+            android:textColor="@color/white"
+            android:textSize="26dp" />
 
     </LinearLayout>
 
