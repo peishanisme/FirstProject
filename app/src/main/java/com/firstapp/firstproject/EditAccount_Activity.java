@@ -39,27 +39,29 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
     EditText EditUsername, EditFullName, EditPhoneN, EditBirthday, EditCountry, EditState, EditOccupation, EditRelationship;
     RadioGroup gender;
     RadioButton genderSelection;
+
     //Use Array List to store hobbies
     ArrayList<String> hobbyList = new ArrayList<>();
+
     //Use stack to store jobs
     Stack<String> jobStack = new Stack<>();
     Button save;
-    Button addJobButton;
-    Button addHobbyButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_account);
+
+
         back_button=findViewById(R.id.backbutton);
         InteractionTracker.add("Edit Account");
-
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
         String uid = mAuth.getCurrentUser().getUid();
@@ -75,10 +77,12 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
         gender = (RadioGroup) findViewById(R.id.editGender);
         save = findViewById(R.id.save_info);
 
+        //dynamic view for addHobby
         layoutList1 = findViewById(R.id.hobby_layout);
         addHobby = findViewById(R.id.AddHobby);
         addHobby.setOnClickListener(this);
 
+        //dynamic view for addJob
         layoutList2 = findViewById(R.id.job_layout);
         addJob = findViewById(R.id.AddJob);
         addJob.setOnClickListener(this);
@@ -87,7 +91,9 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+                //if statement to check whether the field is empty
                 if (!EditUsername.getText().toString().isEmpty() && !EditFullName.getText().toString().isEmpty() && !EditPhoneN.getText().toString().isEmpty() && !EditBirthday.getText().toString().isEmpty() && !EditCountry.getText().toString().isEmpty() && !EditState.getText().toString().isEmpty() && !EditOccupation.getText().toString().isEmpty()) {
+                   //if statement to check whether the data is changed
                     if (isUsernameChange() || isFullNameChange() || isPhoneNChange() || isBirthdayChange() || isCountryChange() || isStateChange() || isOccupationChange() || isRelationshipChange()) {
                         genderSelection = (RadioButton) findViewById(gender.getCheckedRadioButtonId());
                         reference.child(uid).child("username").setValue(EditUsername.getText().toString());
@@ -101,6 +107,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
                         String EditAge = Setup_Activity.ageCalculation(EditBirthday.getText().toString());
                         reference.child(uid).child("age").setValue(EditAge);
 
+                        //Retrieve input from addHobby dynamic view and add into ArrayList. Pass the array list into database for storing
                         hobbyList.clear();
                         for (int i =1;i<layoutList1.getChildCount();i++){
                             EditText ETHobby = (EditText) layoutList1.getChildAt(i).findViewById(R.id.newHobby);
@@ -111,7 +118,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
                         DatabaseReference hobbyReference = FirebaseDatabase.getInstance().getReference("Hobbies");
                         hobbyReference.child(uid).setValue(hobbyList);
 
-                        // Save jobStack data to Firebase
+                        //Retrieve input from addJob dynamic view and push into Stack. Pass the stack into database for storing
                         jobStack.clear();
                         DatabaseReference jobReference = FirebaseDatabase.getInstance().getReference("Jobs");
                         jobReference.child(uid).setValue(jobStack);
@@ -132,7 +139,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
                 }
             }
         });
-
+        //retrieve original data from "Users" node
         reference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -157,7 +164,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
     }
 
 
-
+    //method to control dynamic view
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.AddJob) {
@@ -207,6 +214,8 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
         layoutList1.removeView(v);
     }
 
+
+    //methods to check whether the data is changed
     public boolean isUsernameChange() {
         if (!Username.equals(EditUsername.getText().toString())) {
             Username = EditUsername.getText().toString();
@@ -304,6 +313,7 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
     }
 
 
+//Method to send user to profile fragment
     private void SendUserToProfileFragment() {
         Intent intent = new Intent(EditAccount_Activity.this, ProfileFragment.class);
         startActivity(intent);
