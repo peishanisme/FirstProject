@@ -61,12 +61,12 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/degConnectionDisplay"
+            android:id="@+id/fullnameDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Degree of Connection"
-            android:textAlignment="center" />
+            android:layout_weight="1"
+            android:text="(Full Name)" />
 
         <Button
             android:id="@+id/send_friend_request"

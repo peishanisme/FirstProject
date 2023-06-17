@@ -36,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-    private TextView username, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection,topUsername;
+    private TextView username,fullname, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection,topUsername;
     CircleImageView friendPic1, friendPic2, friendPic3;
     RecyclerView recyclerViewHobby;
     ArrayList<String> hobbies;
@@ -88,6 +88,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         // Initialization of TextView object
         topUsername=findViewById(R.id.topUsername);
         username = findViewById(R.id.usernameDisplay);
+        fullname=findViewById(R.id.fullnameDisplay);
         email = findViewById(R.id.emailDisplay);
         phone = findViewById(R.id.phDisplay);
         occupation = findViewById(R.id.occpDisplay);
@@ -103,7 +104,6 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         friendPic2 = findViewById(R.id.friend_picture2);
         friendPic3 = findViewById(R.id.friend_picture3);
         mutualFriends = findViewById(R.id.mutualFriends);
-        degreeConnection = findViewById(R.id.degConnectionDisplay);
         SendFriendReqButton = findViewById(R.id.send_friend_request);
         DeclineFriendReqButton = findViewById(R.id.decline_friend_request);
         CURRENT_STATE = "not_friends";
@@ -213,6 +213,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                         if (snapshot.exists()) {
 
                             String selectedUsername = snapshot.child("username").getValue().toString();
+                            String selectedFullName=snapshot.child("fullName").getValue().toString();
                             String selectedUserEmail = snapshot.child("email").getValue().toString();
                             String selectedUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
                             String selectedOccupation = snapshot.child("occupation").getValue().toString();
@@ -226,6 +227,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                             // Display the user's profile data in the UI
                             topUsername.setText("@"+selectedUsername);
                             username.setText(selectedUsername);
+                            fullname.setText(selectedFullName);
                             email.setText(selectedUserEmail);
                             friends.setText("Friends (" + selectedUserFriendList.size() + ")");
 
