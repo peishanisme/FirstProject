@@ -14,9 +14,9 @@ public class InteractionTracker {
     static LinkedList <String> interactionTimeList = new LinkedList<>();
 
     public static void add(String interaction, String interactionLink){
-        interactionList.add(interaction);
-        interactionLinkList.add(interactionLink);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        interactionList.add(interaction); //add interaction's name
+        interactionLinkList.add(interactionLink); //add interaction's link like uid of the user
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) { //get the local time
             interactionTimeList.add(LocalDateTime.now().toString());
         }
 
@@ -27,7 +27,7 @@ public class InteractionTracker {
     }
 
 
-    public static void clear(){
+    public static void clear(){ //clear all the linked list
         interactionList.clear();
         interactionTimeList.clear();
         interactionLinkList.clear();
