@@ -32,9 +32,11 @@ import java.util.Stack;
 public class ProfileFragment extends Fragment {
     private View root;
     RecyclerView recyclerViewHobby;
+    //Array List is be used to save retrieved hobby data from database
     ArrayList<String> hobbies;
     addhobbyAdapter addhobbyAdapter;
     RecyclerView recyclerViewJob;
+    //Stack is be used to save and present retrieved jobs data from database
     Stack<String> jobStack;
     addjobAdapter addjobAdapter;
 
