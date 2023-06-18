@@ -9,6 +9,7 @@ public class InteractionTracker {
     public InteractionTracker() {
     }
 
+    //Linked list is be used to store interaction
     static LinkedList <String> interactionList = new LinkedList<>();
     static LinkedList <String> interactionLinkList = new LinkedList<>();
     static LinkedList <String> interactionTimeList = new LinkedList<>();
