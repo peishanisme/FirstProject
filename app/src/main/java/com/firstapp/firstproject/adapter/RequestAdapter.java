@@ -38,10 +38,13 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRe
     @NonNull
     @Override
     public RequestAdapter.FriendRequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // inflates the layout for each item in the RecyclerView using the LayoutInflater and returns a new instance of the FriendRequestViewHolder
         View view = LayoutInflater.from(context).inflate(R.layout.request_display, parent, false);
         return new RequestAdapter.FriendRequestViewHolder(view);
     }
 
+    // retrieves the User object at the given position from the requestList
+    // sets the corresponding data to the respective TextViews in the ViewHolder
     @Override
     public void onBindViewHolder(@NonNull FriendRequestViewHolder holder, int position) {
         Calendar calForDate = Calendar.getInstance();
@@ -51,13 +54,19 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRe
         holder.username.setText(request.getUsername());
         holder.fullname.setText(request.getFullName());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
+            // When an item is clicked, it navigates to the ViewAccActivity_Scrollview activity
+            // uid is passed as an extra with the intent to view the user's account details
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewAccActivity_Scrollview.class);
                 intent.putExtra("uid", request.getUid()); // Pass the user object
                 context.startActivity(intent);
             }
         });
+
+        // when accept button is clicked, it updates the "Friends" node in the Firebase Realtime Database for both the current user and the requesting user and adding each other as friends with the current date
+        // removes the friend request from the "FriendRequests" node for both users
         holder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +77,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRe
             }
         });
 
+        // When the button is clicked, it removes the friend request from the "FriendRequests" node for both the current user and the requesting user
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +96,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRe
     }
 
     public class FriendRequestViewHolder extends RecyclerView.ViewHolder {
+        // represents a single item view within the RecyclerView
+        // holds references to the TextViews (username and fullname) as well as the accept and delete buttons (accept and delete)
         private TextView username;
         private TextView fullname;
 
@@ -101,4 +113,3 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.FriendRe
         }
     }
 }
-

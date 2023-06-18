@@ -412,22 +412,25 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
 
     private void UnfriendAnExistingFriend() {
+        // selected user will be removed from the current user’s friend list
         FriendsRef.child(currentUserId).child(selectedUserId)
                 .removeValue()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+                            // removes the current user from the selected user’s friend list
                             FriendsRef.child(selectedUserId).child(currentUserId)
                                     .removeValue()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
-                                                SendFriendReqButton.setEnabled(true);
-                                                CURRENT_STATE = "not_friend";
-                                                SendFriendReqButton.setText("Send Friend Request");
+                                                SendFriendReqButton.setEnabled(true); // enables the “Send Friend Request” button
+                                                CURRENT_STATE = "not_friend"; // set CURRENT_STATE to not friends
+                                                SendFriendReqButton.setText("Send Friend Request"); // updates the button text to “Send Friend Request”
 
+                                                // hides the “Decline Friend Request” button
                                                 DeclineFriendReqButton.setVisibility(View.INVISIBLE);
                                                 DeclineFriendReqButton.setEnabled(false);
                                             }
@@ -443,14 +446,17 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MMMM-yyyy");
         saveCurrentDate = currentDate.format(calForDate.getTime());
 
+        // adds the friendship connection to the current user’s friend list by setting the friendship date
         FriendsRef.child(currentUserId).child(selectedUserId).child("date").setValue(saveCurrentDate).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
+                    // adds the current user to the selected user's friend list with the same friendship date
                     FriendsRef.child(selectedUserId).child(currentUserId).child("date").setValue(saveCurrentDate).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
+                                // removes the friend request entry from the database for both users
                                 FriendRequestRef.child(currentUserId).child(selectedUserId)
                                         .removeValue()
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -463,6 +469,10 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
                                                                     if(task.isSuccessful()){
+                                                                        //  enables the “Send Friend Request” button
+                                                                        //  sets the “CURRENT_STATE” to “friend”
+                                                                        //  updates the button text to “Unfriend this Person”
+                                                                        //  hides the “Decline Friend Request” button.
                                                                         SendFriendReqButton.setEnabled(true);
                                                                         CURRENT_STATE = "friend";
                                                                         SendFriendReqButton.setText("Unfriend this Person");
@@ -487,6 +497,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
     }
 
     private void CancelFriendRequest() {
+        // removes the friend request entry from the database for both the current user and the selected user
         FriendRequestRef.child(currentUserId).child(selectedUserId)
                 .removeValue()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -499,6 +510,10 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
+                                                //  enables the “Send Friend Request” button
+                                                //  sets the “CURRENT_STATE” to ”not friend”
+                                                //  button text will be updated to “Send Friend Request”
+                                                //  “Decline Friend Request” button will be disabled and hided
                                                 SendFriendReqButton.setEnabled(true);
                                                 CURRENT_STATE = "not_friend";
                                                 SendFriendReqButton.setText("Send Friend Request");
@@ -514,7 +529,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
     }
 
     private void MaintananceofButtion() {
-
+        // maintaining the state and behaviour of the buttons based on the existing friend relationship between the current user and the selected user
 
         FriendRequestRef.child(currentUserId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -574,6 +589,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
     }
 
     private void SendFriendRequestToaPerson() {
+        // It adds an entry to the friend request data in the database for the current user and the selected user
         FriendRequestRef.child(currentUserId).child(selectedUserId)
                 .child("request_type").setValue("sent")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -586,6 +602,10 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
+                                                // enables the “Send Friend Request” button
+                                                // sets the “CURRENT_STATE” to “request_sent”
+                                                // button text will be changed to “Cancel Friend Request”
+                                                // the “Decline Friend Request” will be hide
                                                 SendFriendReqButton.setEnabled(true);
                                                 CURRENT_STATE = "request_sent";
                                                 SendFriendReqButton.setText("Cancel Friend Request");

@@ -28,6 +28,7 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // inflates the layout for each item in the RecyclerView using the LayoutInflater and returns a new instance of the UserViewHolder
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.search_display, parent, false);
         context= parent.getContext();
         return new UserViewHolder(view);
@@ -35,8 +36,10 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
 
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
+        //retrieves the User object at the given position from the userList
         User user = userList.get(position);
 
+        //sets the corresponding data to the respective TextViews in the ViewHolder
         holder.usernameTextView.setText(user.getUsername());
         holder.fullnameTextView.setText(user.getFullName());
         holder.emailTextView.setText(user.getEmail());
@@ -45,8 +48,9 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // navigate to the ViewAccActivity_Scrollview activity when it is clicked
                 Intent intent = new Intent(context, ViewAccActivity_Scrollview.class);
-                intent.putExtra("uid", user.getUid()); // Pass the user object
+                intent.putExtra("uid", user.getUid()); // uid is passed as an extra with the intent to view the user's account details
                 context.startActivity(intent);
             }
         });
@@ -54,10 +58,13 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
     }
 
     @Override
+    //represents the number of users to be displayed in the RecyclerView
     public int getItemCount() {
         return userList.size();
     }
 
+    // represents a single item view within the RecyclerView
+    // holds references to the TextViews that display the user's username, full name, email, and phone number
     static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView usernameTextView;
         TextView fullnameTextView;
@@ -74,8 +81,3 @@ public class SearchFriendAdapter extends RecyclerView.Adapter<SearchFriendAdapte
 
     }
 }
-
-
-
-
-
