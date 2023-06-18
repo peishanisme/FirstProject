@@ -17,7 +17,6 @@ public class Main_Activity extends AppCompatActivity {
     private Toolbar mToolbar;
     ActivityMainBinding binding;
 
-//    @SuppressLint("NonConstantResourceId")
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,30 +77,4 @@ public class Main_Activity extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        super.onCreateOptionsMenu(menu);
-//
-//        getMenuInflater().inflate(R.menu.appbar_dropdownlist_menu, menu);
-//
-//        return true;
-//
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        super.onOptionsItemSelected(item);
-//
-//        if (item.getItemId() == R.id.main_search_user_options){
-//            sendUserToFindFriendsActivity();
-//
-//        }
-//        return true;
-//    }
-//
-//    private void sendUserToFindFriendsActivity(){
-//        Intent findFriendIntent = new Intent(Main_Activity.this, FindFriendsActivity.class);
-//        startActivity(findFriendIntent);
-//    }
 }

@@ -30,9 +30,11 @@ public class ForgotPassword_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
+        // Get references to UI elements
         editTextPwdResetEmail = findViewById(R.id.forgotPassword_email);
         buttonPwdReset = findViewById(R.id.ResetPassword);
 
+        // Set click listener for the reset password button
         buttonPwdReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,28 +56,33 @@ public class ForgotPassword_Activity extends AppCompatActivity {
         });
     }
 
+    // Method to reset the user's password
     private void resetPassword(String email) {
         authProfile = FirebaseAuth.getInstance();
         authProfile.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
+                    // Password reset email sent successfully
                     Toast.makeText(ForgotPassword_Activity.this, "Please check your email for password reset link", Toast.LENGTH_SHORT).show();
 
+                    // Redirect to the starting activity
                     Intent intent = new Intent(ForgotPassword_Activity.this, Starting_Activity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
                 } else {
                     try {
+                        // Handle specific exceptions
                         throw task.getException();
                     } catch (FirebaseAuthInvalidUserException e) {
-                        editTextPwdResetEmail.setError("User does not exits or is no longer valid. Please register again");
+                        // Handle invalid user exception
+                        editTextPwdResetEmail.setError("User does not exist or is no longer valid. Please register again");
                     } catch (Exception e) {
+                        // Handle other exceptions
                         Log.e(TAG, e.getMessage());
                         Toast.makeText(ForgotPassword_Activity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
         });

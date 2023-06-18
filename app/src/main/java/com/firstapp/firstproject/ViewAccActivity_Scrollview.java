@@ -36,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-    private TextView username, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection,topUsername;
+    private TextView username,fullname, email, phone, occupation, gender, country,state, age,birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends,topUsername;
     CircleImageView friendPic1, friendPic2, friendPic3;
     RecyclerView recyclerViewHobby;
     ArrayList<String> hobbies;
@@ -63,8 +63,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_acc_scrollview);
 
+        // set back button
         back_button=findViewById(R.id.backbutton);
-
         back_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,22 +73,29 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         });
 
 
-        // Retrieve selected user's ID passed from the previous activity
+        // Retrieve current user's ID using method in Firebase library
         currentUserId = mAuth.getCurrentUser().getUid();
+
+        // Retrieve selected user's ID passed from the previous activity
         selectedUserId = getIntent().getStringExtra("uid");
+
         InteractionTracker.add("View Account",selectedUserId);
 
         // Get reference to the  selected user by ID
         selectedUserRef = userRef.child(selectedUserId);
         currentUserRef = userRef.child(currentUserId);
 
+        // Initialization of TextView object
         topUsername=findViewById(R.id.topUsername);
         username = findViewById(R.id.usernameDisplay);
+        fullname=findViewById(R.id.fullnameDisplay);
         email = findViewById(R.id.emailDisplay);
         phone = findViewById(R.id.phDisplay);
         occupation = findViewById(R.id.occpDisplay);
         gender = findViewById(R.id.genderDisplay);
         country = findViewById(R.id.countryDisplay);
+        state=findViewById(R.id.stateDisplay);
+        age=findViewById(R.id.ageDisplay);
         birthday = findViewById(R.id.birthdayDisplay);
         relationship = findViewById(R.id.relationshipDisplay);
         friends = findViewById(R.id.Friends);
@@ -99,7 +106,6 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         friendPic2 = findViewById(R.id.friend_picture2);
         friendPic3 = findViewById(R.id.friend_picture3);
         mutualFriends = findViewById(R.id.mutualFriends);
-        degreeConnection = findViewById(R.id.degConnectionDisplay);
         SendFriendReqButton = findViewById(R.id.send_friend_request);
         DeclineFriendReqButton = findViewById(R.id.decline_friend_request);
         CURRENT_STATE = "not_friends";
@@ -145,14 +151,12 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                     }
                 }
 
-                Log.d("FriendList", "Current User Friend List: " + currentUserFriendList);
-                Log.d("FriendList", "Selected User Friend List: " + selectedUserFriendList);
 
 
                 // get mutual friend between two user
                 ArrayList<String> mutualFriendList = getMutualFriendID(currentUserFriendList, selectedUserFriendList);
-                Log.d("FriendList", "MutualFriend List: " + mutualFriendList);
 
+                // set "Mutual Friend" textview into button ( to display all mutual friend's profile)
                 mutualFriends.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -204,19 +208,22 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
                 }
 
-
+                // retrieve the selected user's profile data from database
                 selectedUserRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
 
                             String selectedUsername = snapshot.child("username").getValue().toString();
+                            String selectedFullName=snapshot.child("fullName").getValue().toString();
                             String selectedUserEmail = snapshot.child("email").getValue().toString();
                             String selectedUserPhoneNumber = snapshot.child("phone_number").getValue().toString();
                             String selectedOccupation = snapshot.child("occupation").getValue().toString();
                             String selectedGender = snapshot.child("gender").getValue().toString();
                             String selectedCountry = snapshot.child("countryName").getValue().toString();
+                            String selectedState=snapshot.child("stateName").getValue().toString();
                             String selectedBirthday = snapshot.child("birthday").getValue().toString();
+                            String selectedAge=snapshot.child("age").getValue().toString();
                             String selectedRelationship = snapshot.child("relationship").getValue().toString();
 
 
@@ -224,6 +231,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                             // Display the user's profile data in the UI
                             topUsername.setText("@"+selectedUsername);
                             username.setText(selectedUsername);
+                            fullname.setText(selectedFullName);
                             email.setText(selectedUserEmail);
                             friends.setText("Friends (" + selectedUserFriendList.size() + ")");
 
@@ -233,15 +241,18 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                 mutualFriends.setText("No mutual friends");
                             }
 
+                            // set the profile data that can only be seen if both user are friends
                             if(currentUserFriendList.contains(selectedUserId)){
-
+                                age.setText(selectedAge);
                                 phone.setText(selectedUserPhoneNumber);
                                 occupation.setText(selectedOccupation);
                                 gender.setText(selectedGender);
                                 country.setText(selectedCountry);
+                                state.setText(selectedState);
                                 birthday.setText(selectedBirthday);
                                 relationship.setText(selectedRelationship);
 
+                                // retrieve hobbies list from database
                                 hobbyReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -264,6 +275,7 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                 });
 
 
+                                // retrieve job stack from database
                                 jobReference.child(selectedUserId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -290,10 +302,14 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                                 });
 
                             }else{
+
+                                // profile data will set as "-" if both user are not friend
+                                age.setText("-");
                                 phone.setText("-");
                                 occupation.setText("-");
                                 gender.setText("-");
                                 country.setText("-");
+                                state.setText("-");
                                 birthday.setText("-");
                                 relationship.setText("-");
                             }
@@ -318,10 +334,9 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseData", "Failed to read friendlist: " + error.getMessage());
+
             }
         });
-
 
 
         DeclineFriendReqButton.setVisibility(View.INVISIBLE);

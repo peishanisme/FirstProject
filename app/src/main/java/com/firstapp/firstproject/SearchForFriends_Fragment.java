@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firstapp.firstproject.R;
 import com.firstapp.firstproject.adapter.SearchFriendAdapter;
 import com.firstapp.firstproject.entity.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +34,8 @@ public class SearchForFriends_Fragment extends Fragment {
     private RecyclerView searchResultList;
     private SearchFriendAdapter searchFriendAdapter;
     private List<User> userList;
+    private DatabaseReference usersRef;
+    String currentUserUid;
     View view;
 
 
@@ -39,6 +43,10 @@ public class SearchForFriends_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_seacrh_for_friends_, container, false);
         InteractionTracker.add("Search Friends");
+
+
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
+        currentUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Initialize UI components
         searchBoxInput = view.findViewById(R.id.search_box_input);
@@ -62,118 +70,43 @@ public class SearchForFriends_Fragment extends Fragment {
 
         return view;
     }
-    private void searchUsers(String query) {
-        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
 
-        Query searchQuery = usersRef.orderByChild("username").startAt(query).endAt(query + "\uf8ff");
-        searchQuery.addValueEventListener(new ValueEventListener() {
+
+
+    private void searchUsers(String query) {
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    //Retrieves data from the snapshot and creates a User object by converting the retrieved data into an instance of the User class.
                     User user = snapshot.getValue(User.class);
-                    if (user != null) {
-                        userList.add(user);
-                    }
-                }
-                searchFriendAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle the error
-            }
-        });
+                    //Exclude current user in the search result
+                    if (!currentUserUid.equals(user.getUid())) {
 
-        Query searchQuery2 = usersRef.orderByChild("fullName").startAt(query).endAt(query + "\uf8ff");
-        searchQuery2.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    User user = snapshot.getValue(User.class);
-                    if (user != null) {
-                        if (!userList.contains(user)) {
+                        //Search using username,email,id,full name or phone number (not case-sensitive)
+                        if (user.getUsername().toLowerCase().contains(query.toLowerCase()) || user.getEmail().toLowerCase().contains(query.toLowerCase())||user.getUid().toLowerCase().contains(query.toLowerCase())||user.getFullName().toLowerCase().contains(query.toLowerCase())||user.getPhone_number().contains(query)) {
                             userList.add(user);
                         }
                     }
                 }
-                searchFriendAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle the error
-            }
-        });
-
-        Query searchQuery3 = usersRef.orderByChild("email").startAt(query).endAt(query + "\uf8ff");
-        searchQuery3.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    User user = snapshot.getValue(User.class);
-                    if (user != null) {
-                        if (!userList.contains(user)) {
-                            userList.add(user);
-                        }
+                // Sort userList based on username
+                Collections.sort(userList, new Comparator<User>() {
+                    @Override
+                    public int compare(User user1, User user2) {
+                        return user1.getUsername().compareToIgnoreCase(user2.getUsername());
                     }
-                }
+                });
                 searchFriendAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle the error
-            }
-        });
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        Query searchQuery4 = usersRef.orderByChild("phone_number").startAt(query).endAt(query + "\uf8ff");
-        searchQuery4.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    User user = snapshot.getValue(User.class);
-                    if (user != null) {
-                        if (!userList.contains(user)) {
-                            userList.add(user);
-                        }
-                    }
-                }
-                searchFriendAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle the error
-            }
-        });
-
-        Query searchQuery5 = usersRef.orderByChild("useruid").startAt(query).endAt(query + "\uf8ff");
-        searchQuery5.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    User user = snapshot.getValue(User.class);
-                    if (user != null) {
-                        if (!userList.contains(user)) {
-                            userList.add(user);
-                        }
-                    }
-                }
-                searchFriendAdapter.notifyDataSetChanged();
-
-
-            }
-
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle the error
             }
         });
     }
-
-
 }
 
 

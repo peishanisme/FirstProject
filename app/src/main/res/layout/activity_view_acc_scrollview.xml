@@ -61,12 +61,12 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/degConnectionDisplay"
+            android:id="@+id/fullnameDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Degree of Connection"
-            android:textAlignment="center" />
+            android:layout_weight="1"
+            android:text="(Full Name)" />
 
         <Button
             android:id="@+id/send_friend_request"
@@ -74,7 +74,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:text="add_friend" />
+            android:text="add friend" />
 
         <Button
             android:id="@+id/decline_friend_request"
@@ -147,6 +147,58 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/Birthday_layout"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthday"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="446dp" />
+
+            <TextView
+                android:id="@+id/birthdayDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1/1/2023"
+                android:textAlignment="viewEnd" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Age_layout"
+            android:layout_width="308dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Age"
+                tools:layout_editor_absoluteX="50dp"
+                tools:layout_editor_absoluteY="446dp"/>
+
+            <TextView
+                android:id="@+id/ageDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="25"
+                android:textAlignment="textEnd" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/Occupation_Layout"
@@ -228,9 +280,8 @@
                 tools:layout_editor_absoluteY="515dp" />
 
         </LinearLayout>
-
         <LinearLayout
-            android:id="@+id/Birthday_layout"
+            android:id="@+id/state_layout"
             android:layout_width="308dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -238,23 +289,23 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/birthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Birthday"
-                tools:layout_editor_absoluteX="50dp"
-                tools:layout_editor_absoluteY="446dp" />
-
-            <TextView
-                android:id="@+id/birthdayDisplay"
+                android:id="@+id/state"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="1/1/2023"
-                android:textAlignment="viewEnd" />
+                android:text="State" />
 
-
+            <TextView
+                android:id="@+id/stateDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Selangor"
+                android:textAlignment="textEnd"
+                tools:layout_editor_absoluteX="308dp"
+                tools:layout_editor_absoluteY="515dp" />
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/Relationship_layout"

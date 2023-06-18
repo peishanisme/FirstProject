@@ -25,7 +25,6 @@ import java.util.List;
 
 public class Register_Activity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    //    private AlphaAnimation buttonClick = new AlphaAnimation(1F, 0.8F);
     private EditText UserName,UserEmail,UserPhoneNumber,UserPassword,UserConfrimPassword;
     private ProgressDialog loadingBar;
     private Button CreateAccountButton;
@@ -96,27 +95,30 @@ public class Register_Activity extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    //tell user whether they successful to create account or not
-                    if(task.isSuccessful()){
-                        Toast.makeText(Register_Activity.this,"You are authenticated successfully...",Toast.LENGTH_SHORT).show();
+                    // Tell the user whether they were successful in creating an account or not
+                    if (task.isSuccessful()) {
+                        Toast.makeText(Register_Activity.this, "You are authenticated successfully...", Toast.LENGTH_SHORT).show();
                         loadingBar.dismiss();
 
+                        // Create a new User object with the provided information
+                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","","");
 
-                        user = new User(FirebaseAuth.getInstance().getUid(), username, email, phoneNumber, "", "", "", "", "", "","" ,0 ,"");
-
-
+                        // Store the user object in the "Users" node of the Firebase Realtime Database
                         FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).setValue(user);
+
+                        // Start the Setup_Activity
                         Intent mainIntent = new Intent(Register_Activity.this, Setup_Activity.class);
-                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(mainIntent);
                         finish();
-                    }else {
-                        //display the error message to users
-                        String message=task.getException().getMessage();
-                        Toast.makeText(Register_Activity.this,"Error Occured"+message,Toast.LENGTH_SHORT);
+                    } else {
+                        // Display the error message to the user
+                        String message = task.getException().getMessage();
+                        Toast.makeText(Register_Activity.this, "Error Occurred: " + message, Toast.LENGTH_SHORT);
                         loadingBar.dismiss();
                     }
                 }
+
             });
         }
 

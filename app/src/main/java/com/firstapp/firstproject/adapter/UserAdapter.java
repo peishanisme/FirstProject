@@ -1,5 +1,7 @@
 package com.firstapp.firstproject.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firstapp.firstproject.Admin_ViewUserProfileActivity;
 import com.firstapp.firstproject.R;
 import com.firstapp.firstproject.entity.User;
 
@@ -17,6 +20,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     private List<User> userList;
     private OnDeleteAccountClickListener deleteAccountClickListener;
+
+    private Context context;
 
     public UserAdapter(List<User> userList, OnDeleteAccountClickListener deleteAccountClickListener) {
         this.userList = userList;
@@ -28,6 +33,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.admin_user_list, parent, false);
+        context = parent.getContext();
         return new ViewHolder(view);
     }
 
@@ -48,6 +54,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 }
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Admin_ViewUserProfileActivity.class);
+                intent.putExtra("uid", user.getUid()); // Pass the user object
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override

@@ -8,16 +8,13 @@ import java.util.Queue;
 
 public class User {
 
-    public int numberOfFriends;
     public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,relationship;
-    public List<String>hobbies = new ArrayList<>();
-    public List<User>friends = new ArrayList<>();
-    public String hobby;
     public User(){
-
+        //empty constructor
     }
 
-    public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender, int numberOfFriends,String relationship) {
+    //constructor used to save info in database
+    public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,String relationship) {
         this.userid = userid;
         this.username = username;
         this.email = email;
@@ -29,10 +26,10 @@ public class User {
         this.age = age;
         this.occupation = occupation;
         this.gender = gender;
-        this.numberOfFriends=numberOfFriends;
         this.relationship=relationship;
         }
 
+        //constructor used in Admin_Activity
     public User(String uid, String username, String fullName, String email, String phone_number) {
         this.userid=uid;
         this.username=username;
@@ -41,67 +38,44 @@ public class User {
         this.phone_number=phone_number;
     }
 
-
-
-    public ArrayList<String> getHobbies(ArrayList<String> hobbies) {
-        return hobbies;
-    }
-
-
-    public List<String> getHobbies() {
-        return hobbies;
-    }
-
-    public List<User> getFriends() {
-        return friends;
-    }
+    //accessors
     public String getUid() {
         return userid;
     }
-
     public String getUsername() {
         return username;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-
     public String getFullName() {
         return fullName;
     }
-
+    public String getEmail() {
+        return email;
+    }
+    public String getPhone_number() {
+        return phone_number;
+    }
+    public String getBirthday() {
+        return birthday;
+    }
+    public String getCountryName() {
+        return countryName;
+    }
+    public String getStateName() {
+        return stateName;
+    }
     public String getAge() {
         return age;
     }
-
     public String getGender() {
         return gender;
     }
-
     public String getOccupation() {
         return occupation;
     }
 
-    public String getStateName() {
-        return stateName;
+    //mutators
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public void setUsername(String username) {
@@ -144,120 +118,6 @@ public class User {
         this.age = age;
     }
 
-    public boolean areFriend(User otherUser){
-        return friends.contains(otherUser);
-    }
-
-    //Basic feature : find mutual friends between 2 user
-    public List<User> getMutualFriends(User otherUser) {
-        List<User> mutualFriends = new ArrayList<>();
-        for (User friend : friends) {
-            if (otherUser.getFriends().contains(friend)) {
-                mutualFriends.add(friend);
-            }
-        }
-        return mutualFriends;
-    }
-
-    public int getMutualFriendsNum(User otherUser){
-        List<User> mutualFriends = getMutualFriends(otherUser);
-        return  mutualFriends.size();
-    }
-
-
-    // for enhanced network
-
-    public List<User> getSecondDegreeConnections() {
-        List<User> secondDegreeConnections = new ArrayList<>();
-        Queue<User> queue = new LinkedList<>();
-        List<User> visited = new ArrayList<>();
-
-        for (User friend : getFriends()) {
-            queue.offer(friend);
-            visited.add(friend);
-        }
-
-        while (!queue.isEmpty()) {
-            User firstDeg = queue.poll();
-            for (User secDeg : firstDeg.getFriends()) {
-                if (!visited.contains(secDeg)) {
-                    visited.add(secDeg);
-                    secondDegreeConnections.add(secDeg);
-                }
-            }
-        }
-
-        return secondDegreeConnections;
-    }
-
-    public List<User> getThirdDegreeConnections() {
-        List<User> thirdDegreeConnections = new ArrayList<>();
-        Queue<User> queue = new LinkedList<>();
-        List<User> visited = new ArrayList<>();
-
-        for (User secondDegreeConnection : getSecondDegreeConnections()) {
-            queue.offer(secondDegreeConnection);
-            visited.add(secondDegreeConnection);
-        }
-
-        while (!queue.isEmpty()) {
-            User secDeg = queue.poll();
-            for (User thirdDeg : secDeg.getFriends()) {
-                if (!visited.contains(thirdDeg) && !getFriends().contains(thirdDeg)) {
-                    visited.add(thirdDeg);
-                    thirdDegreeConnections.add(thirdDeg);
-                }
-            }
-        }
-
-        return thirdDegreeConnections;
-    }
-/*
-    public List<User> getOtherConnections() {
-        List<User> otherConnections = new ArrayList<>();
-        otherConnections.remove(user);
-        otherConnections.removeAll(getFriends());
-        otherConnections.removeAll(getSecondDegreeConnections());
-        otherConnections.removeAll(getThirdDegreeConnections());
-
-        return otherConnections;
-    }
- */
-
-    public List<User> getRecommendedConnections() {
-        List<User> recommendedConnections = new ArrayList<>();
-
-        List<User> secondDegreeConnections = getSecondDegreeConnections();
-        secondDegreeConnections.sort(Comparator.comparingInt(user -> -user.getFriends().size()));   //(-) to sort the list in descending order
-
-        List<User> thirdDegreeConnections = getThirdDegreeConnections();
-        thirdDegreeConnections.sort(Comparator.comparingInt(user -> -user.getFriends().size()));
-
-        recommendedConnections.addAll(secondDegreeConnections);
-        recommendedConnections.addAll(thirdDegreeConnections);
-
-        return recommendedConnections;
-    }
-
-    public int getDegreeConnection(User otherUser){
-
-        List<User> firstDegreeConnections = getFriends();
-        if (firstDegreeConnections.contains(otherUser)) {
-            return 1;
-        }
-
-        List<User> secondDegreeConnections = getSecondDegreeConnections();
-        if (secondDegreeConnections.contains(otherUser)) {
-            return 2;
-        }
-
-        List<User> thirdDegreeConnections = getThirdDegreeConnections();
-        if (thirdDegreeConnections.contains(otherUser)) {
-            return 3;
-        }
-
-        return -1; // No connection found
-    }
 
 
 }

@@ -38,6 +38,7 @@ public class Admin_Activity extends AppCompatActivity implements UserAdapter.OnD
         setContentView(R.layout.activity_admin);
         ImageButton logout_button = findViewById(R.id.logout_button);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         // Initialize the RecyclerView
@@ -102,14 +103,55 @@ public class Admin_Activity extends AppCompatActivity implements UserAdapter.OnD
         // Delete account from Realtime Database
         DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
         usersRef.child(uid).removeValue();
+        DatabaseReference hobbyRef = FirebaseDatabase.getInstance().getReference("Hobbies");
+        hobbyRef.child(uid).removeValue();
+        DatabaseReference jobRef = FirebaseDatabase.getInstance().getReference("Jobs");
+        jobRef.child(uid).removeValue();
+        DatabaseReference friendRef = FirebaseDatabase.getInstance().getReference("Friends");
+        friendRef.child(uid).removeValue();
+        friendRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot friendSnapShot : snapshot.getChildren()) {
+                    for (DataSnapshot eachUserFriendSnapshot : friendSnapShot.getChildren()) {
+                        String friendUid = eachUserFriendSnapshot.getKey();
+                        DatabaseReference specificFriendRef = friendRef.child(friendSnapShot.getKey()).child(friendUid);
+                        if (friendUid.equals(uid))
+                            specificFriendRef.child(uid).removeValue();
+                    }
+                }
+            }
 
-        // Delete account from Authentication
-        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-        if (firebaseUser != null) {
-            firebaseUser.delete();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        }
-        }
-    
+            }
+        });
+
+
+        DatabaseReference requestRef = FirebaseDatabase.getInstance().getReference("FriendRequests");
+        requestRef.child(uid).removeValue();
+        requestRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot friendRequestSnapShot : snapshot.getChildren()) {
+                    for (DataSnapshot eachUserRequestSnapshot : friendRequestSnapShot.getChildren()) {
+                        String requestUid = eachUserRequestSnapshot.getKey();
+                        DatabaseReference specificReqRef = requestRef.child(friendRequestSnapShot.getKey());
+                        if (requestUid.equals(uid))
+                            specificReqRef.child(uid).removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
     }
+}
 

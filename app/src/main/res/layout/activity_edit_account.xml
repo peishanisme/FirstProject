@@ -75,7 +75,7 @@
                 android:ems="13"
                 android:gravity="start|top"
                 android:hint="alibaba"
-                android:inputType="textMultiLine"
+                android:inputType="textEmailAddress"
                 android:padding="13dp" />
 
             <EditText
@@ -89,7 +89,7 @@
                 android:ems="13"
                 android:gravity="start|top"
                 android:hint="Ali bin Ahmad"
-                android:inputType="textMultiLine"
+                android:inputType="textEmailAddress"
                 android:padding="13dp" />
 
             <TextView
@@ -121,7 +121,7 @@
                 android:ems="13"
                 android:gravity="start|top"
                 android:hint="0124512365"
-                android:inputType="textMultiLine"
+                android:inputType="textEmailAddress"
                 android:padding="13dp" />
 
             <TextView
@@ -163,7 +163,7 @@
                 android:ems="13"
                 android:gravity="start|top"
                 android:hint="Malaysia"
-                android:inputType="textMultiLine" />
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/state"
@@ -184,7 +184,7 @@
                 android:ems="13"
                 android:gravity="start|top"
                 android:hint="Selangor"
-                android:inputType="textMultiLine" />
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/gender"
@@ -245,7 +245,7 @@
                 android:ems="13"
                 android:gravity="start|top"
                 android:hint="Student"
-                android:inputType="textMultiLine" />
+                android:inputType="textEmailAddress" />
 
             <TextView
                 android:id="@+id/Hobbies"
@@ -313,7 +313,7 @@
                 android:ems="13"
                 android:gravity="start|top"
                 android:hint="Single"
-                android:inputType="textMultiLine" />
+                android:inputType="textEmailAddress" />
 
             <Button
                 android:id="@+id/save_info"
