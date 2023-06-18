@@ -24,7 +24,7 @@ public class Interaction extends AppCompatActivity {
         interactList = findViewById(R.id.Interaction_Lists);
         interactList.setHasFixedSize(true); //set as fixed size, optimize the performance
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true); //make the latest at the top
+        linearLayoutManager.setReverseLayout(true); //make the latest interactionat the top
         interactList.setLayoutManager(linearLayoutManager); //set the layout of this page to the format of linearLayoutManager
         MyAdapter adapter = new MyAdapter(InteractionTracker.interactionList, InteractionTracker.interactionLinkList, InteractionTracker.interactionTimeList);
         interactList.setAdapter(adapter);
@@ -43,7 +43,8 @@ public class Interaction extends AppCompatActivity {
 
         @NonNull
         @Override
-        public InteractionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //viewholder for the part that will repeatly displayed like every single interaction will be displayed
+        public InteractionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            //viewholder for the part that will repeatly displayed like every single interaction will be displayed
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_interaction, parent, false);
             return new InteractionViewHolder(itemView);
         }
