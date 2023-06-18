@@ -36,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
-    private TextView username,fullname, email, phone, occupation, gender, country, birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends, degreeConnection,topUsername;
+    private TextView username,fullname, email, phone, occupation, gender, country,state, age,birthday, relationship, friends,mutual1, mutual2, mutual3,  mutualFriends,topUsername;
     CircleImageView friendPic1, friendPic2, friendPic3;
     RecyclerView recyclerViewHobby;
     ArrayList<String> hobbies;
@@ -94,6 +94,8 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
         occupation = findViewById(R.id.occpDisplay);
         gender = findViewById(R.id.genderDisplay);
         country = findViewById(R.id.countryDisplay);
+        state=findViewById(R.id.stateDisplay);
+        age=findViewById(R.id.ageDisplay);
         birthday = findViewById(R.id.birthdayDisplay);
         relationship = findViewById(R.id.relationshipDisplay);
         friends = findViewById(R.id.Friends);
@@ -219,7 +221,9 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                             String selectedOccupation = snapshot.child("occupation").getValue().toString();
                             String selectedGender = snapshot.child("gender").getValue().toString();
                             String selectedCountry = snapshot.child("countryName").getValue().toString();
+                            String selectedState=snapshot.child("stateName").getValue().toString();
                             String selectedBirthday = snapshot.child("birthday").getValue().toString();
+                            String selectedAge=snapshot.child("age").getValue().toString();
                             String selectedRelationship = snapshot.child("relationship").getValue().toString();
 
 
@@ -239,11 +243,12 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
 
                             // set the profile data that can only be seen if both user are friends
                             if(currentUserFriendList.contains(selectedUserId)){
-
+                                age.setText(selectedAge);
                                 phone.setText(selectedUserPhoneNumber);
                                 occupation.setText(selectedOccupation);
                                 gender.setText(selectedGender);
                                 country.setText(selectedCountry);
+                                state.setText(selectedState);
                                 birthday.setText(selectedBirthday);
                                 relationship.setText(selectedRelationship);
 
@@ -299,10 +304,12 @@ public class ViewAccActivity_Scrollview extends AppCompatActivity {
                             }else{
 
                                 // profile data will set as "-" if both user are not friend
+                                age.setText("-");
                                 phone.setText("-");
                                 occupation.setText("-");
                                 gender.setText("-");
                                 country.setText("-");
+                                state.setText("-");
                                 birthday.setText("-");
                                 relationship.setText("-");
                             }
