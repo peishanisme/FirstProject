@@ -86,9 +86,6 @@ public class Login_Activity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         String userId = mAuth.getCurrentUser().getUid();
                         checkStatus(userId);
-
-
-
                     } else {
                         String message = task.getException().getMessage();
                         Toast.makeText(Login_Activity.this, "Error occurred: " + message, Toast.LENGTH_SHORT).show();
@@ -101,16 +98,13 @@ public class Login_Activity extends AppCompatActivity {
 
 
     private void checkStatus(String userId) {
-        //check whether user is an admin
-        adminRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+        adminRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {   //check whether user is an admin
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 boolean isAdmin = snapshot.exists();
-
                 if (isAdmin) {
                     // User is an admin
                     Toast.makeText(Login_Activity.this, "You are logged in as admin", Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(Login_Activity.this, Admin_Activity.class);
                     startActivity(intent);
                     finish();
@@ -132,7 +126,6 @@ public class Login_Activity extends AppCompatActivity {
                                 loadingBar.dismiss();
                             }
                         }
-
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                             // Handle error

@@ -116,14 +116,14 @@ public class Setup_Activity extends AppCompatActivity {
                 }
 
                 // Check if any required field is empty, display a toast if true
-                if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(countryName) || TextUtils.isEmpty(stateName) || TextUtils.isEmpty(birthday) || TextUtils.isEmpty(occupation)) {
+                if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(countryName) || TextUtils.isEmpty(stateName) ||
+                        TextUtils.isEmpty(birthday) || TextUtils.isEmpty(occupation)) {
                     Toast.makeText(Setup_Activity.this, "Please insert your information...", Toast.LENGTH_SHORT).show();
                 } else {
                     loadingBar.setTitle("Setting up account...");
                     loadingBar.setMessage("Please wait, we are saving your account information...");
                     loadingBar.show();
                     loadingBar.setCanceledOnTouchOutside(true);
-
                     // Update the user object with the entered information
                     // Update the user data in the database and handle the completion
                     user.setFullName(fullName);
@@ -133,7 +133,6 @@ public class Setup_Activity extends AppCompatActivity {
                     user.setAge(ageCalculation(birthday));
                     user.setOccupation(occupation);
                     user.setGender(genderSelection.getText().toString());
-
                     reference.setValue(user)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
@@ -161,7 +160,7 @@ public class Setup_Activity extends AppCompatActivity {
         finish();
     }
 
-    //Method to V\validate the birthday format (yyyy/MM/dd)
+    //Method to validate the birthday format (yyyy/MM/dd)
     public static boolean isValidBirthdayFormat(String birthday) {
         String regex = "\\d{4}/\\d{2}/\\d{2}";
         return birthday.matches(regex);
@@ -171,7 +170,8 @@ public class Setup_Activity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String ageCalculation(String birthday){
         LocalDate today = LocalDate.now();
-        LocalDate Birthday = LocalDate.of(Integer.parseInt(birthday.substring(0, 4)), Integer.parseInt(birthday.substring(5, 7)), Integer.parseInt(birthday.substring(8, 10))); //Birth date
+        LocalDate Birthday = LocalDate.of(Integer.parseInt(birthday.substring(0, 4)),
+                Integer.parseInt(birthday.substring(5, 7)), Integer.parseInt(birthday.substring(8, 10))); //Birth date
         Period p = Period.between(Birthday, today);
         String age=String.format("%2d", p.getYears());
         return age;

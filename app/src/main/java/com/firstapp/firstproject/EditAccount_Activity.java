@@ -93,14 +93,18 @@ public class EditAccount_Activity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 //if statement to check whether the field is empty
-                if (!EditUsername.getText().toString().isEmpty() && !EditFullName.getText().toString().isEmpty() && !EditPhoneN.getText().toString().isEmpty() && !EditBirthday.getText().toString().isEmpty() && !EditCountry.getText().toString().isEmpty() && !EditState.getText().toString().isEmpty() && !EditOccupation.getText().toString().isEmpty()) {
+                if (!EditUsername.getText().toString().isEmpty() && !EditFullName.getText().toString().isEmpty() &&
+                        !EditPhoneN.getText().toString().isEmpty() && !EditBirthday.getText().toString().isEmpty() &&
+                        !EditCountry.getText().toString().isEmpty() && !EditState.getText().toString().isEmpty() &&
+                        !EditOccupation.getText().toString().isEmpty()) {
                     //check the format of birthday
                     if (!isValidBirthdayFormat(EditBirthday.getText().toString())) {
                         Toast.makeText(EditAccount_Activity.this, "Invalid birthday format. Please use yyyy/MM/dd.", Toast.LENGTH_SHORT).show();
                         return; // Exit the method if the format is invalid
                     }
                     //if statement to check whether the data is changed
-                    if (isUsernameChange() || isFullNameChange() || isPhoneNChange() || isBirthdayChange() || isCountryChange() || isStateChange() || isOccupationChange() || isRelationshipChange()) {
+                    if (isUsernameChange() || isFullNameChange() || isPhoneNChange() || isBirthdayChange() || isCountryChange() ||
+                            isStateChange() || isOccupationChange() || isRelationshipChange()) {
                         genderSelection = (RadioButton) findViewById(gender.getCheckedRadioButtonId());
                         reference.child(uid).child("username").setValue(EditUsername.getText().toString());
                         reference.child(uid).child("fullName").setValue(EditFullName.getText().toString());
