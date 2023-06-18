@@ -22,10 +22,10 @@ public class Interaction extends AppCompatActivity {
         setContentView(R.layout.display_interaction);
 
         interactList = findViewById(R.id.Interaction_Lists);
-        interactList.setHasFixedSize(true); //set as fixed size, optimize the performance
+        interactList.setHasFixedSize(true); // set as fixed size, optimize the performance
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setReverseLayout(true); //make the latest interactionat the top
-        interactList.setLayoutManager(linearLayoutManager); //set the layout of this page to the format of linearLayoutManager
+        linearLayoutManager.setReverseLayout(true); // make the latest interactionat the top
+        interactList.setLayoutManager(linearLayoutManager); // set the layout of this page to the format of linearLayoutManager
         MyAdapter adapter = new MyAdapter(InteractionTracker.interactionList, InteractionTracker.interactionLinkList, InteractionTracker.interactionTimeList);
         interactList.setAdapter(adapter);
     }
@@ -44,7 +44,7 @@ public class Interaction extends AppCompatActivity {
         @NonNull
         @Override
         public InteractionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            //viewholder for the part that will repeatly displayed like every single interaction will be displayed
+            // viewholder for the part that will repeatly displayed like every single interaction will be displayed
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_interaction, parent, false);
             return new InteractionViewHolder(itemView);
         }
@@ -55,21 +55,21 @@ public class Interaction extends AppCompatActivity {
             String data2 = mDataList2.get(position);
             String data3 = mDataList3.get(position);
 
-            holder.setName(data1); //set the name of fragment to data1, which will be the fragment name
-            holder.setContent(data2); //set the name of content to data2, which will display the relevant data like uid of the user
-            holder.setTime(data3); //set the local time to the time
+            holder.setName(data1); // set the name of fragment to data1, which will be the fragment name
+            holder.setContent(data2); // set the name of content to data2, which will display the relevant data like uid of the user
+            holder.setTime(data3); // set the local time to the time
 
             // Set click listener for the button
             holder.interactionButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    handleButtonClick(data1, data2); //when click on the button, the application will jump to the handleButtonClick method
+                    handleButtonClick(data1, data2); // when click on the button, the application will jump to the handleButtonClick method
                 }
             });
         }
 
         @Override
-        public int getItemCount() { //count each lists' size
+        public int getItemCount() { // count each lists' size
             return Math.min(Math.min(mDataList1.size(), mDataList2.size()), mDataList3.size());
         }
 
@@ -102,7 +102,7 @@ public class Interaction extends AppCompatActivity {
     }
 
     private void handleButtonClick(String interactionContent, String id) {
-        // Handle the button click based on the interaction content
+            // Handle the button click based on the interaction content
         if(interactionContent.equals( "Post")){
             // Start the Post_Fragment activity
             Intent postFragmentIntent = new Intent(Interaction.this, Post_Fragment.class);
@@ -110,41 +110,42 @@ public class Interaction extends AppCompatActivity {
 
         }
         else if(interactionContent.equals( "Home")) {
-            // Start the Main_Activity, then redirect to Home fragment
+            //Start the Main_Activity, then redirect to Home fragment
             Intent MainIntent = new Intent(Interaction.this, Main_Activity.class);
             MainIntent.putExtra("targetFragment", "Home");
             startActivity(MainIntent);
         }
         else if(interactionContent.equals( "Profile")) {
-            // Start the Main_Activity, then redirect to Profile fragment
+            //Start the Main_Activity, then redirect to Profile fragment
             Intent MainIntent = new Intent(Interaction.this, Main_Activity.class);
             MainIntent.putExtra("targetFragment", "Profile");
             startActivity(MainIntent);
         }
         else if(interactionContent.equals( "Friend list")) {
-            // Start the Main_Activity, then redirect to Friend list fragment
+            //Start the Main_Activity, then redirect to Friend list fragment
             Intent FriendsActivityIntent = new Intent(Interaction.this, Main_Activity.class);
             FriendsActivityIntent.putExtra("targetFragment", "Friend list");
             startActivity(FriendsActivityIntent);
         }
         else if(interactionContent.equals( "Search Friends")) {
-            // Start the Main_Activity, then redirect to search friends fragment
+            //Start the Main_Activity, then redirect to search friends fragment
             Intent MainIntent = new Intent(Interaction.this, Main_Activity.class);
             MainIntent.putExtra("targetFragment", "Search Friends");
             startActivity(MainIntent);
         }
         else if(interactionContent.equals( "Edit Account")) {
+            //Start the EditAccount_Activity
             Intent EditAccIntent = new Intent(Interaction.this, EditAccount_Activity.class);
             startActivity(EditAccIntent);
         }
         else if(interactionContent.equals( "Request")) {
-            // Start the Main_Activity, then redirect to Request fragment
+            //Start the Main_Activity, then redirect to Request fragment
             Intent MainIntent = new Intent(Interaction.this, Main_Activity.class);
             MainIntent.putExtra("targetFragment", "Request");
             startActivity(MainIntent);
         }
         else if(interactionContent.equals( "View Account")) {
-            // Start the Main_Activity, then redirect to ViewAccActivity_Scrollview class
+            //Start the Main_Activity, then redirect to ViewAccActivity_Scrollview class
             Intent ViewAccountIntent = new Intent(Interaction.this, ViewAccActivity_Scrollview.class);
             ViewAccountIntent.putExtra("uid", id);
             startActivity(ViewAccountIntent);
