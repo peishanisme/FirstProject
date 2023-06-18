@@ -149,12 +149,4 @@ public class Interaction extends AppCompatActivity {
 }
 
 
-//private void handleButtonClick(String interactionContent,String id) {
-// Determine which activity class to start based on the interaction content
 
-
-
-//}
-
-
-//}

@@ -9,12 +9,11 @@ import java.util.Queue;
 public class User {
 
     public String userid,username,email,phone_number,fullName,countryName,stateName,birthday,age,occupation,gender,relationship;
-    public List<String>hobbies = new ArrayList<>();
-    public List<User>friends = new ArrayList<>();
     public User(){
-
+        //empty constructor
     }
 
+    //constructor used to save info in database
     public User(String userid, String username, String email, String phone_number, String fullName, String countryName, String stateName, String birthday, String age, String occupation, String gender,String relationship) {
         this.userid = userid;
         this.username = username;
@@ -30,6 +29,7 @@ public class User {
         this.relationship=relationship;
         }
 
+        //constructor used in Admin_Activity
     public User(String uid, String username, String fullName, String email, String phone_number) {
         this.userid=uid;
         this.username=username;
@@ -38,49 +38,44 @@ public class User {
         this.phone_number=phone_number;
     }
 
+    //accessors
     public String getUid() {
         return userid;
     }
-
     public String getUsername() {
         return username;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-
     public String getFullName() {
         return fullName;
     }
-
+    public String getEmail() {
+        return email;
+    }
+    public String getPhone_number() {
+        return phone_number;
+    }
+    public String getBirthday() {
+        return birthday;
+    }
+    public String getCountryName() {
+        return countryName;
+    }
+    public String getStateName() {
+        return stateName;
+    }
     public String getAge() {
         return age;
     }
-
     public String getGender() {
         return gender;
     }
-
     public String getOccupation() {
         return occupation;
     }
 
-    public String getStateName() {
-        return stateName;
+    //mutators
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public void setUsername(String username) {
@@ -122,7 +117,6 @@ public class User {
     public void setAge(String age) {
         this.age = age;
     }
-
 
 
 
