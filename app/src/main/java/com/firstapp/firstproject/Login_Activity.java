@@ -68,6 +68,7 @@ public class Login_Activity extends AppCompatActivity {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
 
+        //cannot leave empty space at email and password field
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please write your email...", Toast.LENGTH_SHORT).show();
         } else if (TextUtils.isEmpty(password)) {
@@ -84,27 +85,9 @@ public class Login_Activity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         String userId = mAuth.getCurrentUser().getUid();
+                        checkStatus(userId);
 
-                        // Check if user exists in "Users" node
-                        userRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    // User exists in the "Users" node
-                                    checkAdminStatus(userId);
-                                } else {
-                                    // User does not exist in the "Users" node
-                                    Toast.makeText(Login_Activity.this, "User not found. Login failed.", Toast.LENGTH_SHORT).show();
-                                    loadingBar.dismiss();
-                                }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                // Handle error
-                                loadingBar.dismiss();
-                            }
-                        });
 
                     } else {
                         String message = task.getException().getMessage();
@@ -117,7 +100,8 @@ public class Login_Activity extends AppCompatActivity {
     }
 
 
-    private void checkAdminStatus(String userId) {
+    private void checkStatus(String userId) {
+        //check whether user is an admin
         adminRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -131,15 +115,32 @@ public class Login_Activity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    // User is not an admin
-                    Toast.makeText(Login_Activity.this, "You are logged in successfully", Toast.LENGTH_SHORT).show();
+                    // Check if user exists in "Users" node
+                    userRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                // User exists in the "Users" node
+                                Toast.makeText(Login_Activity.this, "You are logged in successfully", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(Login_Activity.this, Main_Activity.class);
-                    startActivity(intent);
-                    finish();
+                                Intent intent = new Intent(Login_Activity.this, Main_Activity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // User does not exist in the "Users" node
+                                Toast.makeText(Login_Activity.this, "User not found. Login failed.", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            // Handle error
+                            loadingBar.dismiss();
+                        }
+                    });
+
                 }
-
-                loadingBar.dismiss();
             }
 
             @Override

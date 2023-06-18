@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firstapp.firstproject.R;
-import com.firstapp.firstproject.adapter.FriendsAdapter;
 import com.firstapp.firstproject.adapter.RequestAdapter;
 import com.firstapp.firstproject.entity.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +32,7 @@ public class RequestFragment extends Fragment {
     private DatabaseReference friendsRef;
     private DatabaseReference usersRef;
     private String currentUserId;
-    private List<User>requestList = new ArrayList<>();
+    private List<User> requestList = new ArrayList<>();
 
     public RequestFragment() {
         // Required empty public constructor
@@ -63,6 +62,8 @@ public class RequestFragment extends Fragment {
     }
 
     private void retrieveFriendRequest() {
+
+        // Get the reference to the FriendRequests node for the current user
         DatabaseReference friendRequestRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests").child(currentUserId);
 
         friendRequestRef.addValueEventListener(new ValueEventListener() {
@@ -70,11 +71,12 @@ public class RequestFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 requestList.clear();
                 for (DataSnapshot friendRequestSnapshot : dataSnapshot.getChildren()) {
-                        String friendRequestUid = friendRequestSnapshot.getKey();
-                        String request_type = friendRequestSnapshot.child("request_type").getValue(String.class);
+                    // Get the friend request UID and request type
+                    String friendRequestUid = friendRequestSnapshot.getKey();
+                    String request_type = friendRequestSnapshot.child("request_type").getValue(String.class);
 
                     if (request_type.equals("received")) {
-
+                        // If the request type is "received", retrieve the user information
                         usersRef.child(friendRequestUid).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -92,14 +94,10 @@ public class RequestFragment extends Fragment {
                 }
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle the error
             }
         });
-
     }
-
-
 }

@@ -10,9 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firstapp.firstproject.AdminViewUserProfileActivity;
+import com.firstapp.firstproject.Admin_ViewUserProfileActivity;
 import com.firstapp.firstproject.R;
-import com.firstapp.firstproject.ViewAccActivity_Scrollview;
 import com.firstapp.firstproject.entity.User;
 
 import java.util.List;
@@ -58,7 +57,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, AdminViewUserProfileActivity.class);
+                Intent intent = new Intent(context, Admin_ViewUserProfileActivity.class);
                 intent.putExtra("uid", user.getUid()); // Pass the user object
                 context.startActivity(intent);
             }

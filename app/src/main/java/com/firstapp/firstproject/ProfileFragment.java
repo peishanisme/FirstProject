@@ -45,6 +45,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profile, container, false);
+        //Get reference to UI elements
         ImageButton edit_profile_button = root.findViewById(R.id.edit_profile_button);
         ImageButton logout_button = root.findViewById(R.id.logout_button);
         TextView username = root.findViewById(R.id.UsernameDisplay);
@@ -59,6 +60,7 @@ public class ProfileFragment extends Fragment {
         TextView gender = root.findViewById(R.id.genderDisplay);
         TextView relationship = root.findViewById(R.id.relationshipDisplay);
 
+        //Get Firebase instance and reference
         FirebaseAuth auth = FirebaseAuth.getInstance();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         DatabaseReference hobbyReference = FirebaseDatabase.getInstance().getReference("Hobbies");
@@ -78,9 +80,11 @@ public class ProfileFragment extends Fragment {
         recyclerViewJob.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewJob.setAdapter(addjobAdapter);
 
+        //Fetch user profile data from the database
         databaseReference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //Update UI with retrieved user data
                 username.setText(snapshot.child("username").getValue(String.class));
                 fullname.setText(snapshot.child("fullName").getValue(String.class));
                 email.setText(snapshot.child("email").getValue(String.class));
@@ -99,13 +103,14 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-
+        //Fetch user hobbies from the database
         hobbyReference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 hobbies.clear();
 
                 if (snapshot.exists()) {
+                    //Retrieve hobbies and add thenm to the list
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String hobby = dataSnapshot.getValue(String.class);
                         hobbies.add(hobby);
@@ -120,7 +125,7 @@ public class ProfileFragment extends Fragment {
                 // Handle error
             }
         });
-
+        //Fetch user jobs from the database
         DatabaseReference jobReference = FirebaseDatabase.getInstance().getReference("Jobs");
         jobReference.child(uid).addValueEventListener(new ValueEventListener() {
             @Override
@@ -128,10 +133,12 @@ public class ProfileFragment extends Fragment {
                 jobStack.clear();
                 if(snapshot.exists()) {
                     Stack<String> jobList = new Stack<>();
+                    // Retrieve jobs and add them to the stack
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String job = dataSnapshot.getValue(String.class);
                         jobList.push(job);
                     }
+                    // Push jobs from the temporary stack to the main stack to maintain the correct order
                     for (int i = 0; i <= jobList.size(); i++) {
                         jobStack.push(jobList.pop());
 
@@ -146,7 +153,7 @@ public class ProfileFragment extends Fragment {
                 // Handle error
             }
         });
-
+        // Handle edit profile button click
         edit_profile_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,7 +161,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
+        // Handle logout button click
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

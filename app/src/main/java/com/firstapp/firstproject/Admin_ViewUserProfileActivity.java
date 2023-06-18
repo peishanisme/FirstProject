@@ -5,14 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.firstapp.firstproject.adapter.UserAdapter;
 import com.firstapp.firstproject.adapter.addhobbyAdapter;
 import com.firstapp.firstproject.adapter.addjobAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Stack;
 
-public class AdminViewUserProfileActivity extends AppCompatActivity {
+public class Admin_ViewUserProfileActivity extends AppCompatActivity {
 
 
     RecyclerView recyclerViewHobby;
@@ -57,7 +53,7 @@ public class AdminViewUserProfileActivity extends AppCompatActivity {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Users");
         DatabaseReference hobbyReference = FirebaseDatabase.getInstance().getReference("Hobbies");
         String uid = getIntent().getStringExtra("uid");
-        InteractionTracker.add("Profile");
+
 
         hobbies = new ArrayList<>();
 
@@ -144,5 +140,4 @@ public class AdminViewUserProfileActivity extends AppCompatActivity {
 
 
     }
-
 }

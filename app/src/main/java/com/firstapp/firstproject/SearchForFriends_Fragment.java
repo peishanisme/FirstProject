@@ -44,8 +44,10 @@ public class SearchForFriends_Fragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_seacrh_for_friends_, container, false);
         InteractionTracker.add("Search Friends");
 
+
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         currentUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         // Initialize UI components
         searchBoxInput = view.findViewById(R.id.search_box_input);
         searchButton = view.findViewById(R.id.search_people_friends_button);
@@ -77,9 +79,13 @@ public class SearchForFriends_Fragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    //Retrieves data from the snapshot and creates a User object by converting the retrieved data into an instance of the User class.
                     User user = snapshot.getValue(User.class);
 
+                    //Exclude current user in the search result
                     if (!currentUserUid.equals(user.getUid())) {
+
+                        //Search using username,email,id,full name or phone number (not case-sensitive)
                         if (user.getUsername().toLowerCase().contains(query.toLowerCase()) || user.getEmail().toLowerCase().contains(query.toLowerCase())||user.getUid().toLowerCase().contains(query.toLowerCase())||user.getFullName().toLowerCase().contains(query.toLowerCase())||user.getPhone_number().contains(query)) {
                             userList.add(user);
                         }

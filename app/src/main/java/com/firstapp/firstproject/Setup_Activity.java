@@ -58,6 +58,7 @@ public class Setup_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
 
+        // Initialize Firebase authentication, retrieve the current user ID, and get the database reference
         mAuth = FirebaseAuth.getInstance();
         currentUserID = mAuth.getCurrentUser().getUid();
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserID);
@@ -76,6 +77,7 @@ public class Setup_Activity extends AppCompatActivity {
             }
         });
 
+        // Initialize UI elements and set up event listeners
         FullName = (EditText) findViewById(R.id.editFullName);
         CountryName = (EditText) findViewById(R.id.editCountry);
         StateName = (EditText) findViewById(R.id.editState);
@@ -86,7 +88,7 @@ public class Setup_Activity extends AppCompatActivity {
         ProfilePicture = (CircleImageView) findViewById(R.id.profile_picture);
         loadingBar = new ProgressDialog(this);
 
-
+        // Handle the click event on the SaveInfoButton
         SaveInfoButton.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -96,8 +98,10 @@ public class Setup_Activity extends AppCompatActivity {
 
 
             @RequiresApi(api = Build.VERSION_CODES.O)
+            // Method to save the user account setup information
             private void SaveAccountSetupInformation() {
 
+                // Retrieve input values from UI elements
                 String fullName = FullName.getText().toString();
                 String countryName = CountryName.getText().toString();
                 String stateName = StateName.getText().toString();
@@ -111,7 +115,7 @@ public class Setup_Activity extends AppCompatActivity {
                     return; // Exit the method if the format is invalid
                 }
 
-
+                // Check if any required field is empty, display a toast if true
                 if (TextUtils.isEmpty(fullName) || TextUtils.isEmpty(countryName) || TextUtils.isEmpty(stateName) || TextUtils.isEmpty(birthday) || TextUtils.isEmpty(occupation)) {
                     Toast.makeText(Setup_Activity.this, "Please insert your information...", Toast.LENGTH_SHORT).show();
                 } else {
@@ -120,6 +124,8 @@ public class Setup_Activity extends AppCompatActivity {
                     loadingBar.show();
                     loadingBar.setCanceledOnTouchOutside(true);
 
+                    // Update the user object with the entered information
+                    // Update the user data in the database and handle the completion
                     user.setFullName(fullName);
                     user.setCountryName(countryName);
                     user.setStateName(stateName);
@@ -147,7 +153,7 @@ public class Setup_Activity extends AppCompatActivity {
         });
     }
 
-
+    //after setting up the account, users will be sent to main activity
     private void SendUserToMainActivity() {
         Intent mainIntent = new Intent(Setup_Activity.this, Main_Activity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -155,13 +161,13 @@ public class Setup_Activity extends AppCompatActivity {
         finish();
     }
 
-    // Validate the birthday format (yyyy/MM/dd)
-    private boolean isValidBirthdayFormat(String birthday) {
+    //Method to V\validate the birthday format (yyyy/MM/dd)
+    public static boolean isValidBirthdayFormat(String birthday) {
         String regex = "\\d{4}/\\d{2}/\\d{2}";
         return birthday.matches(regex);
     }
 
-    //method to calculate age
+    //Method to calculate age based on the birthday
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String ageCalculation(String birthday){
         LocalDate today = LocalDate.now();

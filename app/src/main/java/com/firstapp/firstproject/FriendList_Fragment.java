@@ -25,92 +25,97 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-    public class FriendList_Fragment extends Fragment {
+public class FriendList_Fragment extends Fragment {
 
-        private RecyclerView recyclerView;
-        private FriendsAdapter adapter;
-        private List<User> friendList;
-        private DatabaseReference usersRef;
-        DatabaseReference friendsRef;
-        private FirebaseAuth mAuth;
-        String currentUser;
-        TextView numberOfFriends;
-        int friendCount;
+    private RecyclerView recyclerView;
+    private FriendsAdapter adapter;
+    private List<User> friendList;
+    private DatabaseReference usersRef;
+    DatabaseReference friendsRef;
+    private FirebaseAuth mAuth;
+    String currentUser;
+    TextView numberOfFriends;
+    int friendCount;
 
-        @Nullable
-        @Override
-        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
-            InteractionTracker.add("Friend list");
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_friend_list, container, false);
+        InteractionTracker.add("Friend list");
 
-            friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
-            recyclerView = view.findViewById(R.id.my_freind_list);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // Initialize Firebase references
+        friendsRef = FirebaseDatabase.getInstance().getReference().child("Friends");
+        usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-            friendList = new ArrayList<>();
-            adapter = new FriendsAdapter(friendList, getActivity());
-            recyclerView.setAdapter(adapter);
+        recyclerView = view.findViewById(R.id.my_freind_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-            mAuth=FirebaseAuth.getInstance();
-            usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-            currentUser = mAuth.getCurrentUser().getUid();
+        friendList = new ArrayList<>();
+        adapter = new FriendsAdapter(friendList, getActivity());
+        recyclerView.setAdapter(adapter);
 
-            numberOfFriends=view.findViewById(R.id.numberOfFriends);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser().getUid();
 
-            // Retrieve the friend list of the current user from the database
-            retrieveFriendList();
+        numberOfFriends = view.findViewById(R.id.numberOfFriends);
 
-            friendsRef.child(currentUser).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        friendCount=(int)snapshot.getChildrenCount();
-                        numberOfFriends.setText("("+Integer.toString(friendCount)+")");
+        // Retrieve the friend list of the current user from the database
+        retrieveFriendList();
 
-                    }else
-                        numberOfFriends.setText("(0)");
-                }
+        friendsRef.child(currentUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    friendCount = (int) snapshot.getChildrenCount();
+                    numberOfFriends.setText("(" + Integer.toString(friendCount) + ")");
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                } else
+                    numberOfFriends.setText("(0)");
+            }
 
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle the error
+            }
+        });
 
-            return view;
-        }
-
-        private void retrieveFriendList() {
-
-            friendsRef.child(currentUser).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    friendList.clear();
-
-                    for (DataSnapshot friendSnapshot : dataSnapshot.getChildren()) {
-                        String friendUid = friendSnapshot.getKey();
-
-                        usersRef.child(friendUid).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                User friend = dataSnapshot.getValue(User.class);
-                                friendList.add(friend);
-                                adapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                // Handle the error
-                            }
-                        });
-                    }
-                }
-
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Handle the error
-                }
-            });
-        }
+        return view;
     }
+
+    // Method to retrieve the friend list of the current user from the database
+    private void retrieveFriendList() {
+
+        friendsRef.child(currentUser).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                friendList.clear();
+
+                // Iterate over each friend UID in the snapshot
+                for (DataSnapshot friendSnapshot : dataSnapshot.getChildren()) {
+                    String friendUid = friendSnapshot.getKey();
+
+                    usersRef.child(friendUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            // Retrieve the friend user object from the database
+                            User friend = dataSnapshot.getValue(User.class);
+                            friendList.add(friend);
+                            adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Handle the error
+                        }
+                    });
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error
+            }
+        });
+    }
+}
